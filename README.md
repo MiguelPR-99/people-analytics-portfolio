@@ -2,6 +2,8 @@
 
 I build decision-support products that connect HR processes, workforce data, and business operations.
 
+I’m building this portfolio around People Analytics, HR Data, HR Services, process improvement, and responsible AI.
+
 [Español](README.es.md)
 
 ## Completed work
@@ -19,3 +21,4 @@ An interactive Power BI solution for reviewing talent distribution, employee mov
 My goal is to grow as an **HR Analytics & Digital HR professional**: someone who understands people processes and turns them into reliable indicators, better services, and decision-ready systems.
 
 > All portfolio datasets are synthetic or privacy-safe. Projects are learning and demonstration artifacts, not production HR decision systems.
+
