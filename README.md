@@ -1,6 +1,6 @@
 # People Analytics & Digital HR Portfolio
 
-I build decision-support products that connect HR processes, workforce data, and business operations.
+I build decision-support products that connect HR processes, workforce data and business operations.
 
 I’m building this portfolio around People Analytics, HR Data, HR Services, process improvement and responsible AI.
 
