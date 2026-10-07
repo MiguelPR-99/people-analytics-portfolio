@@ -8,6 +8,14 @@ Estoy construyendo este portafolio en torno a People Analytics, HR Data, HR Serv
 
 ## Trabajo terminado
 
+### Proyecto 1 — HR Services Control Tower
+
+Caso end-to-end en Power BI para monitorear demanda, SLA, backlog, capacidad, calidad de proceso y experiencia del empleado mediante datos sintéticos reproducibles.
+
+[Abrir el reporte interactivo](https://app.powerbi.com/view?r=eyJrIjoiMjU5MDEzODEtMDBkMi00MmUzLTlhNTgtMmQ4N2E1NDkyZDM2IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9) · [Explorar el caso completo](projects/hr-services-control-tower/README.es.md)
+
+![Dashboard HR Services Control Tower](projects/hr-services-control-tower/assets/screenshots/executive-overview.png)
+
 ### Proyecto 0 — Talent Review & Calibration
 
 Solución interactiva en Power BI para revisar distribución de talento, movimientos de empleados, patrones de evaluación por manager y riesgo departamental.
@@ -21,4 +29,3 @@ Solución interactiva en Power BI para revisar distribución de talento, movimie
 Mi objetivo es desarrollarme como profesional de **HR Analytics & Digital HR**: una persona que entiende los procesos de RH y los convierte en indicadores confiables, mejores servicios y sistemas preparados para la toma de decisiones.
 
 > Todos los datasets del portafolio son sintéticos o seguros para demostración. Los proyectos son artefactos de aprendizaje y portafolio, no sistemas productivos para tomar decisiones de RH.
-

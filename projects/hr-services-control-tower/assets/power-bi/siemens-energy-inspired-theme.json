@@ -1,0 +1,45 @@
+{
+  "name": "Siemens Energy Inspired - HR Services",
+  "dataColors": [
+    "#7A1E6C",
+    "#006B8F",
+    "#00A6A6",
+    "#4C2A68",
+    "#72A835",
+    "#5C8DB8",
+    "#D59B2D",
+    "#C64B5B"
+  ],
+  "background": "#F4F2F5",
+  "foreground": "#241E26",
+  "tableAccent": "#7A1E6C",
+  "good": "#3D7F45",
+  "neutral": "#D59B2D",
+  "bad": "#C64B5B",
+  "maximum": "#4C2A68",
+  "center": "#00A6A6",
+  "minimum": "#E8E2EA",
+  "null": "#A7A0AA",
+  "textClasses": {
+    "callout": {
+      "fontFace": "Arial",
+      "fontSize": 28,
+      "color": "#241E26"
+    },
+    "title": {
+      "fontFace": "Arial",
+      "fontSize": 12,
+      "color": "#241E26"
+    },
+    "header": {
+      "fontFace": "Arial",
+      "fontSize": 11,
+      "color": "#241E26"
+    },
+    "label": {
+      "fontFace": "Arial",
+      "fontSize": 10,
+      "color": "#5F5862"
+    }
+  }
+}

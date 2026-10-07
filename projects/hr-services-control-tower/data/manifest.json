@@ -1,0 +1,223 @@
+{
+  "project": "HR Services / Service Delivery Control Tower",
+  "synthetic_data": true,
+  "seed": 20260824,
+  "generated_at": "2026-07-01T06:00:00",
+  "validation": {
+    "passed": true,
+    "checks": {
+      "case_count": true,
+      "case_id_unique": true,
+      "case_key_unique": true,
+      "case_foreign_keys": true,
+      "event_case_keys": true,
+      "survey_case_keys": true,
+      "survey_scores": true,
+      "event_sequence_unique": true,
+      "event_timestamps_monotonic": true,
+      "non_negative_durations": true,
+      "case_event_counters": true,
+      "final_backlog_reconciles": true,
+      "email_more_incomplete_than_portal": true,
+      "payroll_month_end_pattern": true,
+      "data_change_intervention_pattern": true,
+      "benefits_vendor_delay_pattern": true,
+      "reopen_csat_pattern": true
+    },
+    "failed_checks": [],
+    "metrics": {
+      "case_count": 9000,
+      "strict_pattern_checks_applied": true,
+      "event_count": 52285,
+      "survey_count": 2543,
+      "backlog_snapshot_count": 89538,
+      "final_backlog_count": 679,
+      "status_distribution": {
+        "Waiting for Employee": 62,
+        "Closed": 8196,
+        "In Progress": 444,
+        "Cancelled": 125,
+        "Waiting for Vendor": 50,
+        "Waiting for Approval": 98,
+        "Resolved": 3,
+        "Assigned": 9,
+        "Submitted": 13
+      },
+      "channel_metrics": {
+        "Portal": {
+          "cases": 4988,
+          "incomplete_rate": 0.046311146752205296
+        },
+        "Email": {
+          "cases": 2256,
+          "incomplete_rate": 0.20921985815602837
+        },
+        "Teams": {
+          "cases": 1031,
+          "incomplete_rate": 0.1309408341416101
+        },
+        "Phone": {
+          "cases": 725,
+          "incomplete_rate": 0.0993103448275862
+        }
+      },
+      "email_to_portal_incomplete_ratio": 4.5177,
+      "payroll_window_share": 0.2562,
+      "payroll_outside_share": 0.1737,
+      "data_change_pre_incomplete_rate": 0.0382,
+      "data_change_post_incomplete_rate": 0.0156,
+      "data_change_post_to_pre_ratio": 0.4077,
+      "benefits_delay_p90_hours": 96.3076,
+      "benefits_recovery_p90_hours": 73.8761,
+      "reopened_csat_mean": 3.0816,
+      "not_reopened_csat_mean": 3.9795,
+      "reopened_csat_difference": -0.8979
+    }
+  },
+  "files": [
+    {
+      "layer": "processed",
+      "file": "dim_date.csv",
+      "rows": 546,
+      "sha256": "5c431210bac888acc3f71cf6782f3cd30f19f9240b7a3770f249a9fb9f6291a3"
+    },
+    {
+      "layer": "processed",
+      "file": "dim_location.csv",
+      "rows": 3,
+      "sha256": "6ddb57aca647a0930f5cfc3fa5073b2ccd5b4dbb146e3d35bb264b3d0b4f0051"
+    },
+    {
+      "layer": "processed",
+      "file": "dim_organization.csv",
+      "rows": 7,
+      "sha256": "5894586b7944eeacff2d0818f0a3ce012b3b8ca7198f55bbd044d5417b19257a"
+    },
+    {
+      "layer": "processed",
+      "file": "dim_team.csv",
+      "rows": 3,
+      "sha256": "95d1c5717b75e277277581eeac19c5e3e2b960998558cdff7314dde8a8e6be62"
+    },
+    {
+      "layer": "processed",
+      "file": "dim_requester.csv",
+      "rows": 1200,
+      "sha256": "4368a52a525ecd3bacba230a87c99b9db94cc085724f6eb43170b2ecbaccbb27"
+    },
+    {
+      "layer": "processed",
+      "file": "dim_agent.csv",
+      "rows": 18,
+      "sha256": "bdc0cbf79c22612a484c3e7a1eaebcb369f8b6e50361663dd73c53a295d0f0a1"
+    },
+    {
+      "layer": "processed",
+      "file": "dim_service_catalog.csv",
+      "rows": 21,
+      "sha256": "ddb5314cddbfec4f1c289a728a1608be36aca64c997f28fb21e8471b83657dae"
+    },
+    {
+      "layer": "processed",
+      "file": "dim_sla_policy.csv",
+      "rows": 4,
+      "sha256": "1b725cc955740bb8449caa4469df8f1626755b4ee256069a7565db4347adeeaf"
+    },
+    {
+      "layer": "processed",
+      "file": "fact_cases.csv",
+      "rows": 9000,
+      "sha256": "69f74d13e913d154734bc3b0a51eae75618aedb32fbf9e0d5d9f0cbf13f990a5"
+    },
+    {
+      "layer": "processed",
+      "file": "fact_case_events.csv",
+      "rows": 52285,
+      "sha256": "8fb562bd10bb65f6743b7fed012b3a5c2139b9c0c577866ee2e0fe8294ffebc0"
+    },
+    {
+      "layer": "processed",
+      "file": "fact_surveys.csv",
+      "rows": 2543,
+      "sha256": "615a3a5962452060d8db402aa44557ce53aa401d9fad15c758a17d4242563067"
+    },
+    {
+      "layer": "processed",
+      "file": "fact_backlog_daily.csv",
+      "rows": 89538,
+      "sha256": "335dc00a6b489e3a37c9ede0d94514f853859bf7d3555d378db23aed391ee58a"
+    },
+    {
+      "layer": "processed",
+      "file": "fact_queue_capacity_weekly.csv",
+      "rows": 711,
+      "sha256": "136b794f7ae2bb5be02baae408fcf352f30ca764f935f23fbce48ef5e907055e"
+    },
+    {
+      "layer": "raw",
+      "file": "hr_case_export.csv",
+      "rows": 9072,
+      "sha256": "70af2b1146ad92dd62b44f45bb9883e2e74bb55e6d46a47521d8a2bfce9a019b"
+    },
+    {
+      "layer": "raw",
+      "file": "hr_case_event_log.csv",
+      "rows": 52546,
+      "sha256": "6d021a7828c5b1bfd8354db5b3b8c9a0204ffe5802b74614342842d35bca7e78"
+    },
+    {
+      "layer": "raw",
+      "file": "hr_survey_responses.csv",
+      "rows": 2551,
+      "sha256": "6bd0f2cb4f1c0d80187d003c52a67f92f4c66cc58f6d5a27d28919c818cfa414"
+    },
+    {
+      "layer": "raw",
+      "file": "hr_requester_roster.csv",
+      "rows": 1200,
+      "sha256": "b6f5519477dbd9f1176da7bb190f22a6d92c2404bfda6e405e58690ba072733b"
+    },
+    {
+      "layer": "raw",
+      "file": "hr_agent_roster.csv",
+      "rows": 18,
+      "sha256": "c73b7e35b977906abc9d9a86a86b99377ddccdf5e9d0ed3b8457b59744daf1f7"
+    },
+    {
+      "layer": "raw",
+      "file": "hr_service_catalog.csv",
+      "rows": 21,
+      "sha256": "e371db97a14ebf4b50cae3caba55d12a357deb8fe3d9b9a749079542d092dbe2"
+    },
+    {
+      "layer": "raw",
+      "file": "hr_locations.csv",
+      "rows": 3,
+      "sha256": "1f2df0fab42b4858cc07411f416250eaece32b9aad868f5cf4166c319ebdecb1"
+    },
+    {
+      "layer": "raw",
+      "file": "hr_organization_units.csv",
+      "rows": 7,
+      "sha256": "410f8108b803447eb46595da776788208b491d714bf668fbbba5f6c5f7fc9277"
+    },
+    {
+      "layer": "raw",
+      "file": "hr_teams.csv",
+      "rows": 3,
+      "sha256": "a5b937d148025c169bff6435153d16cf47d01abca836746546077010143e6e54"
+    },
+    {
+      "layer": "raw",
+      "file": "hr_sla_policy.csv",
+      "rows": 4,
+      "sha256": "c06e6779ac5aff3528e1d6ec0b6130ac132bcea5efec1cf9a079b3c8ef9775e4"
+    },
+    {
+      "layer": "raw",
+      "file": "hr_queue_capacity_weekly.csv",
+      "rows": 711,
+      "sha256": "0356b210a4d2dac621a7c331d34d325b624dcfd3292b67862c9292098b14b666"
+    }
+  ]
+}

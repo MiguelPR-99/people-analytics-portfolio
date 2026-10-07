@@ -4,3 +4,6 @@ Thumbs.db
 *.temp
 *.bak
 *.pbi.local.json
+__pycache__/
+*.py[cod]
+.pytest_cache/

@@ -1,0 +1,4 @@
+﻿TeamKey,TeamCode,TeamName,ServiceScope,SourceRowNumber,SourceSystem,RawExtractID
+1,PAYTIME,Payroll & Time,"Payroll, compensation, time and attendance",1,SYNTHETIC_REFERENCE_DATA,EXT-20260701-A
+2,BENDOC,Benefits & Documents,"Benefits, certificates and HR documents",2,SYNTHETIC_REFERENCE_DATA,EXT-20260701-A
+3,DATALIFE,Employee Data & Lifecycle,"Employee data, onboarding and offboarding",3,SYNTHETIC_REFERENCE_DATA,EXT-20260701-A

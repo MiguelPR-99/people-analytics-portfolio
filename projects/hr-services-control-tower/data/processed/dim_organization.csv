@@ -1,0 +1,8 @@
+﻿OrgUnitKey,OrgUnitCode,OrgUnitName,FunctionGroup
+1,MFG,Manufacturing,Operations
+2,ENG,Engineering,Operations
+3,SVO,Service Operations,Operations
+4,SC,Supply Chain,Operations
+5,SAL,Sales,Commercial
+6,FIN,Finance,Corporate
+7,COR,Corporate Functions,Corporate

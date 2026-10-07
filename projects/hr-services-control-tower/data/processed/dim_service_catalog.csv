@@ -1,0 +1,22 @@
+﻿ServiceKey,ServiceCode,ServiceGroup,RequestType,OwnerTeamKey,BaseComplexity,DefaultPriority,ApprovalProbability,VendorDependencyProbability,FirstContactResolutionBaseProbability,ActiveFlag
+1,PAY-01,Payroll & Compensation,Payslip Clarification,1,Low,Standard,0.02,0.02,0.78,true
+2,PAY-02,Payroll & Compensation,Payment Discrepancy,1,High,High,0.18,0.05,0.42,true
+3,PAY-03,Payroll & Compensation,Bank or Tax Data,1,Medium,Standard,0.2,0.03,0.58,true
+4,BEN-01,Benefits,Enrollment or Change,2,Medium,Standard,0.12,0.28,0.55,true
+5,BEN-02,Benefits,Dependent Update,2,Medium,Standard,0.18,0.3,0.5,true
+6,BEN-03,Benefits,Vendor Inquiry,2,High,Standard,0.05,0.72,0.34,true
+7,TNA-01,Time & Attendance,Time Correction,1,Medium,Standard,0.3,0.01,0.54,true
+8,TNA-02,Time & Attendance,Absence or Leave Registration,1,Medium,Standard,0.35,0.04,0.48,true
+9,TNA-03,Time & Attendance,Overtime Query,1,Low,Low,0.15,0.01,0.7,true
+10,EDC-01,Employee Data Changes,Personal or Contact Data,3,Low,Low,0.05,0,0.76,true
+11,EDC-02,Employee Data Changes,Emergency or Dependent Data,3,Medium,Standard,0.1,0,0.64,true
+12,EDC-03,Employee Data Changes,Position or Location Data,3,High,High,0.65,0,0.35,true
+13,DOC-01,HR Documents & Certificates,Employment Certificate,2,Low,Low,0.02,0,0.82,true
+14,DOC-02,HR Documents & Certificates,Reference or Confirmation Letter,2,Medium,Standard,0.18,0,0.6,true
+15,DOC-03,HR Documents & Certificates,Document Copy,2,Low,Low,0.01,0,0.86,true
+16,ONB-01,Onboarding,Pre-hire Documents,3,Medium,High,0.15,0.02,0.52,true
+17,ONB-02,Onboarding,HR System Setup,3,High,High,0.08,0.18,0.38,true
+18,ONB-03,Onboarding,Orientation Support,3,Low,Standard,0.02,0,0.78,true
+19,OFF-01,Offboarding,Termination Documents,3,Medium,High,0.25,0,0.48,true
+20,OFF-02,Offboarding,Final Pay Coordination,3,High,Critical,0.4,0.08,0.3,true
+21,OFF-03,Offboarding,Asset or Access Clearance,3,High,High,0.35,0.2,0.32,true

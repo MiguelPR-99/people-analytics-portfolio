@@ -1,0 +1,5 @@
+﻿SLAPolicyKey,Priority,FirstResponseSLAHours,ResolutionSLAHours,PauseOnEmployeeWaitFlag,PolicyVersion,SourceRowNumber,SourceSystem,RawExtractID
+1,Critical,2,8,true,SYN-1.0,1,SYNTHETIC_REFERENCE_DATA,EXT-20260701-A
+2,High,4,16,true,SYN-1.0,2,SYNTHETIC_REFERENCE_DATA,EXT-20260701-A
+3,Standard,8,40,true,SYN-1.0,3,SYNTHETIC_REFERENCE_DATA,EXT-20260701-A
+4,Low,16,80,true,SYN-1.0,4,SYNTHETIC_REFERENCE_DATA,EXT-20260701-A

@@ -1,0 +1,226 @@
+project:
+  id: hr-services-control-tower
+  organization: EnergiaNova Industrial Mexico
+  disclaimer: Fully synthetic learning scenario; not Siemens Energy data or process.
+
+simulation:
+  random_seed: 20260824
+  start_date: 2025-01-01
+  end_date: 2026-06-30
+  cutoff_timestamp: "2026-06-30T23:59:59"
+  timezone: America/Mexico_City
+  requester_count: 1200
+  agent_count: 18
+  target_case_count: 9000
+  extracted_at: "2026-07-01T06:00:00"
+
+business_calendar:
+  weekdays: [Monday, Tuesday, Wednesday, Thursday, Friday]
+  service_start: "08:00:00"
+  service_end: "16:00:00"
+  hours_per_business_day: 8
+  simulated_non_working_dates:
+    - 2025-01-01
+    - 2025-02-03
+    - 2025-03-17
+    - 2025-05-01
+    - 2025-09-16
+    - 2025-11-17
+    - 2025-12-25
+    - 2026-01-01
+    - 2026-02-02
+    - 2026-03-16
+    - 2026-05-01
+
+locations:
+  - key: 1
+    code: BJPL
+    name: Bajio Manufacturing Plant
+    type: Plant
+    region: Central Mexico
+    requester_weight: 0.52
+  - key: 2
+    code: QHSC
+    name: Queretaro HR Service Center
+    type: Service Center
+    region: Central Mexico
+    requester_weight: 0.23
+  - key: 3
+    code: MXCO
+    name: Mexico City Corporate Office
+    type: Corporate Office
+    region: Central Mexico
+    requester_weight: 0.25
+
+organization_units:
+  - {key: 1, code: MFG, name: Manufacturing, function_group: Operations, weight: 0.35}
+  - {key: 2, code: ENG, name: Engineering, function_group: Operations, weight: 0.14}
+  - {key: 3, code: SVO, name: Service Operations, function_group: Operations, weight: 0.14}
+  - {key: 4, code: SC, name: Supply Chain, function_group: Operations, weight: 0.12}
+  - {key: 5, code: SAL, name: Sales, function_group: Commercial, weight: 0.09}
+  - {key: 6, code: FIN, name: Finance, function_group: Corporate, weight: 0.07}
+  - {key: 7, code: COR, name: Corporate Functions, function_group: Corporate, weight: 0.09}
+
+teams:
+  - key: 1
+    code: PAYTIME
+    name: Payroll & Time
+  - key: 2
+    code: BENDOC
+    name: Benefits & Documents
+  - key: 3
+    code: DATALIFE
+    name: Employee Data & Lifecycle
+
+sla_policies:
+  - {key: 1, priority: Critical, first_response_hours: 2, resolution_hours: 8, pause_on_employee_wait: true}
+  - {key: 2, priority: High, first_response_hours: 4, resolution_hours: 16, pause_on_employee_wait: true}
+  - {key: 3, priority: Standard, first_response_hours: 8, resolution_hours: 40, pause_on_employee_wait: true}
+  - {key: 4, priority: Low, first_response_hours: 16, resolution_hours: 80, pause_on_employee_wait: true}
+
+priority_base_weights:
+  Critical: 0.01
+  High: 0.11
+  Standard: 0.54
+  Low: 0.34
+
+channel_rules:
+  Portal:
+    weight: 0.55
+    incomplete_probability: 0.05
+    survey_response_probability: 0.48
+  Email:
+    weight: 0.25
+    incomplete_probability: 0.22
+    survey_response_probability: 0.42
+  Teams:
+    weight: 0.12
+    incomplete_probability: 0.12
+    survey_response_probability: 0.38
+  Phone:
+    weight: 0.08
+    incomplete_probability: 0.10
+    survey_response_probability: 0.32
+
+service_groups:
+  - name: Payroll & Compensation
+    weight: 0.18
+    owner_team_key: 1
+    request_types:
+      - {code: PAY-01, name: Payslip Clarification, weight: 0.35, complexity: Low, default_priority: Standard, approval_probability: 0.02, vendor_probability: 0.02, fcr_probability: 0.78}
+      - {code: PAY-02, name: Payment Discrepancy, weight: 0.40, complexity: High, default_priority: High, approval_probability: 0.18, vendor_probability: 0.05, fcr_probability: 0.42}
+      - {code: PAY-03, name: Bank or Tax Data, weight: 0.25, complexity: Medium, default_priority: Standard, approval_probability: 0.20, vendor_probability: 0.03, fcr_probability: 0.58}
+  - name: Benefits
+    weight: 0.15
+    owner_team_key: 2
+    request_types:
+      - {code: BEN-01, name: Enrollment or Change, weight: 0.42, complexity: Medium, default_priority: Standard, approval_probability: 0.12, vendor_probability: 0.28, fcr_probability: 0.55}
+      - {code: BEN-02, name: Dependent Update, weight: 0.33, complexity: Medium, default_priority: Standard, approval_probability: 0.18, vendor_probability: 0.30, fcr_probability: 0.50}
+      - {code: BEN-03, name: Vendor Inquiry, weight: 0.25, complexity: High, default_priority: Standard, approval_probability: 0.05, vendor_probability: 0.72, fcr_probability: 0.34}
+  - name: Time & Attendance
+    weight: 0.16
+    owner_team_key: 1
+    request_types:
+      - {code: TNA-01, name: Time Correction, weight: 0.44, complexity: Medium, default_priority: Standard, approval_probability: 0.30, vendor_probability: 0.01, fcr_probability: 0.54}
+      - {code: TNA-02, name: Absence or Leave Registration, weight: 0.34, complexity: Medium, default_priority: Standard, approval_probability: 0.35, vendor_probability: 0.04, fcr_probability: 0.48}
+      - {code: TNA-03, name: Overtime Query, weight: 0.22, complexity: Low, default_priority: Low, approval_probability: 0.15, vendor_probability: 0.01, fcr_probability: 0.70}
+  - name: Employee Data Changes
+    weight: 0.19
+    owner_team_key: 3
+    request_types:
+      - {code: EDC-01, name: Personal or Contact Data, weight: 0.46, complexity: Low, default_priority: Low, approval_probability: 0.05, vendor_probability: 0.00, fcr_probability: 0.76}
+      - {code: EDC-02, name: Emergency or Dependent Data, weight: 0.30, complexity: Medium, default_priority: Standard, approval_probability: 0.10, vendor_probability: 0.00, fcr_probability: 0.64}
+      - {code: EDC-03, name: Position or Location Data, weight: 0.24, complexity: High, default_priority: High, approval_probability: 0.65, vendor_probability: 0.00, fcr_probability: 0.35}
+  - name: HR Documents & Certificates
+    weight: 0.15
+    owner_team_key: 2
+    request_types:
+      - {code: DOC-01, name: Employment Certificate, weight: 0.48, complexity: Low, default_priority: Low, approval_probability: 0.02, vendor_probability: 0.00, fcr_probability: 0.82}
+      - {code: DOC-02, name: Reference or Confirmation Letter, weight: 0.28, complexity: Medium, default_priority: Standard, approval_probability: 0.18, vendor_probability: 0.00, fcr_probability: 0.60}
+      - {code: DOC-03, name: Document Copy, weight: 0.24, complexity: Low, default_priority: Low, approval_probability: 0.01, vendor_probability: 0.00, fcr_probability: 0.86}
+  - name: Onboarding
+    weight: 0.10
+    owner_team_key: 3
+    request_types:
+      - {code: ONB-01, name: Pre-hire Documents, weight: 0.38, complexity: Medium, default_priority: High, approval_probability: 0.15, vendor_probability: 0.02, fcr_probability: 0.52}
+      - {code: ONB-02, name: HR System Setup, weight: 0.34, complexity: High, default_priority: High, approval_probability: 0.08, vendor_probability: 0.18, fcr_probability: 0.38}
+      - {code: ONB-03, name: Orientation Support, weight: 0.28, complexity: Low, default_priority: Standard, approval_probability: 0.02, vendor_probability: 0.00, fcr_probability: 0.78}
+  - name: Offboarding
+    weight: 0.07
+    owner_team_key: 3
+    request_types:
+      - {code: OFF-01, name: Termination Documents, weight: 0.34, complexity: Medium, default_priority: High, approval_probability: 0.25, vendor_probability: 0.00, fcr_probability: 0.48}
+      - {code: OFF-02, name: Final Pay Coordination, weight: 0.33, complexity: High, default_priority: Critical, approval_probability: 0.40, vendor_probability: 0.08, fcr_probability: 0.30}
+      - {code: OFF-03, name: Asset or Access Clearance, weight: 0.33, complexity: High, default_priority: High, approval_probability: 0.35, vendor_probability: 0.20, fcr_probability: 0.32}
+
+outcome_rules:
+  cancellation_probability: 0.015
+  transfer_base_probability: 0.12
+  reopen_base_probability: 0.08
+  survey_invitation_probability: 0.70
+  survey_score_base_mean: 4.20
+  survey_score_noise_sd: 0.65
+  penalties:
+    missed_resolution_sla: 0.55
+    each_transfer: 0.35
+    each_reopen: 0.75
+    incomplete_submission: 0.20
+  status_at_cutoff_target_ranges:
+    closed_or_resolved: [0.88, 0.92]
+    open: [0.07, 0.10]
+    cancelled: [0.01, 0.02]
+
+controlled_patterns:
+  payroll_month_end:
+    enabled: true
+    window: day_26_through_day_03
+    arrival_multiplier: 1.60
+  benefits_vendor_delay:
+    enabled: true
+    start_date: 2025-04-01
+    end_date: 2025-06-30
+    request_type_codes: [BEN-02, BEN-03]
+    vendor_wait_probability_multiplier: 1.55
+    vendor_wait_duration_multiplier: 1.80
+  bajio_demand_capacity_event:
+    enabled: true
+    demand_start_date: 2025-09-01
+    demand_end_date: 2025-10-31
+    location_code: BJPL
+    arrival_multiplier: 1.30
+    capacity_start_date: 2025-09-08
+    capacity_weeks: 6
+    team_code: DATALIFE
+    available_hours_multiplier: 0.80
+    recovery_end_date: 2025-12-31
+  employee_data_portal_standardization:
+    enabled: true
+    intervention_date: 2026-01-01
+    service_group: Employee Data Changes
+    channel: Portal
+    incomplete_probability_multiplier: 0.45
+    active_time_multiplier: 0.80
+
+raw_quality_issues:
+  duplicate_case_row_rate: 0.008
+  channel_or_service_variant_rate: 0.015
+  blank_channel_rate: 0.005
+  surrounding_whitespace_rate: 0.010
+  mixed_boolean_representation_rate: 0.020
+  duplicate_event_rate: 0.005
+  orphan_survey_rate: 0.003
+
+quality_acceptance:
+  processed_case_id_unique: true
+  processed_foreign_keys_valid: true
+  processed_event_sequence_unique: true
+  negative_duration_count: 0
+  invalid_score_count: 0
+  final_backlog_reconciliation_tolerance: 0
+  event_counter_reconciliation_tolerance: 0
+  pattern_checks:
+    email_incomplete_rate_min_ratio_vs_portal: 2.5
+    benefits_delay_period_p90_min_ratio_vs_following_period: 1.15
+    post_intervention_incomplete_rate_max_ratio_vs_pre: 0.70
+    reopened_case_csat_max_difference_vs_not_reopened: -0.30
+
