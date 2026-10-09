@@ -18,7 +18,7 @@ An end-to-end Power BI case for monitoring HR service demand, SLA, backlog, capa
 
 ### Project 0 — Talent Review & Calibration
 
-An interactive Power BI solution for reviewing talent distribution, employee movement, manager rating patterns, and department-level talent risk.
+A Power BI case for understanding talent distribution, year-over-year movement, rating consistency, and department-level talent risk using synthetic data.
 
 [Open the live Power BI report](https://app.powerbi.com/view?r=eyJrIjoiMjM2NGFkZjYtOWNiNy00MWZhLWJjOGEtYzY5ZGZhZTk2N2E3IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9) · [Explore the full case study](projects/talent-review-calibration/README.md)
 

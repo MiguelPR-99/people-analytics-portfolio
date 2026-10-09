@@ -18,7 +18,7 @@ Caso end-to-end en Power BI para monitorear demanda, SLA, backlog, capacidad, ca
 
 ### Proyecto 0 — Talent Review & Calibration
 
-Solución interactiva en Power BI para revisar distribución de talento, movimientos de empleados, patrones de evaluación por manager y riesgo departamental.
+Caso en Power BI para comprender la distribución de talento, los movimientos entre periodos, la consistencia de las evaluaciones y el riesgo departamental mediante datos sintéticos.
 
 [Abrir el reporte interactivo](https://app.powerbi.com/view?r=eyJrIjoiMjM2NGFkZjYtOWNiNy00MWZhLWJjOGEtYzY5ZGZhZTk2N2E3IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9) · [Explorar el caso completo](projects/talent-review-calibration/README.es.md)
 
