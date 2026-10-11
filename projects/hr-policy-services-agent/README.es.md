@@ -5,7 +5,6 @@ Caso de Digital HR desarrollado con Microsoft Copilot Studio y Power Automate pa
 [← Volver al portafolio](../../README.es.md) · [English](README.md)
 
 ![Estado](https://img.shields.io/badge/estado-terminado-14866d)
-![Evaluación](https://img.shields.io/badge/coincidencia%20semántica-100%25-14866d)
 ![Datos](https://img.shields.io/badge/datos-100%25%20sintéticos-4c78a8)
 
 > Proyecto independiente de portafolio. No es un sistema oficial ni está afiliado o respaldado por Siemens Energy. Las políticas, personas, solicitudes y resultados son sintéticos.
