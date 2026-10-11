@@ -4,8 +4,6 @@ A Digital HR case built with Microsoft Copilot Studio and Power Automate to answ
 
 [← Back to portfolio](../../README.md) · [Español](README.es.md)
 
-![Status](https://img.shields.io/badge/status-completed-14866d)
-![Data](https://img.shields.io/badge/data-100%25%20synthetic-4c78a8)
 
 > Independent portfolio project. It is not an official system and is not affiliated with or endorsed by Siemens Energy. All policies, people, requests, and results are synthetic.
 
