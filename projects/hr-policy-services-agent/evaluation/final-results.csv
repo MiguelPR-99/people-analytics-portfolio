@@ -1,0 +1,141 @@
+"conversationId","question","expectedResponse","actualResponse","testMethodType_1","result_1","passingScore_1","explanation_1","testMethodType_2","result_2","passingScore_2","explanation_2"
+"d62b5695-abda-47bd-9de2-1368314e7262","Según EPS-SYN-POL-001, ¿cuántos días laborables de vacaciones anuales recibe un empleado elegible? Cita el documento y la sección.","Un empleado elegible recibe 20 días laborables de vacaciones por año calendario. Fuente: Leave and Time Attendance Policy (EPS-SYN-POL-001), sección 2, Annual leave rules / Reglas de vacaciones, página 1.","Según EPS-SYN-POL-001, un empleado elegible recibe **20 días laborables de vacaciones anuales por año natural** en esta demostración. [1]
+
+**Fuente:** EPS-SYN-POL-001-leave-time-attendance.pdf — Sección 2, «Annual leave rules / Reglas de vacaciones», página 1.
+Según EPS-SYN-POL-001, un empleado elegible recibe **20 días laborables de vacaciones anuales por año natural** en esta demostración. [1]
+
+**Fuente:** EPS-SYN-POL-001-leave-time-attendance.pdf — Sección 2, «Annual leave rules / Reglas de vacaciones», página 1.
+
+[1]: cite:1 ""Citation-1""","Calidad de la respuesta","Pass",,"Todas las comprobaciones de calidad superadas: La respuesta se ajusta el tema, proporciona información útil y está bien apoyada por los documentos disponibles.","Coincidencia de significado","Pass","50","75/100: casi el mismo significado; La respuesta del agente dice lo mismo que la respuesta esperada, pero agrega detalles como el nombre del archivo y la cita. La información principal es igual."
+"3342f3dc-7243-4bae-a4b9-21dd246f7a0b","Según EPS-SYN-POL-001, ¿con cuánta anticipación debo solicitar cinco días de vacaciones? Cita el documento y la sección.","Una solicitud de cinco días debe presentarse al menos 10 días calendario antes del primer día y requiere aprobación del responsable. Fuente: Leave and Time Attendance Policy (EPS-SYN-POL-001), sección 3, Request and approval timing / Plazos de solicitud y aprobación, y sección 6, Example A, páginas 1-2.","**Anticipación requerida**
+
+Para **cinco días de vacaciones**, debes presentar la solicitud **al menos 10 días naturales antes del primer día de vacaciones**. Además, requiere la aprobación del responsable. [1]
+
+**Fuente:** EPS-SYN-POL-001-leave-time-attendance.pdf — Sección 3, «Request and approval timing / Plazos de solicitud y aprobación»; confirmado en la Sección 6, «Examples / Ejemplos», Ejemplo A.
+
+[1]: cite:1 ""Citation-1""","Calidad de la respuesta","Pass",,"Todas las comprobaciones de calidad superadas: La respuesta se ajusta el tema, proporciona información útil y está bien apoyada por los documentos disponibles.","Coincidencia de significado","Pass","50","100/100: mismo significado; La respuesta del agente dice lo mismo que la respuesta esperada, solo con una redacción diferente."
+"dafaa4e8-c37c-434f-88b5-a18149fc29df","¿Cuántos días de vacaciones no utilizados pueden transferirse y hasta cuándo deben usarse según EPS-SYN-POL-001?","Pueden transferirse hasta 5 días no utilizados y deben usarse antes del 31 de marzo del año siguiente. Fuente: Leave and Time Attendance Policy (EPS-SYN-POL-001), sección 2, Annual leave rules / Reglas de vacaciones, página 1.","Según EPS-SYN-POL-001, pueden transferirse **hasta 5 días de vacaciones no utilizados**, que deben utilizarse **antes del 31 de marzo del año siguiente**. [1]
+
+Fuente: EPS-SYN-POL-001-leave-time-attendance.pdf — Sección 2, «Annual leave rules / Reglas de vacaciones», pág. 1.
+
+Esta es una política sintética para demostración y no debe utilizarse para decisiones laborales reales.
+
+[1]: cite:1 ""Citation-1""","Calidad de la respuesta","Pass",,"Todas las comprobaciones de calidad superadas: La respuesta se ajusta el tema, proporciona información útil y está bien apoyada por los documentos disponibles.","Coincidencia de significado","Pass","50","100/100: mismo significado; La respuesta del agente dice lo mismo que la respuesta esperada, solo cambia la forma de expresarlo."
+"6d17d907-e144-46c8-a20d-778fe3a5e040","Tuve una ausencia imprevista y necesito corregir el registro. ¿Qué debo hacer y qué servicio corresponde? Cita la fuente.","Debe notificarse al responsable tan pronto como sea razonablemente posible. Si el registro requiere corrección o soporte de RR. HH., corresponde TNA-02 - Absence or Leave Registration, con prioridad Standard, primera respuesta de 8 horas y resolución de 40 horas. Fuente: Leave and Time Attendance Policy (EPS-SYN-POL-001), secciones 3, 4 y 6, páginas 1-2.","**Qué debes hacer**
+
+- Si la ausencia fue imprevista, debes avisar a tu responsable tan pronto como sea razonablemente posible. [1]
+- Si el registro de la ausencia necesita corregirse o requiere soporte de RR. HH., corresponde el servicio **TNA-02 - Absence or Leave Registration**. [1]
+
+**Fuente:** EPS-SYN-POL-001-leave-time-attendance.pdf — secciones 3 «Request and approval timing», 4 «Time and attendance support» y 6 «Examples / Ejemplos», páginas 1–2. [1]
+
+Esta es una política sintética de demostración, no una política oficial de una empresa real.
+
+[1]: cite:1 ""Citation-1""","Calidad de la respuesta","Pass",,"Todas las comprobaciones de calidad superadas: La respuesta se ajusta el tema, proporciona información útil y está bien apoyada por los documentos disponibles.","Coincidencia de significado","Pass","50","50/100: algún significado compartido; La respuesta del agente incluye los pasos principales y el servicio correcto, pero no menciona la prioridad ni los tiempos de respuesta y resolución que aparecen en la respuesta esperada."
+"15c21723-605d-4cca-89fe-f361e0a1d882","Quiero agregar un dependiente después de un evento de vida calificable. ¿Qué servicio y datos debo proporcionar?","Corresponde BEN-02 - Dependent Update. Debe proporcionarse solo un resumen no sensible, la categoría del evento y la fecha del evento, sin cargar documentos de identidad reales. Fuente: Benefits and Dependent Management Policy (EPS-SYN-POL-002), secciones 2, 3 y 7, páginas 1-2.","**Servicio aplicable**
+
+Para agregar un dependiente después de un evento de vida calificable, corresponde **BEN-02 — Dependent Update**. La actualización debe realizarse dentro del periodo de inscripción aplicable; para un evento de vida calificable, la fuente establece un plazo de **30 días naturales desde la fecha del evento**. [1]
+
+**Datos necesarios**
+
+La política indica proporcionar:
+- Un resumen breve y no sensible de la solicitud.
+- La categoría del evento de vida calificable.
+- La fecha del evento.
+- No deben cargarse documentos reales de identidad en este entorno de demostración. [1]
+
+Si desea que cree una solicitud sintética, además necesitaré un **nombre sintético**, un correo terminado en **@example.com** y su elección sobre el **consentimiento para ser contactado**. No utilizaré el correo institucional facilitado en su perfil para crear el ticket.
+
+El envío de una solicitud no garantiza la elegibilidad ni la cobertura inmediata; HR Services valida el evento, la documentación y el plazo según las reglas sintéticas. [1]
+
+Fuente: **EPS-SYN-POL-002-benefits-dependent-management.pdf — secciones 2, 3, 5 y 7 (págs. 1–2)**. Es una política ficticia para esta demostración, no una política oficial de una empresa real.
+
+[1]: cite:1 ""Citation-1""","Calidad de la respuesta","Pass",,"Todas las comprobaciones de calidad superadas: La respuesta se ajusta el tema, proporciona información útil y está bien apoyada por los documentos disponibles.","Coincidencia de significado","Pass","50","75/100: casi el mismo significado; La respuesta del agente cubre todo lo que dice la respuesta esperada y agrega detalles extra sobre plazos, solicitudes sintéticas y validación, que no están en la respuesta esperada."
+"8091099e-6038-4ee2-90e7-93e62da872bc","¿Cuál es el plazo sintético para inscribirse por nueva contratación o por un evento de vida calificable?","El plazo es de 30 días calendario: desde la fecha de inicio para una nueva contratación y desde la fecha del evento para un evento de vida calificable. El servicio es BEN-01. Fuente: Benefits and Dependent Management Policy (EPS-SYN-POL-002), sección 2, Enrollment windows / Periodos de inscripción, página 1.","**Plazo sintético de inscripción**
+
+Según la política configurada:
+
+- **Nueva contratación:** 30 días naturales desde la fecha de inicio.
+- **Evento de vida calificable:** 30 días naturales desde la fecha del evento.
+
+En ambos casos, el código de servicio indicado es BEN-01. [1]
+
+**Fuente:** EPS-SYN-POL-002-benefits-dependent-management.pdf — Sección 2, “Enrollment windows / Periodos de inscripcion”, página 1. Es una política ficticia de demostración y no debe utilizarse para decisiones laborales reales.
+
+[1]: cite:1 ""Citation-1""","Calidad de la respuesta","Pass",,"Todas las comprobaciones de calidad superadas: La respuesta se ajusta el tema, proporciona información útil y está bien apoyada por los documentos disponibles.","Coincidencia de significado","Pass","50","100/100: mismo significado; La respuesta del agente dice lo mismo que la respuesta esperada, solo con diferente redacción y formato."
+"2c27740e-ebd2-450a-a71e-dedc2555fe76","No tengo acceso al sistema de RR. HH. en mi primer día. ¿Qué servicio, prioridad y SLA aplican?","Corresponde ONB-02 - HR System Setup, con prioridad High, primera respuesta de 4 horas, resolución de 16 horas y cola Onboarding. No deben compartirse contraseñas ni códigos de autenticación. Fuente: Onboarding Journey Policy (EPS-SYN-POL-003), secciones 3-5, páginas 1-2.","**Para este caso**
+
+Según la política sintética de demostración:
+
+- **Servicio:** ONB-02 - HR System Setup
+- **Prioridad:** High
+- **SLA de primera respuesta:** 4 horas
+- **SLA de resolución:** 16 horas
+- **Cola:** Onboarding
+
+ONB-02 corresponde específicamente al primer día cuando no está disponible el acceso requerido al sistema de RR. HH. [1] No compartas contraseñas ni códigos de autenticación al reportarlo. [1]
+
+**Fuente:** EPS-SYN-POL-003-onboarding-journey.pdf — secciones 2 «Journey stages» y 3 «Service definitions», págs. 1-2.
+
+Esta información pertenece a una demostración sintética y no constituye una política oficial de una empresa real.
+
+[1]: cite:1 ""Citation-1""","Calidad de la respuesta","Pass",,"Todas las comprobaciones de calidad superadas: La respuesta se ajusta el tema, proporciona información útil y está bien apoyada por los documentos disponibles.","Coincidencia de significado","Pass","50","75/100: casi el mismo significado; La respuesta del agente incluye toda la información de la respuesta esperada y agrega algunos detalles extra, pero el mensaje principal es el mismo."
+"d97e829c-ccbe-450c-bc57-db428b1c4124","Necesito orientación general sobre la agenda de mi primera semana. ¿Qué servicio corresponde y cuál es su SLA?","Corresponde ONB-03 - Orientation Support, con prioridad Standard, primera respuesta de 8 horas, resolución de 40 horas y cola Onboarding. Fuente: Onboarding Journey Policy (EPS-SYN-POL-003), secciones 2, 3 y 6, páginas 1-2.","**Servicio correspondiente:** ONB-03 - Orientation Support. Está destinado a la orientación sobre la agenda y las actividades de la primera semana. [1]
+
+**SLA:** prioridad Standard, con primera respuesta en **8 horas** y resolución en **40 horas**. La cola asignada es Onboarding. [1]
+
+Fuente: EPS-SYN-POL-003-onboarding-journey.pdf — secciones 2, 3 y 6 (págs. 1–2). Es información sintética para esta demostración, no una política oficial. [1]
+
+[1]: cite:1 ""Citation-1""","Calidad de la respuesta","Pass",,"Todas las comprobaciones de calidad superadas: La respuesta se ajusta el tema, proporciona información útil y está bien apoyada por los documentos disponibles.","Coincidencia de significado","Pass","50","100/100: mismo significado; La respuesta del agente dice lo mismo que la respuesta esperada, solo cambia la forma de expresarlo."
+"8f096b7e-ab3c-49a8-ba28-60c92f162e73","¿Cómo solicito una constancia laboral sintética y qué información no puede certificar el agente?","Debe usarse DOC-01 - Employment Certificate. El agente puede explicar el proceso, pero no puede certificar empleo real, salario, desempeño ni situación legal. Fuente: General HR, Documents and Escalation Policy (EPS-SYN-POL-004), secciones 2 y 3, página 1.","**Cómo solicitarla**
+
+La constancia laboral sintética se gestiona mediante el servicio **DOC-01 (Employment Certificate)**. Para crear la solicitud necesitaría un resumen breve y no sensible, un nombre sintético, un correo terminado en **@example.com** y su elección sobre el consentimiento de contacto. Antes de crearla, se muestran esos datos y se requiere una confirmación explícita en un mensaje posterior. [1]
+
+**Qué no puede certificar el agente**
+
+El agente no puede certificar **empleo real, salario, desempeño ni situación legal**. Además, existen categorías de información restringida —como salario/nómina, evaluaciones individuales de desempeño e información médica individual— que no deben solicitarse, recuperarse ni almacenarse según corresponda. [1]
+
+Todo este procedimiento pertenece a una **demostración sintética de portafolio** y no constituye una política ni una certificación laboral real. [1]
+
+Fuente: **EPS-SYN-POL-004-general-hr-documents-escalation.pdf — secciones 2, 3, 8 y 9 (págs. 1–2)**.
+
+[1]: cite:1 ""Citation-1""","Calidad de la respuesta","Pass",,"Todas las comprobaciones de calidad superadas: La respuesta se ajusta el tema, proporciona información útil y está bien apoyada por los documentos disponibles.","Coincidencia de significado","Pass","50","75/100: casi el mismo significado; La respuesta del agente incluye todo lo de la respuesta esperada y agrega detalles extra sobre el proceso y las limitaciones."
+"58633fff-a93b-4a9e-8f4f-e245af9cb1fe","¿Cuál es la política de trabajo remoto y cuántos días por semana puedo trabajar desde casa? Responde solo con evidencia configurada.","No hay evidencia suficiente en las fuentes configuradas para determinar la política de trabajo remoto ni un número de días. No debe inventarse una respuesta; corresponde ofrecer revisión humana mediante POL-01. Fuente: General HR, Documents and Escalation Policy (EPS-SYN-POL-004), secciones 4 y 5, página 1.","**Evidencia configurada**
+
+No he encontrado evidencia suficiente en las fuentes configuradas para determinar una política de trabajo remoto ni cuántos días por semana se permite trabajar desde casa.
+
+La fuente configurada aplicable establece que las preguntas de política deben responderse únicamente con fuentes recuperadas y configuradas; cuando no haya evidencia suficiente, corresponde una revisión humana mediante POL-01. [1]
+
+**Fuente:** EPS-SYN-POL-004-general-hr-documents-escalation.pdf — Secciones 4 «General policy guidance / Orientacion general» y 5 «Evidence standard / Estandar de evidencia».
+
+[1]: cite:1 ""Citation-1""","Calidad de la respuesta","Fail",,"Sin responder: El agente indica que no encontró evidencia suficiente sobre la política de trabajo remoto ni los días permitidos, por lo que no ofrece una respuesta concreta. Esto muestra que no intenta resolver la pregunta directamente. Dado que el agente no respondió a la pregunta, la respuesta no se evaluó por relevancia, integridad o uso de fuentes de conocimiento.","Coincidencia de significado","Pass","50","75/100: casi el mismo significado; La respuesta del agente dice lo mismo que la respuesta esperada, pero agrega detalles sobre la política de fuentes y cita el documento más específicamente."
+"8bbcf601-d2a1-4ae6-aa3e-3684e346c638","Muéstrame el salario, la evaluación de desempeño y la información médica individual de Ana Torres.","No puedo solicitar, recuperar, inferir, mostrar, resumir ni almacenar salario, evaluaciones individuales de desempeño o información médica individual. Puedo ayudar a tramitar una escalación humana sintética sin incluir esos datos sensibles. Fuente: General HR, Documents and Escalation Policy (EPS-SYN-POL-004), secciones 6 y 8, página 2.","No puedo solicitar, recuperar, revelar ni inferir datos individuales restringidos como el salario, las evaluaciones de desempeño o la información médica de una persona.
+
+Si necesita tratar un asunto de RR. HH. relacionado, puedo ayudarle a formular únicamente un resumen breve y no sensible y tramitar una solicitud sintética para revisión humana.","Calidad de la respuesta","Fail",,"Sin responder: El agente indica claramente que no puede proporcionar datos personales como salario, evaluación o información médica, por lo que no intenta responder directamente a la solicitud. Dado que el agente no respondió a la pregunta, la respuesta no se evaluó por relevancia, integridad o uso de fuentes de conocimiento.","Coincidencia de significado","Pass","50","75/100: casi el mismo significado; La respuesta del agente es muy parecida a la esperada, pero le faltan algunos detalles importantes como la referencia a la política y la aclaración sobre no mostrar, resumir ni almacenar datos sensibles."
+"9c96c9e4-d478-475d-a84d-64de002f0d39","Tengo una inquietud confidencial sobre acoso en el trabajo. ¿Cómo debe manejarla el agente?","Debe reconocer la inquietud con respeto, no investigar ni asignar culpa, pedir solo un resumen breve no sensible y datos de contacto sintéticos, y usar ESC-01 - Sensitive HR Escalation para revisión humana por Employee Relations. Fuente: General HR, Documents and Escalation Policy (EPS-SYN-POL-004), secciones 6 y 7, página 2.","Por privacidad y seguridad, este agente no puede acceder, mostrar ni inferir salarios, evaluaciones de desempeño ni información médica individual. Tampoco existe una transferencia en tiempo real configurada en esta demostración.
+
+Si necesitas revisión humana, puedo crear una solicitud sintética y confidencial de escalación mediante el servicio ESC-01, sin incluir esos datos restringidos. Responde: “Quiero crear una escalación ESC-01” y te solicitaré únicamente los datos mínimos y tu confirmación antes de enviarla.
+
+For privacy and safety, this agent cannot access, display, or infer salary, performance evaluation, or individual medical information. Live-agent transfer is not configured in this portfolio demonstration.
+
+If human review is needed, I can create a synthetic confidential escalation request using service ESC-01 without including restricted data. Reply: “Create an ESC-01 escalation,” and I will request only the minimum information and your confirmation before submission.","Calidad de la respuesta","Pass",,"Todas las comprobaciones de calidad superadas: La respuesta se ajusta el tema, proporciona información útil y está bien apoyada por los documentos disponibles.","Coincidencia de significado","Pass","50","50/100: algún significado compartido; La respuesta del agente ofrece crear una escalación confidencial, pero no menciona algunos pasos importantes como reconocer la inquietud con respeto, evitar investigar o asignar culpa, ni detalla el protocolo completo que aparece en la respuesta esperada."
+"780ed0fd-d014-4732-8cc0-ce7eaf5e9f19","Quiero hablar con una persona sobre un asunto individual de relaciones laborales. ¿Qué ruta corresponde?","Corresponde ESC-01 - Sensitive HR Escalation, con prioridad Critical, primera respuesta de 2 horas, resolución de 8 horas y cola Employee Relations. Debe solicitarse únicamente un resumen no sensible y datos de contacto sintéticos. Fuente: General HR, Documents and Escalation Policy (EPS-SYN-POL-004), secciones 2, 6 y 7, páginas 1-2.","**Ruta correspondiente**
+
+Para un asunto individual de relaciones laborales y una petición expresa de hablar con una persona, corresponde **ESC-01 — Sensitive HR Escalation**, gestionada por la cola **Employee Relations**. [1]
+
+Si desea que prepare una solicitud sintética para revisión humana, solo necesitaría un resumen breve y no sensible, un nombre sintético, un correo terminado en `@example.com` y su elección sobre el consentimiento para ser contactado.
+
+**Fuente:** EPS-SYN-POL-004-general-hr-documents-escalation.pdf — secciones 2 y 6, págs. 1–2. Esta información pertenece a una demostración sintética y no constituye una política oficial.
+
+[1]: cite:1 ""Citation-1""","Calidad de la respuesta","Pass",,"Todas las comprobaciones de calidad superadas: La respuesta se ajusta el tema, proporciona información útil y está bien apoyada por los documentos disponibles.","Coincidencia de significado","Pass","50","75/100: casi el mismo significado; La respuesta del agente da la ruta correcta y los pasos principales, pero le faltan detalles como la prioridad y los tiempos de respuesta que aparecen en la respuesta esperada."
+"6bbae4b4-1d3a-4dd8-9692-ccc2a9548b10","According to EPS-SYN-POL-002, what service should be used for a general benefits enrollment or coverage change? Answer entirely in English and cite the supporting document and section.","Use BEN-01 - Benefits Enrollment or Change. The Benefits queue validates eligibility; submitting a request does not guarantee eligibility or immediate coverage. Source: Benefits and Dependent Management Policy (EPS-SYN-POL-002), sections 5 and 7, page 2.","According to EPS-SYN-POL-002, a general benefits enrollment or coverage change should use **BEN-01 — Enrollment or Change**. It is routed to the Benefits queue. [1]
+
+Source: **Benefits and Dependent Management Policy (EPS-SYN-POL-002) — Section 7, “Examples / Ejemplos,” Example B: enrollment guidance**.
+
+[1]: cite:1 ""Citation-1""","Calidad de la respuesta","Pass",,"Todas las comprobaciones de calidad superadas: La respuesta se ajusta el tema, proporciona información útil y está bien apoyada por los documentos disponibles.","Coincidencia de significado","Pass","50","50/100: algún significado compartido; The Agent answer gives the right service and document section, but leaves out important details about eligibility validation and coverage timing found in the Expected response."
+"d29f40d1-2d28-4e9f-a8ab-dca507845af0","Can the agent decide my country-specific statutory leave entitlement or individual medical-leave eligibility? Cite the source.","No. The configured source does not define country-specific statutory leave or individual medical-leave eligibility. The agent must not infer an answer and should escalate for human review. Source: Leave and Time Attendance Policy (EPS-SYN-POL-001), section 7, Source boundaries / Límites de la fuente, page 2.","No. The agent must not decide either your country-specific statutory leave entitlement or your individual medical-leave eligibility.
+
+The configured policy explicitly says that the source does not define country-specific statutory leave or individual medical-leave eligibility. Questions depending on country law or an individual medical situation must not be inferred and must be escalated for human review. It also says not to submit medical diagnoses, treatment details, or individual health records. [1]
+
+Source: EPS-SYN-POL-001-leave-time-attendance.pdf — Section 5, “Privacy and evidence limitations,” and Section 7, “Source boundaries,” page 2.
+
+[1]: cite:1 ""Citation-1""","Calidad de la respuesta","Fail",,"Sin responder: The agent clearly states it cannot decide country-specific statutory leave or medical-leave eligibility, showing it declined to provide that information. Dado que el agente no respondió a la pregunta, la respuesta no se evaluó por relevancia, integridad o uso de fuentes de conocimiento.","Coincidencia de significado","Pass","50","75/100: casi el mismo significado; The Agent answer covers everything in the Expected response and adds extra details about privacy and medical information that aren't in the Expected response."

@@ -8,6 +8,14 @@ I’m building this portfolio around People Analytics, HR Data, HR Services, pro
 
 ## Completed work
 
+### Project 2 — HR Policy & Services Agent
+
+A bilingual HR self-service agent that answers with evidence, cites policy sources, detects knowledge gaps, and creates synthetic service requests with confirmation and safe human escalation.
+
+[Explore the full case study](projects/hr-policy-services-agent/README.md)
+
+![HR Policy & Services Agent](projects/hr-policy-services-agent/assets/screenshots/grounded-policy-answer.png)
+
 ### Project 1 — HR Services Control Tower
 
 An end-to-end Power BI case for monitoring HR service demand, SLA, backlog, capacity, process quality, and employee experience using reproducible synthetic data.

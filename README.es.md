@@ -8,6 +8,14 @@ Estoy construyendo este portafolio en torno a People Analytics, HR Data, HR Serv
 
 ## Trabajo terminado
 
+### Proyecto 2 — HR Policy & Services Agent
+
+Agente bilingüe de autoservicio de RH que responde con evidencia, cita políticas, detecta vacíos de información y crea solicitudes sintéticas con confirmación y escalación humana segura.
+
+[Explorar el caso completo](projects/hr-policy-services-agent/README.es.md)
+
+![HR Policy & Services Agent](projects/hr-policy-services-agent/assets/screenshots/grounded-policy-answer.png)
+
 ### Proyecto 1 — HR Services Control Tower
 
 Caso end-to-end en Power BI para monitorear demanda, SLA, backlog, capacidad, calidad de proceso y experiencia del empleado mediante datos sintéticos reproducibles.
