@@ -16,6 +16,23 @@ The agent addresses two common HR Services needs:
 
 The solution combines configured-document retrieval, responsible-use instructions, a Power Automate flow, and Microsoft Lists. Before creating a ticket, it displays a summary and requires explicit confirmation.
 
+## End-to-end demonstration
+
+This one-minute walkthrough shows the complete experience: a benefits question is answered with retrieved evidence; the agent then collects only synthetic details, presents a summary, waits for explicit confirmation, and creates the request through Power Automate. The result includes a ticket number, service, status, and target dates, and is stored in Microsoft Lists.
+
+![End-to-end demonstration of the HR Policy & Services Agent](assets/demo/hr-policy-services-agent-demo.gif)
+
+[Open the MP4 demonstration](assets/demo/hr-policy-services-agent-demo.mp4)
+
+The recording provides four observable pieces of evidence:
+
+- **Grounding:** it retrieves `EPS-SYN-POL-002` and preserves the section used.
+- **Action control:** it presents the request details and waits for confirmation in a later message.
+- **Execution:** Power Automate returns structured output with the ticket, service, status, and SLA.
+- **Traceability:** the new request appears in Microsoft Lists.
+
+Every name, email address, and record shown is synthetic.
+
 ## What the project solves
 
 - Reduces manual policy lookup while preserving the source used.
@@ -25,7 +42,9 @@ The solution combines configured-document retrieval, responsible-use instruction
 - Routes sensitive matters to human review through `ESC-01`.
 - Validates the requested service and creates a ticket with priority, queue, and target dates.
 
-## Demonstrated experience
+## Supporting evidence
+
+The following screenshots provide a closer look at the controls represented in the demonstration.
 
 ### Evidence-grounded answer
 
@@ -38,20 +57,6 @@ The agent retrieves the relevant document, answers the question, and identifies 
 Requests for individual salary, performance ratings, or medical information are refused without attempting to retrieve or infer those data.
 
 ![Restricted-data protection](assets/screenshots/privacy-guardrail.png)
-
-### Confirmation before action
-
-The agent summarizes the synthetic requester, email, service, description, and contact consent. The tool does not run until confirmation arrives in a later message.
-
-![Request confirmation](assets/screenshots/ticket-confirmation.png)
-
-### Ticket creation and record
-
-Power Automate validates the catalog, calculates SLA targets, assigns the queue, and returns the ticket number. The request is stored in Microsoft Lists.
-
-![Ticket created](assets/screenshots/ticket-created.png)
-
-![Microsoft Lists record](assets/screenshots/request-record.png)
 
 ## How it works
 
@@ -100,6 +105,8 @@ The three general-quality failures are intentional refusals: remote-work policy 
 
 ## Resources
 
+- [Animated demonstration](assets/demo/hr-policy-services-agent-demo.gif)
+- [Video demonstration](assets/demo/hr-policy-services-agent-demo.mp4)
 - [Final agent instructions](prompts/agent-instructions.txt)
 - [Test cases](evaluation/test-cases.csv)
 - [Complete evaluation results](evaluation/final-results.csv)

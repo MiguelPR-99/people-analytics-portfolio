@@ -12,7 +12,7 @@ I’m building this portfolio around People Analytics, HR Data, HR Services, pro
 
 A bilingual HR self-service agent that answers with evidence, cites policy sources, detects knowledge gaps, and creates synthetic service requests with confirmation and safe human escalation.
 
-[Explore the full case study](projects/hr-policy-services-agent/README.md)
+[Explore the full case study](projects/hr-policy-services-agent/README.md) · [Watch the end-to-end demonstration](projects/hr-policy-services-agent/README.md#end-to-end-demonstration)
 
 ![HR Policy & Services Agent](projects/hr-policy-services-agent/assets/screenshots/grounded-policy-answer.png)
 
