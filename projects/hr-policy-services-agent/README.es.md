@@ -24,7 +24,14 @@ Este recorrido de un minuto muestra la experiencia completa: una consulta sobre 
 
 [Abrir la demostración en MP4](assets/demo/hr-policy-services-agent-demo.mp4)
 
-La grabación permite observar tanto la conversación como la recuperación de fuentes y la salida estructurada de la herramienta. Todos los nombres, correos y registros mostrados son sintéticos.
+La grabación aporta cuatro evidencias observables:
+
+- **Fundamentación:** recupera `EPS-SYN-POL-002` y conserva la sección utilizada.
+- **Control de la acción:** presenta los datos y espera una confirmación en un mensaje posterior.
+- **Ejecución:** Power Automate devuelve una salida estructurada con folio, servicio, estado y SLA.
+- **Trazabilidad:** la nueva solicitud aparece en Microsoft Lists.
+
+Todos los nombres, correos y registros mostrados son sintéticos.
 
 ## Qué resuelve
 
@@ -50,20 +57,6 @@ El agente recupera el documento pertinente, responde la pregunta y muestra la se
 Las solicitudes sobre salario, evaluación de desempeño o información médica individual se rechazan sin intentar recuperar ni inferir esos datos.
 
 ![Protección de información restringida](assets/screenshots/privacy-guardrail.png)
-
-### Confirmación antes de actuar
-
-El agente resume nombre, correo sintético, servicio, descripción y consentimiento. La herramienta no se ejecuta hasta recibir una confirmación en un mensaje posterior.
-
-![Confirmación de solicitud](assets/screenshots/ticket-confirmation.png)
-
-### Creación y registro del ticket
-
-Power Automate valida el catálogo, calcula el SLA, asigna la cola y devuelve el folio. La solicitud queda registrada en Microsoft Lists.
-
-![Solicitud creada](assets/screenshots/ticket-created.png)
-
-![Registro en Microsoft Lists](assets/screenshots/request-record.png)
 
 ## Cómo funciona
 
