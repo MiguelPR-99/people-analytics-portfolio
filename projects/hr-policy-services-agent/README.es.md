@@ -16,6 +16,16 @@ El agente cubre dos necesidades frecuentes de HR Services:
 
 La solución combina búsqueda sobre documentos configurados, instrucciones de uso responsable, un flujo de Power Automate y Microsoft Lists. Antes de crear un ticket, muestra un resumen y exige una confirmación explícita.
 
+## Demostración end-to-end
+
+Este recorrido de un minuto muestra la experiencia completa: una consulta sobre beneficios se responde con evidencia recuperada; después, el agente reúne únicamente datos sintéticos, presenta un resumen, espera una confirmación explícita y crea la solicitud mediante Power Automate. El resultado incluye folio, servicio, estado y fechas objetivo, y queda registrado en Microsoft Lists.
+
+![Demostración end-to-end del HR Policy & Services Agent](assets/demo/hr-policy-services-agent-demo.gif)
+
+[Abrir la demostración en MP4](assets/demo/hr-policy-services-agent-demo.mp4)
+
+La grabación permite observar tanto la conversación como la recuperación de fuentes y la salida estructurada de la herramienta. Todos los nombres, correos y registros mostrados son sintéticos.
+
 ## Qué resuelve
 
 - Reduce la búsqueda manual de políticas y conserva la fuente utilizada.
@@ -25,7 +35,9 @@ La solución combina búsqueda sobre documentos configurados, instrucciones de u
 - Dirige asuntos sensibles a revisión humana mediante `ESC-01`.
 - Valida el servicio y crea un ticket con prioridad, cola y fechas objetivo.
 
-## Experiencia demostrada
+## Evidencia complementaria
+
+Las siguientes capturas permiten revisar con mayor detalle los controles representados en la demostración.
 
 ### Respuesta fundamentada
 
@@ -100,6 +112,8 @@ Los tres casos no aprobados por el evaluador de calidad son negativas intenciona
 
 ## Recursos
 
+- [Demostración animada](assets/demo/hr-policy-services-agent-demo.gif)
+- [Demostración en video](assets/demo/hr-policy-services-agent-demo.mp4)
 - [Instrucciones finales del agente](prompts/agent-instructions.txt)
 - [Casos de prueba](evaluation/test-cases.csv)
 - [Resultados completos de la evaluación](evaluation/final-results.csv)

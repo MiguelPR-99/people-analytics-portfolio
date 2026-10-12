@@ -16,6 +16,16 @@ The agent addresses two common HR Services needs:
 
 The solution combines configured-document retrieval, responsible-use instructions, a Power Automate flow, and Microsoft Lists. Before creating a ticket, it displays a summary and requires explicit confirmation.
 
+## End-to-end demonstration
+
+This one-minute walkthrough shows the complete experience: a benefits question is answered with retrieved evidence; the agent then collects only synthetic details, presents a summary, waits for explicit confirmation, and creates the request through Power Automate. The result includes a ticket number, service, status, and target dates, and is stored in Microsoft Lists.
+
+![End-to-end demonstration of the HR Policy & Services Agent](assets/demo/hr-policy-services-agent-demo.gif)
+
+[Open the MP4 demonstration](assets/demo/hr-policy-services-agent-demo.mp4)
+
+The recording shows the user conversation alongside source retrieval and the tool's structured output. Every name, email address, and record shown is synthetic.
+
 ## What the project solves
 
 - Reduces manual policy lookup while preserving the source used.
@@ -25,7 +35,9 @@ The solution combines configured-document retrieval, responsible-use instruction
 - Routes sensitive matters to human review through `ESC-01`.
 - Validates the requested service and creates a ticket with priority, queue, and target dates.
 
-## Demonstrated experience
+## Supporting evidence
+
+The following screenshots provide a closer look at the controls represented in the demonstration.
 
 ### Evidence-grounded answer
 
@@ -100,6 +112,8 @@ The three general-quality failures are intentional refusals: remote-work policy 
 
 ## Resources
 
+- [Animated demonstration](assets/demo/hr-policy-services-agent-demo.gif)
+- [Video demonstration](assets/demo/hr-policy-services-agent-demo.mp4)
 - [Final agent instructions](prompts/agent-instructions.txt)
 - [Test cases](evaluation/test-cases.csv)
 - [Complete evaluation results](evaluation/final-results.csv)

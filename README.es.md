@@ -12,7 +12,7 @@ Estoy construyendo este portafolio en torno a People Analytics, HR Data, HR Serv
 
 Agente bilingüe de autoservicio de RH que responde con evidencia, cita políticas, detecta vacíos de información y crea solicitudes sintéticas con confirmación y escalación humana segura.
 
-[Explorar el caso completo](projects/hr-policy-services-agent/README.es.md)
+[Explorar el caso completo](projects/hr-policy-services-agent/README.es.md) · [Ver demostración end-to-end](projects/hr-policy-services-agent/README.es.md#demostración-end-to-end)
 
 ![HR Policy & Services Agent](projects/hr-policy-services-agent/assets/screenshots/grounded-policy-answer.png)
 
