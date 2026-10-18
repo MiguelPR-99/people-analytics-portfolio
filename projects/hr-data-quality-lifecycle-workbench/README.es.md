@@ -66,15 +66,15 @@ Estos resultados son patrones diseñados para demostración, no hallazgos de una
 
 ## Explorar la implementación
 
-- [Arquitectura, límites y mapa del repositorio](docs/technical-overview.es.md)
-- [Diseño y granularidad de datos](docs/data-design.es.md)
-- [Reglas de calidad y comportamiento esperado](docs/quality-rules.es.md)
-- [Implementación en Fabric](docs/fabric-implementation.es.md)
-- [Diseño de Dataverse](docs/dataverse-design.es.md)
-- [Arquitectura de Power Apps](docs/generative-page-architecture.es.md)
-- [Diseño y controles de Power Automate](docs/phase-7-automation-design.es.md)
-- [Diseño de Power BI](docs/phase-8-bi-design.es.md)
-- [Guía opcional para grabar el video](docs/video-recording-guide.es.md)
+La implementación sigue una separación deliberada entre análisis y operación:
+
+1. Las fuentes sintéticas crean un problema repetible sin utilizar información laboral real.
+2. Fabric conserva la población completa y convierte conflictos entre sistemas en excepciones explicables.
+3. Solo las excepciones priorizadas pasan a Dataverse para evitar convertir el análisis completo en una cola operativa.
+4. Power Apps reúne la investigación humana; Power Automate coordina los pasos asíncronos y las aprobaciones.
+5. Power BI reconcilia la tendencia analítica con el avance de los casos sin confundir cierre administrativo con corrección del origen.
+
+[Seguir la narrativa técnica y sus decisiones](docs/technical-overview.es.md). Desde ese recorrido se puede acceder a modelos, reglas, automatizaciones, pruebas y demás artefactos reproducibles cuando sea necesario.
 
 Los parámetros públicos de Power BI utilizan valores de ejemplo seguros. Antes de actualizar, deben sustituirse en Power BI Desktop por el endpoint SQL de Fabric, la base del Lakehouse y el entorno de Dataverse propios.
 
