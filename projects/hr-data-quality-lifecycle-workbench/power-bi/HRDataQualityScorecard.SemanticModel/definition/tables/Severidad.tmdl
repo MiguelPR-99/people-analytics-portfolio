@@ -1,0 +1,31 @@
+/// Catálogo ordenado de severidad operacional.
+table Severidad
+	lineageTag: e85db4b1-3952-4609-a53c-e57ada0807c5
+
+	/// Nivel de impacto operativo de una excepción.
+	column Severidad
+		dataType: string
+		lineageTag: d60a273f-b818-4884-b6fe-0936009e38b7
+		sourceColumn: OperationalSeverity
+		sortByColumn: 'Orden de severidad'
+
+	column 'Orden de severidad'
+		dataType: int64
+		isHidden
+		lineageTag: 3978cd3e-6748-4ec7-a7a4-8ef23e6d4a17
+		summarizeBy: none
+		sourceColumn: SeverityOrder
+
+	partition Severidad = m
+		mode: import
+		source =
+				#table(
+				    type table [OperationalSeverity = text, SeverityOrder = Int64.Type],
+				    {
+				        {"Critical", 1},
+				        {"High", 2},
+				        {"Medium", 3},
+				        {"Low", 4}
+				    }
+				)
+

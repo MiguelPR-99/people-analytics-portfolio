@@ -1,0 +1,20 @@
+/// Catálogo de sistemas fuente incluidos en las evaluaciones de calidad.
+table 'Sistema fuente'
+	lineageTag: 80c94fcc-19da-47de-b152-3129aa2aae38
+
+	/// Sistema de origen donde se evaluó la calidad.
+	column 'Sistema fuente'
+		dataType: string
+		lineageTag: 06d94454-1805-4f77-b4ee-c3051d0a0054
+		sourceColumn: SourceSystem
+
+	partition 'Sistema fuente' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(pFabricSqlServer, pFabricSqlDatabase),
+				    Performance = Source{[Schema="dbo", Item="vw_dq_rule_performance"]}[Data],
+				    Selected = Table.Distinct(Table.SelectColumns(Performance, {"SourceSystem"}))
+				in
+				    Selected
+

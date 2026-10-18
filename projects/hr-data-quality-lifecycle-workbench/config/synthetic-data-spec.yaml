@@ -1,0 +1,207 @@
+project:
+  id: hr-data-quality-lifecycle-workbench
+  organization: EnergiaNova Industrial Mexico
+  scenario: Global-local HR data quality and employee lifecycle reconciliation
+  disclaimer: Fully synthetic learning scenario inspired by industrial energy HR data challenges; not Siemens Energy data or process.
+
+simulation:
+  random_seed: 20261012
+  start_date: 2025-01-01
+  end_date: 2026-06-30
+  cutoff_date: 2026-06-30
+  timezone: America/Mexico_City
+  snapshot_dates:
+    - 2025-03-31
+    - 2025-06-30
+    - 2025-09-30
+    - 2025-12-31
+    - 2026-03-31
+    - 2026-06-30
+  starting_active_workers: 1200
+  ending_employed_workers_target: 1320
+  distinct_workers_target: 1500
+  position_count_target: 1450
+  lifecycle_event_count_target: 2800
+  extract_time: "06:00:00"
+
+source_systems:
+  global_hris:
+    code: GHRIS
+    output_pattern: data/raw/global_hris/snapshot_date=YYYY-MM-DD/workers.csv
+    grain: One source row per employee and snapshot date before quality handling
+    load_pattern: Quarterly full snapshot ingested incrementally by snapshot folder
+  local_hr_operations:
+    code: LHROPS
+    output_pattern: data/raw/local_hr_operations/extract_date=YYYY-MM-DD/lifecycle_events.csv
+    grain: One employee lifecycle event
+    load_pattern: Events created or updated since the prior quarterly extraction
+  organization_master:
+    code: ORGMD
+    output_pattern: data/raw/organization_master/snapshot_date=YYYY-MM-DD/positions.csv
+    grain: One effective-dated position version visible at the snapshot date
+    load_pattern: Quarterly reference snapshot ingested incrementally by snapshot folder
+
+locations:
+  - {code: BJPL, name: Bajio Manufacturing Plant, type: Plant, region: Central Mexico, worker_weight: 0.45}
+  - {code: QESC, name: Queretaro Engineering and Service Center, type: Engineering and Service Center, region: Central Mexico, worker_weight: 0.20}
+  - {code: MXCO, name: Mexico City Corporate Office, type: Corporate Office, region: Central Mexico, worker_weight: 0.15}
+  - {code: MFSH, name: Monterrey Field Service Hub, type: Field Service Hub, region: Northern Mexico, worker_weight: 0.20}
+
+function_groups:
+  - {code: MFG, name: Manufacturing Operations, weight: 0.30}
+  - {code: ENG, name: Engineering and R&D, weight: 0.16}
+  - {code: FSV, name: Field Service, weight: 0.15}
+  - {code: PRJ, name: Project Execution, weight: 0.10}
+  - {code: SCM, name: Supply Chain, weight: 0.11}
+  - {code: COM, name: Sales and Commercial, weight: 0.07}
+  - {code: COR, name: Corporate Functions, weight: 0.11}
+
+worker_profile:
+  employment_statuses: [PreHire, Active, Leave, Terminated]
+  worker_types:
+    Regular: 0.84
+    Temporary: 0.10
+    Intern: 0.06
+  employee_groups:
+    Salaried: 0.58
+    Hourly: 0.42
+  country_code: MX
+
+lifecycle_event_types:
+  - PreHireCreated
+  - Hire
+  - Transfer
+  - Promotion
+  - ManagerChange
+  - LocationChange
+  - CostCenterChange
+  - LeaveStart
+  - LeaveEnd
+  - Termination
+
+business_calendar:
+  weekdays: [Monday, Tuesday, Wednesday, Thursday, Friday]
+  business_day_start: "08:00:00"
+  business_day_end: "17:00:00"
+  sla_business_days:
+    Critical: 1
+    High: 3
+    Medium: 5
+    Low: 10
+
+quality_score:
+  formula: 100 * weighted_passed_eligible_checks / weighted_eligible_checks
+  severity_weights:
+    Critical: 4
+    High: 3
+    Medium: 2
+    Low: 1
+  rounding_decimals: 1
+  workflow_closure_changes_score: false
+  note: A closed remediation case improves the score only after corrected source data passes a later evaluation.
+
+quality_rules:
+  - code: DQ-001
+    name: Required fields complete
+    dimension: Completeness
+    default_severity: High
+    owner: HR Operations Data
+  - code: DQ-002
+    name: Employee snapshot key unique
+    dimension: Uniqueness
+    default_severity: Critical
+    owner: HRIS Integration
+  - code: DQ-003
+    name: Manager reference valid and eligible
+    dimension: Referential Integrity
+    default_severity: High
+    owner: Organization Management
+  - code: DQ-004
+    name: Organizational assignment valid as of snapshot
+    dimension: Validity
+    default_severity: High
+    owner: Organization Management
+  - code: DQ-005
+    name: Position occupancy within allowed capacity
+    dimension: Consistency
+    default_severity: High
+    owner: Organization Management
+  - code: DQ-006
+    name: Employment dates temporally coherent
+    dimension: Temporal Coherence
+    default_severity: Critical
+    owner: HR Operations Data
+  - code: DQ-007
+    name: HRIS state reconciles to latest completed lifecycle event
+    dimension: Cross-system Consistency
+    default_severity: Critical
+    owner: HRIS Integration
+  - code: DQ-008
+    name: Source record updated within freshness threshold
+    dimension: Timeliness
+    default_severity: Medium
+    owner: HRIS Integration
+
+quality_thresholds:
+  source_freshness_business_days: 5
+  lifecycle_sync_tolerance_business_days: 2
+  valid_country_codes: [MX]
+  expected_exception_rate_range: [0.035, 0.065]
+  latest_snapshot_score_target_range: [98.0, 99.8]
+
+controlled_patterns:
+  q3_2025_reorganization:
+    enabled: true
+    start_date: 2025-07-01
+    end_date: 2025-09-30
+    affected_function_groups: [ENG, PRJ, FSV]
+    expected_effect: Temporary increase in manager and organizational reconciliation exceptions
+  q1_2026_onboarding_wave:
+    enabled: true
+    start_date: 2026-01-01
+    end_date: 2026-03-31
+    affected_locations: [BJPL, MFSH]
+    expected_effect: Higher pre-hire completeness exceptions and temporary position over-occupancy
+  q2_2026_data_quality_intervention:
+    enabled: true
+    intervention_date: 2026-04-01
+    affected_rules: [DQ-001, DQ-008]
+    expected_effect: Lower incompleteness and stale-record rates in the final snapshot
+
+raw_quality_issue_rates:
+  required_field_missing: 0.007
+  duplicate_employee_snapshot: 0.003
+  invalid_manager_reference: 0.010
+  invalid_organization_assignment: 0.008
+  position_over_occupancy: 0.005
+  incoherent_employment_dates: 0.003
+  lifecycle_reconciliation_mismatch: 0.012
+  stale_source_record: 0.010
+
+privacy_constraints:
+  prohibited_fields:
+    - EmployeeName
+    - Email
+    - Phone
+    - NationalIdentifier
+    - BirthDate
+    - Gender
+    - Salary
+    - MedicalInformation
+    - PerformanceRating
+    - FreeTextComment
+  identifiers_are_synthetic: true
+  individual_decision_support_prohibited: true
+
+acceptance:
+  reproducible_with_fixed_seed: true
+  raw_files_immutable_after_generation: true
+  every_injected_issue_maps_to_rule: true
+  every_rule_has_positive_negative_and_edge_tests: true
+  silver_primary_keys_unique: true
+  silver_types_and_domains_valid: true
+  gold_failed_checks_reconcile_to_exceptions: true
+  gold_score_recomputable_from_rule_results: true
+  incremental_reload_is_idempotent: true
+  manifest_contains_counts_hashes_and_expected_anomalies: true
+

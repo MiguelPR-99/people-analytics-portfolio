@@ -1,0 +1,47 @@
+/// Catálogo controlado de estados del ciclo de vida de remediación.
+table Estado
+	lineageTag: 24491105-8df7-49c3-b873-e8bd2cdc8918
+
+	column 'Estado ID'
+		dataType: string
+		isHidden
+		lineageTag: fa35af29-aad4-4dd0-a7ba-f7c819f56685
+		sourceColumn: mprpa_dqstatusid
+
+	column 'Código de estado'
+		dataType: string
+		isHidden
+		lineageTag: 6660f4ac-6a12-44f0-b914-8197b158f458
+		sourceColumn: mprpa_statuscode
+
+	/// Estado de ciclo de vida mostrado al usuario.
+	column Estado
+		dataType: string
+		lineageTag: 40a3ca7f-b59a-4227-a337-65f5faf7de9c
+		sourceColumn: mprpa_statusname
+		sortByColumn: Secuencia
+
+	column Secuencia
+		dataType: int64
+		isHidden
+		lineageTag: 28b13601-d37e-4711-b928-c56d3ea77f6f
+		summarizeBy: none
+		sourceColumn: mprpa_sequence
+
+	/// Indica si el estado concluye el ciclo operativo.
+	column 'Es terminal'
+		dataType: boolean
+		lineageTag: bb8e0f0a-9432-4ec7-8542-25a75df0a7b6
+		sourceColumn: mprpa_terminal
+
+	partition Estado = m
+		mode: import
+		source =
+				let
+				    DataverseHost = Text.AfterDelimiter(pDataverseEnvironmentUrl, "://"),
+				    Source = CommonDataService.Database(DataverseHost, [CreateNavigationProperties=false]),
+				    Entity = Source{[Schema="dbo", Item="mprpa_dqstatus"]}[Data],
+				    Selected = Table.SelectColumns(Entity, {"mprpa_dqstatusid", "mprpa_statuscode", "mprpa_statusname", "mprpa_sequence", "mprpa_terminal"})
+				in
+				    Selected
+

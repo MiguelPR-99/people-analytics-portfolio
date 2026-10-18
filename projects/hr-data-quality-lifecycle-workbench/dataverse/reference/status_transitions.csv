@@ -1,0 +1,9 @@
+TransitionCode,TransitionName,FromStatusCode,ToStatusCode,RequiresEvidence,RequiresComment,RequiresApproval,Available
+NEW_TRIAGED,New to Triaged,NEW,TRIAGED,false,false,false,true
+TRIAGED_IN_PROGRESS,Triaged to In Progress,TRIAGED,IN_PROGRESS,false,false,false,true
+IN_PROGRESS_PENDING_APPROVAL,In Progress to Pending Approval,IN_PROGRESS,PENDING_APPROVAL,true,true,false,true
+PENDING_APPROVAL_RESOLVED,Pending Approval to Resolved,PENDING_APPROVAL,RESOLVED,true,true,true,true
+PENDING_APPROVAL_REJECTED,Pending Approval to Rejected,PENDING_APPROVAL,REJECTED,false,true,true,true
+REJECTED_IN_PROGRESS,Rejected to In Progress,REJECTED,IN_PROGRESS,false,true,false,true
+PENDING_APPROVAL_WAIVED,Pending Approval to Waived,PENDING_APPROVAL,WAIVED,true,true,true,true
+RESOLVED_IN_PROGRESS,Resolved to In Progress,RESOLVED,IN_PROGRESS,false,true,true,true

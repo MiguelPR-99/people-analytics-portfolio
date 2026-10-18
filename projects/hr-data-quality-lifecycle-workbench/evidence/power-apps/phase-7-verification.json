@@ -1,0 +1,20 @@
+{
+  "generatedAt": "2026-10-17T04:10:49.8676477Z",
+  "project": "HR Data Quality & Lifecycle Workbench",
+  "gate": "Power Platform Phase 7",
+  "status": "passed",
+  "browserVerification": true,
+  "mutationExecuted": false,
+  "steps": [
+    {
+      "step": "Generative Page typecheck and component tests",
+      "status": "passed",
+      "durationSeconds": 12.4
+    },
+    {
+      "step": "Published Power Apps smoke tests",
+      "status": "passed",
+      "durationSeconds": 29.62
+    }
+  ]
+}

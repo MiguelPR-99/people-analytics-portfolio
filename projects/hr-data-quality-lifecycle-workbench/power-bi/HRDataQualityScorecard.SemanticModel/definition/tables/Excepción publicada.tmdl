@@ -1,0 +1,82 @@
+/// Subconjunto de excepciones Gold publicado en Dataverse para tratamiento operativo.
+table 'Excepción publicada'
+	lineageTag: 160a6ea4-4162-45e2-825e-c9b3e1f11523
+
+	/// Intersección virtual entre referencias publicadas de Dataverse e instancias Gold en el contexto visible; no existe una relación física entre ambas tablas.
+	measure 'Cobertura de casos publicados' =
+			VAR _instanciasPublicadas =
+			    CALCULATE(
+			        [Instancias de excepción],
+			        KEEPFILTERS(
+			            TREATAS(
+			                VALUES('Excepción publicada'[Instancia de excepción ID]),
+			                'Excepciones'[Instancia de excepción ID]
+			            )
+			        )
+			    )
+			RETURN
+			    DIVIDE(_instanciasPublicadas, [Instancias de excepción])
+		formatString: 0.0%
+		displayFolder: Cobertura
+		lineageTag: a801c1c0-7cfe-4568-a88c-9f3ee7287f9a
+
+	column 'Excepción publicada ID'
+		dataType: string
+		isHidden
+		lineageTag: f44aeca8-9e1b-4a91-b2c1-b24a1413d004
+		sourceColumn: mprpa_dqexceptionreferenceid
+
+	column 'Instancia de excepción ID'
+		dataType: string
+		isHidden
+		lineageTag: fd6d5b42-a25e-4608-bcdc-b2f4aff02e01
+		sourceColumn: mprpa_exceptioninstanceid
+
+	/// Etiqueta legible de la excepción publicada.
+	column 'Etiqueta de excepción'
+		dataType: string
+		lineageTag: 4b824b19-55d9-4206-a6c7-9a64ca7301b4
+		sourceColumn: mprpa_exceptionlabel
+
+	column 'Código de regla'
+		dataType: string
+		isHidden
+		lineageTag: 12d877ac-6f20-4bbe-9458-f299e3f9ffbf
+		sourceColumn: mprpa_rulecode
+
+	/// Dimensión de calidad informada al publicar la excepción.
+	column 'Dimensión de calidad'
+		dataType: string
+		lineageTag: a9181be7-7216-428e-b252-eac4e6e83f65
+		sourceColumn: mprpa_qualitydimension
+
+	/// Sistema de origen de la excepción publicada.
+	column 'Sistema fuente'
+		dataType: string
+		lineageTag: 475aab7e-48f8-4f16-b7cf-0ec9c6f00b41
+		sourceColumn: mprpa_sourcesystem
+
+	/// Corte Gold que originó la referencia publicada.
+	column 'Fecha de snapshot'
+		dataType: dateTime
+		formatString: dd mmm yyyy
+		lineageTag: 9266ae0b-5c43-4e82-8db5-ca3886f4ee90
+		sourceColumn: mprpa_snapshotdate
+
+	/// Severidad operacional de la excepción publicada.
+	column Severidad
+		dataType: string
+		lineageTag: 4923f21c-8df2-4b00-a5c6-583e8b037778
+		sourceColumn: mprpa_operationalseverityname
+
+	partition 'Excepción publicada' = m
+		mode: import
+		source =
+				let
+				    DataverseHost = Text.AfterDelimiter(pDataverseEnvironmentUrl, "://"),
+				    Source = CommonDataService.Database(DataverseHost, [CreateNavigationProperties=false]),
+				    Entity = Source{[Schema="dbo", Item="mprpa_dqexceptionreference"]}[Data],
+				    Selected = Table.SelectColumns(Entity, {"mprpa_dqexceptionreferenceid", "mprpa_exceptioninstanceid", "mprpa_exceptionlabel", "mprpa_rulecode", "mprpa_qualitydimension", "mprpa_sourcesystem", "mprpa_snapshotdate", "mprpa_operationalseverityname"})
+				in
+				    Selected
+

@@ -4,6 +4,12 @@ Thumbs.db
 *.temp
 *.bak
 *.pbi.local.json
+**/.pbi/
 __pycache__/
 *.py[cod]
 .pytest_cache/
+node_modules/
+playwright-report/
+test-results/
+.auth/
+.env
