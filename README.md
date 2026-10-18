@@ -8,6 +8,14 @@ I’m building this portfolio around People Analytics, HR Data, HR Services, pro
 
 ## Completed work
 
+### Project 3 — HR Data Quality & Lifecycle Workbench
+
+An end-to-end Digital HR workbench that detects workforce-data conflicts, routes selected exceptions through human remediation, and shows whether quality improves beyond administrative case closure.
+
+[Explore the full case study](projects/hr-data-quality-lifecycle-workbench/README.md) · [Review the technical route](projects/hr-data-quality-lifecycle-workbench/docs/technical-overview.md)
+
+![HR Data Quality & Lifecycle Workbench](projects/hr-data-quality-lifecycle-workbench/evidence/phase-9/checkpoint-02-power-bi-public-scorecard.png)
+
 ### Project 2 — HR Policy & Services Agent
 
 A bilingual HR self-service agent that answers with evidence, cites policy sources, detects knowledge gaps, and creates synthetic service requests with confirmation and safe human escalation.

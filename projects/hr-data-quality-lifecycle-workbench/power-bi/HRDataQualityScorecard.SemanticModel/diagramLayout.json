@@ -1,0 +1,178 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 338.45186222910735,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 1884.0216377275983,
+            "y": 90.264930716698075
+          },
+          "nodeIndex": "Actividades del caso",
+          "nodeLineageTag": "53aa8680-2447-4707-b701-fda60f142531",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1599.8367836704838,
+            "y": 254.00814487460315
+          },
+          "nodeIndex": "Caso",
+          "nodeLineageTag": "df2fca57-f06c-404a-9fdb-738330ba9aa4",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": 207.32176189001473
+          },
+          "nodeIndex": "Cortes de calidad",
+          "nodeLineageTag": "ac7c5d38-6b35-46ce-82e1-2ab7aa42c08e",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 223.07186432178267,
+            "y": 564.26822844602509
+          },
+          "nodeIndex": "Desempeño de reglas",
+          "nodeLineageTag": "b401fd94-624c-4394-8721-ee46d8592384",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1315.6489979166488,
+            "y": 481.47210776334913
+          },
+          "nodeIndex": "Estado",
+          "nodeLineageTag": "24491105-8df7-49c3-b873-e8bd2cdc8918",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1817.1834726666884,
+            "y": 604.19189437310865
+          },
+          "nodeIndex": "Excepción publicada",
+          "nodeLineageTag": "160a6ea4-4162-45e2-825e-c9b3e1f11523",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 738.829528119403,
+            "y": 83.895087901951
+          },
+          "nodeIndex": "Excepciones",
+          "nodeLineageTag": "c890ac4d-dee8-4f71-b936-dc6c2de04302",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 453.07118829852459,
+            "y": 264.67075365012295
+          },
+          "nodeIndex": "Fecha",
+          "nodeLineageTag": "d5acd54d-4a7b-4391-b583-ff662dd33226",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1024.5180106407158,
+            "y": 442.9723677084886
+          },
+          "nodeIndex": "Regla",
+          "nodeLineageTag": "b8f27c7f-f225-4f12-8a9f-921e723bc2d7",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1414.6327136675632,
+            "y": 75.820765014515075
+          },
+          "nodeIndex": "Responsable",
+          "nodeLineageTag": "e1e05540-e9bc-4446-afe0-aab13117cef5",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1031.6489979166486,
+            "y": -50
+          },
+          "nodeIndex": "Severidad",
+          "nodeLineageTag": "e85db4b1-3952-4609-a53c-e57ada0807c5",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 508.87424116800884,
+            "y": 922.01265938762367
+          },
+          "nodeIndex": "Sistema fuente",
+          "nodeLineageTag": "80c94fcc-19da-47de-b152-3129aa2aae38",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Todas las tablas",
+      "zoomValue": 50.346892102823162,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas las tablas",
+  "defaultDiagram": "Todas las tablas"
+}

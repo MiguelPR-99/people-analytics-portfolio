@@ -1,0 +1,160 @@
+/// Hecho global con una fila por corte de calidad; es la fuente de registros evaluados, registros con excepción y actualización.
+table 'Cortes de calidad'
+	lineageTag: ac7c5d38-6b35-46ce-82e1-2ab7aa42c08e
+
+	/// Total global de registros evaluados en los cortes visibles. Es una métrica global y no responde a regla ni sistema fuente.
+	measure 'Registros evaluados' = SUM('Cortes de calidad'[Registros evaluados base])
+		formatString: #,##0
+		displayFolder: Volumen
+		lineageTag: 34a7a055-6ded-423f-b221-f5d1443990b8
+
+	/// Total global de registros que presentaron al menos una excepción en los cortes visibles.
+	measure 'Registros con excepción' = SUM('Cortes de calidad'[Registros con excepción base])
+		formatString: #,##0
+		displayFolder: Volumen
+		lineageTag: 2688afc8-0c2d-4baa-ab46-3e25589a39e9
+
+	/// Registros evaluados en la fecha máxima visible; evita sumar varios cortes en una tarjeta.
+	measure 'Registros evaluados actuales' =
+			VAR _snapshotActual = MAX('Fecha'[Fecha de snapshot])
+			RETURN
+			    CALCULATE(
+			        [Registros evaluados],
+			        KEEPFILTERS('Fecha'[Fecha de snapshot] = _snapshotActual)
+			    )
+		formatString: #,##0
+		displayFolder: KPI actuales
+		lineageTag: d77c5de2-5425-46bd-ba12-555dbd0cc0a7
+
+	/// Registros con excepción en la fecha máxima visible; evita sumar varios cortes en una tarjeta.
+	measure 'Registros con excepción actuales' =
+			VAR _snapshotActual = MAX('Fecha'[Fecha de snapshot])
+			RETURN
+			    CALCULATE(
+			        [Registros con excepción],
+			        KEEPFILTERS('Fecha'[Fecha de snapshot] = _snapshotActual)
+			    )
+		formatString: #,##0
+		displayFolder: KPI actuales
+		lineageTag: be048b18-f599-48d8-99fd-a2b3afabfa1f
+
+	/// Proporción global de registros con excepción en el corte máximo visible. No debe interpretarse como promedio de reglas.
+	measure 'Tasa de excepción actual' = DIVIDE([Registros con excepción actuales], [Registros evaluados actuales])
+		formatString: 0.0%
+		displayFolder: KPI actuales
+		lineageTag: b302121e-c15d-4913-8155-31ee9b5ed548
+
+	/// Momento de cálculo del corte máximo visible.
+	measure 'Última actualización' =
+			VAR _snapshotActual = MAX('Fecha'[Fecha de snapshot])
+			RETURN
+			    CALCULATE(
+			        MAX('Cortes de calidad'[Fecha de cálculo]),
+			        KEEPFILTERS('Fecha'[Fecha de snapshot] = _snapshotActual)
+			    )
+		formatString: dd/MM HH:mm
+		displayFolder: KPI actuales
+		lineageTag: 491073ac-80cd-4d3a-b5fd-b136a36b4c97
+
+	column 'Fecha de snapshot'
+		dataType: dateTime
+		isHidden
+		formatString: dd mmm yyyy
+		lineageTag: 78d3dc1b-90e4-4ece-984b-823f6ad3e3e8
+		summarizeBy: none
+		sourceColumn: SnapshotDate
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Checks elegibles'
+		dataType: int64
+		isHidden
+		lineageTag: 4e7e8867-c93c-4676-969c-5a0961c29cad
+		summarizeBy: none
+		sourceColumn: EligibleChecks
+
+	column 'Checks aprobados'
+		dataType: int64
+		isHidden
+		lineageTag: b8fd7e73-f373-405a-8fb0-a27abd9a3e9b
+		summarizeBy: none
+		sourceColumn: PassedChecks
+
+	column 'Checks fallidos'
+		dataType: int64
+		isHidden
+		lineageTag: b4676beb-19b4-4c5d-94c9-9c5eb0f04b34
+		summarizeBy: none
+		sourceColumn: FailedChecks
+
+	column 'Elegible ponderado'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 26c7c86f-c5c1-4300-be06-896e2b46fe92
+		summarizeBy: sum
+		sourceColumn: WeightedEligible
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Aprobado ponderado'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 6d184509-2394-4943-a0ad-0115d69e4ef4
+		summarizeBy: sum
+		sourceColumn: WeightedPassed
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Registros evaluados base'
+		dataType: int64
+		isHidden
+		lineageTag: c0854a79-6114-4b64-8b0c-ab6b89caeedd
+		summarizeBy: none
+		sourceColumn: RecordsEvaluated
+
+	column 'Registros con excepción base'
+		dataType: int64
+		isHidden
+		lineageTag: b2aa87d7-044b-4c62-928f-e204938710b9
+		summarizeBy: none
+		sourceColumn: RecordsWithException
+
+	column 'Score fuente'
+		dataType: double
+		isHidden
+		lineageTag: fd7c2a5b-a471-4933-883d-50b4f376e230
+		summarizeBy: sum
+		sourceColumn: DQScore
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Fecha de cálculo'
+		dataType: dateTime
+		isHidden
+		formatString: dd mmm yyyy HH:mm
+		lineageTag: da1fb421-1b13-481f-91d2-d960a4dac02b
+		sourceColumn: CalculatedAt
+
+	column RunID
+		dataType: string
+		lineageTag: c7242713-7e63-4d08-ba3c-7d4489c0061c
+		summarizeBy: none
+		sourceColumn: RunID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Cortes de calidad' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(pFabricSqlServer, pFabricSqlDatabase),
+				    View = Source{[Schema="dbo", Item="vw_dq_score_trend"]}[Data]
+				in
+				    View
+

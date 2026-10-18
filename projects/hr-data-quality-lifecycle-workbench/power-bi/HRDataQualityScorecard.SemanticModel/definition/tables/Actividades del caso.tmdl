@@ -1,0 +1,58 @@
+/// Eventos auditables asociados a los casos publicados.
+table 'Actividades del caso'
+	lineageTag: 53aa8680-2447-4707-b701-fda60f142531
+
+	column 'Actividad ID'
+		dataType: string
+		isHidden
+		lineageTag: 6e6a265f-5ae8-4048-8265-cf2a0d9de8bb
+		sourceColumn: mprpa_dqcaseactivityid
+
+	column 'Caso ID'
+		dataType: string
+		isHidden
+		lineageTag: 18b1f94d-b22c-4f78-9849-341af6de6914
+		sourceColumn: mprpa_remediationcase
+
+	column 'Número de actividad'
+		dataType: string
+		isHidden
+		lineageTag: f4f3651a-31b5-4a91-95e6-7d810889f055
+		sourceColumn: mprpa_activitynumber
+
+	/// Descripción breve del evento registrado.
+	column 'Título de actividad'
+		dataType: string
+		lineageTag: f4ac3413-69c8-46eb-9f7f-88bb0c6dd2e2
+		sourceColumn: mprpa_activitytitle
+
+	/// Clasificación del evento, por ejemplo asignación, transición o aprobación.
+	column 'Tipo de actividad'
+		dataType: string
+		lineageTag: 8d268c90-414f-4e71-80ca-1f24af44f3a6
+		sourceColumn: mprpa_activitytypename
+
+	/// Fecha y hora en que ocurrió la actividad.
+	column 'Ocurrió el'
+		dataType: dateTime
+		formatString: dd mmm yyyy HH:mm
+		lineageTag: 74a46019-aae5-4b91-ac78-bc0a6d7e0224
+		sourceColumn: mprpa_occurredat
+
+	/// Indica si la actividad fue creada automáticamente.
+	column 'Generada por sistema'
+		dataType: boolean
+		lineageTag: 70ac2e00-2e8a-4dad-81d5-7f1d0ea508d1
+		sourceColumn: mprpa_systemgenerated
+
+	partition 'Actividades del caso' = m
+		mode: import
+		source =
+				let
+				    DataverseHost = Text.AfterDelimiter(pDataverseEnvironmentUrl, "://"),
+				    Source = CommonDataService.Database(DataverseHost, [CreateNavigationProperties=false]),
+				    Entity = Source{[Schema="dbo", Item="mprpa_dqcaseactivity"]}[Data],
+				    Selected = Table.SelectColumns(Entity, {"mprpa_dqcaseactivityid", "mprpa_remediationcase", "mprpa_activitynumber", "mprpa_activitytitle", "mprpa_activitytypename", "mprpa_occurredat", "mprpa_systemgenerated"})
+				in
+				    Selected
+

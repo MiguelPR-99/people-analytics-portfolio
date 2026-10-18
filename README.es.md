@@ -8,6 +8,14 @@ Estoy construyendo este portafolio en torno a People Analytics, HR Data, HR Serv
 
 ## Trabajo terminado
 
+### Proyecto 3 — HR Data Quality & Lifecycle Workbench
+
+Workbench end-to-end de Digital HR que detecta conflictos en datos laborales, dirige excepciones seleccionadas a remediación humana y muestra si la calidad mejora más allá del cierre administrativo de casos.
+
+[Explorar el caso completo](projects/hr-data-quality-lifecycle-workbench/README.es.md) · [Revisar la ruta técnica](projects/hr-data-quality-lifecycle-workbench/docs/technical-overview.es.md)
+
+![HR Data Quality & Lifecycle Workbench](projects/hr-data-quality-lifecycle-workbench/evidence/phase-9/checkpoint-02-power-bi-public-scorecard.png)
+
 ### Proyecto 2 — HR Policy & Services Agent
 
 Agente bilingüe de autoservicio de RH que responde con evidencia, cita políticas, detecta vacíos de información y crea solicitudes sintéticas con confirmación y escalación humana segura.

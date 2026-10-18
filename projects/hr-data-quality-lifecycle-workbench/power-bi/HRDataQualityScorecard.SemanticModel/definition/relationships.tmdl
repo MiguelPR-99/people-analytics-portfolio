@@ -1,0 +1,48 @@
+relationship 'Cortes de calidad - Fecha'
+	fromColumn: 'Cortes de calidad'.'Fecha de snapshot'
+	toColumn: Fecha.'Fecha de snapshot'
+
+relationship 'Desempeño de reglas - Fecha'
+	fromColumn: 'Desempeño de reglas'.'Fecha de snapshot'
+	toColumn: Fecha.'Fecha de snapshot'
+
+relationship 'Excepciones - Fecha'
+	fromColumn: Excepciones.'Fecha de snapshot'
+	toColumn: Fecha.'Fecha de snapshot'
+
+relationship 'Desempeño de reglas - Regla'
+	fromColumn: 'Desempeño de reglas'.'Código de regla'
+	toColumn: Regla.'Código de regla'
+
+relationship 'Excepciones - Regla'
+	fromColumn: Excepciones.'Código de regla'
+	toColumn: Regla.'Código de regla'
+
+relationship 'Desempeño de reglas - Sistema fuente'
+	fromColumn: 'Desempeño de reglas'.'Sistema fuente'
+	toColumn: 'Sistema fuente'.'Sistema fuente'
+
+relationship 'Excepciones - Sistema fuente'
+	fromColumn: Excepciones.'Sistema fuente'
+	toColumn: 'Sistema fuente'.'Sistema fuente'
+
+relationship 'Excepciones - Severidad'
+	fromColumn: Excepciones.Severidad
+	toColumn: Severidad.Severidad
+
+relationship 'Caso - Estado'
+	fromColumn: Caso.'Estado ID'
+	toColumn: Estado.'Estado ID'
+
+relationship 'Caso - Responsable'
+	fromColumn: Caso.'Responsable ID'
+	toColumn: Responsable.'Responsable ID'
+
+relationship 'Caso - Excepción publicada'
+	fromColumn: Caso.'Excepción publicada ID'
+	toColumn: 'Excepción publicada'.'Excepción publicada ID'
+
+relationship 'Actividades del caso - Caso'
+	fromColumn: 'Actividades del caso'.'Caso ID'
+	toColumn: Caso.'Caso ID'
+

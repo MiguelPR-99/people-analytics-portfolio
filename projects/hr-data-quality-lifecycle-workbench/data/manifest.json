@@ -1,0 +1,566 @@
+{
+  "configuration": {
+    "path": "config/synthetic-data-spec.yaml",
+    "sha256": "c5cc2424b37fdc81dc58179e6aa01d380f15fea48756d03dcef63c4c3619998e"
+  },
+  "controlled_pattern_checks": {
+    "q1_2026_onboarding_wave": {
+      "observed": {
+        "DQ-001_2025-12-31": 10,
+        "DQ-001_2026-03-31": 21,
+        "DQ-005_2025-12-31": 7,
+        "DQ-005_2026-03-31": 11
+      },
+      "passed": true
+    },
+    "q2_2026_data_quality_intervention": {
+      "observed": {
+        "DQ-001_2026-03-31": 21,
+        "DQ-001_2026-06-30": 4,
+        "DQ-008_2026-03-31": 15,
+        "DQ-008_2026-06-30": 6
+      },
+      "passed": true
+    },
+    "q3_2025_reorganization": {
+      "observed": {
+        "DQ-003_2025-06-30": 13,
+        "DQ-003_2025-09-30": 30,
+        "DQ-007_2025-06-30": 52,
+        "DQ-007_2025-09-30": 90
+      },
+      "passed": true
+    }
+  },
+  "disclaimer": "Fully synthetic learning scenario; not Siemens Energy data or process.",
+  "files": [
+    {
+      "bytes": 278097,
+      "columns": 20,
+      "path": "raw/global_hris/snapshot_date=2025-03-31/workers.csv",
+      "rows": 1264,
+      "sha256": "e285674f543b018effb65ba21a74d2078661caeaddf22f58b7641b24890ffa68"
+    },
+    {
+      "bytes": 286583,
+      "columns": 20,
+      "path": "raw/global_hris/snapshot_date=2025-06-30/workers.csv",
+      "rows": 1303,
+      "sha256": "d98bc48cb004c7144309d8506f53b18b452b5f1be076470950e8d5b294245a73"
+    },
+    {
+      "bytes": 301191,
+      "columns": 20,
+      "path": "raw/global_hris/snapshot_date=2025-09-30/workers.csv",
+      "rows": 1369,
+      "sha256": "e9f3a8df666fae52e240707aa66acfd8394a493868914898099e722ddd688b38"
+    },
+    {
+      "bytes": 313495,
+      "columns": 20,
+      "path": "raw/global_hris/snapshot_date=2025-12-31/workers.csv",
+      "rows": 1423,
+      "sha256": "3a2d97ad7bfaa854420babb63c9c2ae8a095ca58925b2265f552e19b2f26050a"
+    },
+    {
+      "bytes": 329391,
+      "columns": 20,
+      "path": "raw/global_hris/snapshot_date=2026-03-31/workers.csv",
+      "rows": 1496,
+      "sha256": "249851e740b710007afbdfa92d4b88cdfdb1a30e7872614fcea27a69a1449490"
+    },
+    {
+      "bytes": 331303,
+      "columns": 20,
+      "path": "raw/global_hris/snapshot_date=2026-06-30/workers.csv",
+      "rows": 1504,
+      "sha256": "0975052c854ae8ec7e820ce4dc51b42be595a38fda294f2807c9d8c756683a4b"
+    },
+    {
+      "bytes": 307181,
+      "columns": 23,
+      "path": "raw/local_hr_operations/extract_date=2025-03-31/lifecycle_events.csv",
+      "rows": 1340,
+      "sha256": "97378a634721d7eceace5f27993931f1fdf228e05a1183e2ffc1aa3483638b6a"
+    },
+    {
+      "bytes": 62749,
+      "columns": 23,
+      "path": "raw/local_hr_operations/extract_date=2025-06-30/lifecycle_events.csv",
+      "rows": 226,
+      "sha256": "3520cc1a179ecc9086970691548d8baedbe1ae695da90d59c24e8d859abd58f6"
+    },
+    {
+      "bytes": 108023,
+      "columns": 23,
+      "path": "raw/local_hr_operations/extract_date=2025-09-30/lifecycle_events.csv",
+      "rows": 390,
+      "sha256": "13514a120cd966f43689b83fee35c9f04d15e77d35b716d7b3fe2333ca40d8fc"
+    },
+    {
+      "bytes": 83571,
+      "columns": 23,
+      "path": "raw/local_hr_operations/extract_date=2025-12-31/lifecycle_events.csv",
+      "rows": 302,
+      "sha256": "d5446ec26cb9f86f23a36c591f8145215d0d532f31f8f0d109f3cbf75b15a17e"
+    },
+    {
+      "bytes": 94087,
+      "columns": 23,
+      "path": "raw/local_hr_operations/extract_date=2026-03-31/lifecycle_events.csv",
+      "rows": 342,
+      "sha256": "8900fe2aeb85607b3d36d3c0173a78315669a03bd51fed6924baf2573532cc4b"
+    },
+    {
+      "bytes": 76135,
+      "columns": 23,
+      "path": "raw/local_hr_operations/extract_date=2026-06-30/lifecycle_events.csv",
+      "rows": 267,
+      "sha256": "70c778dbd8774c6265b409aa9e73008159dd3c878407e86ea4814c0788e9fd22"
+    },
+    {
+      "bytes": 377800,
+      "columns": 22,
+      "path": "raw/organization_master/snapshot_date=2025-03-31/positions.csv",
+      "rows": 1450,
+      "sha256": "4c136afab939b61a700d7a3fe5bccd924deb6f36f7c7b0e5c86db4c8b1065196"
+    },
+    {
+      "bytes": 377800,
+      "columns": 22,
+      "path": "raw/organization_master/snapshot_date=2025-06-30/positions.csv",
+      "rows": 1450,
+      "sha256": "decbf971825178954a7f204591356aeef25a1f5c65bbb9faf1e7ea4e1ff099d4"
+    },
+    {
+      "bytes": 377800,
+      "columns": 22,
+      "path": "raw/organization_master/snapshot_date=2025-09-30/positions.csv",
+      "rows": 1450,
+      "sha256": "9b42349ffa40ce216c942175e60ef001425fe9f85041d4fde89062a62522a2fb"
+    },
+    {
+      "bytes": 377800,
+      "columns": 22,
+      "path": "raw/organization_master/snapshot_date=2025-12-31/positions.csv",
+      "rows": 1450,
+      "sha256": "e76ceaa7a53424f5511c487c8954fea8196dec1396d08179b289da0980190204"
+    },
+    {
+      "bytes": 377800,
+      "columns": 22,
+      "path": "raw/organization_master/snapshot_date=2026-03-31/positions.csv",
+      "rows": 1450,
+      "sha256": "7023da48cb35a4f0cc7a3ae2f728246833bc1e7738a361d452191c18e3c1104a"
+    },
+    {
+      "bytes": 377800,
+      "columns": 22,
+      "path": "raw/organization_master/snapshot_date=2026-06-30/positions.csv",
+      "rows": 1450,
+      "sha256": "03b94b2983f6e4510306b2ff72033d89d6685f781a662f2c774e0d43b048f348"
+    }
+  ],
+  "generated_at": "2026-07-01T06:00:00-06:00",
+  "injected_primary_issues": {
+    "2025-03-31": {
+      "DQ-001": 9,
+      "DQ-002": 4,
+      "DQ-003": 13,
+      "DQ-004": 10,
+      "DQ-005": 6,
+      "DQ-006": 4,
+      "DQ-007": 15,
+      "DQ-008": 13
+    },
+    "2025-06-30": {
+      "DQ-001": 9,
+      "DQ-002": 4,
+      "DQ-003": 13,
+      "DQ-004": 10,
+      "DQ-005": 6,
+      "DQ-006": 4,
+      "DQ-007": 16,
+      "DQ-008": 13
+    },
+    "2025-09-30": {
+      "DQ-001": 10,
+      "DQ-002": 4,
+      "DQ-003": 30,
+      "DQ-004": 11,
+      "DQ-005": 7,
+      "DQ-006": 4,
+      "DQ-007": 36,
+      "DQ-008": 14
+    },
+    "2025-12-31": {
+      "DQ-001": 10,
+      "DQ-002": 4,
+      "DQ-003": 14,
+      "DQ-004": 11,
+      "DQ-005": 7,
+      "DQ-006": 4,
+      "DQ-007": 17,
+      "DQ-008": 14
+    },
+    "2026-03-31": {
+      "DQ-001": 21,
+      "DQ-002": 4,
+      "DQ-003": 15,
+      "DQ-004": 12,
+      "DQ-005": 15,
+      "DQ-006": 4,
+      "DQ-007": 18,
+      "DQ-008": 15
+    },
+    "2026-06-30": {
+      "DQ-001": 4,
+      "DQ-002": 4,
+      "DQ-003": 15,
+      "DQ-004": 12,
+      "DQ-005": 8,
+      "DQ-006": 4,
+      "DQ-007": 18,
+      "DQ-008": 6
+    }
+  },
+  "organization": "EnergiaNova Industrial Mexico",
+  "period": {
+    "end": "2026-06-30",
+    "start": "2025-01-01"
+  },
+  "population": {
+    "distinct_workers": 1500,
+    "ending_employed_workers": 1320,
+    "lifecycle_events": 2867,
+    "positions": 1450,
+    "starting_employed_workers": 1200,
+    "status_by_snapshot": {
+      "2025-03-31": {
+        "Active": 1206,
+        "Leave": 19,
+        "PreHire": 23,
+        "Terminated": 12
+      },
+      "2025-06-30": {
+        "Active": 1237,
+        "Leave": 11,
+        "PreHire": 12,
+        "Terminated": 39
+      },
+      "2025-09-30": {
+        "Active": 1263,
+        "Leave": 11,
+        "PreHire": 31,
+        "Terminated": 60
+      },
+      "2025-12-31": {
+        "Active": 1289,
+        "Leave": 29,
+        "PreHire": 16,
+        "Terminated": 85
+      },
+      "2026-03-31": {
+        "Active": 1325,
+        "Leave": 21,
+        "PreHire": 23,
+        "Terminated": 123
+      },
+      "2026-06-30": {
+        "Active": 1307,
+        "Leave": 13,
+        "Terminated": 180
+      }
+    }
+  },
+  "privacy": {
+    "prohibited_fields": [
+      "EmployeeName",
+      "Email",
+      "Phone",
+      "NationalIdentifier",
+      "BirthDate",
+      "Gender",
+      "Salary",
+      "MedicalInformation",
+      "PerformanceRating",
+      "FreeTextComment"
+    ],
+    "prohibited_fields_present": false,
+    "synthetic_identifiers_only": true
+  },
+  "project_id": "hr-data-quality-lifecycle-workbench",
+  "quality_evaluation": {
+    "by_snapshot": {
+      "2025-03-31": {
+        "DQ-001": {
+          "eligible": 1264,
+          "failed": 9,
+          "passed": 1255
+        },
+        "DQ-002": {
+          "eligible": 1260,
+          "failed": 4,
+          "passed": 1256
+        },
+        "DQ-003": {
+          "eligible": 1241,
+          "failed": 13,
+          "passed": 1228
+        },
+        "DQ-004": {
+          "eligible": 1260,
+          "failed": 17,
+          "passed": 1243
+        },
+        "DQ-005": {
+          "eligible": 1114,
+          "failed": 6,
+          "passed": 1108
+        },
+        "DQ-006": {
+          "eligible": 1260,
+          "failed": 27,
+          "passed": 1233
+        },
+        "DQ-007": {
+          "eligible": 1260,
+          "failed": 51,
+          "passed": 1209
+        },
+        "DQ-008": {
+          "eligible": 1248,
+          "failed": 13,
+          "passed": 1235
+        }
+      },
+      "2025-06-30": {
+        "DQ-001": {
+          "eligible": 1303,
+          "failed": 9,
+          "passed": 1294
+        },
+        "DQ-002": {
+          "eligible": 1299,
+          "failed": 4,
+          "passed": 1295
+        },
+        "DQ-003": {
+          "eligible": 1253,
+          "failed": 13,
+          "passed": 1240
+        },
+        "DQ-004": {
+          "eligible": 1299,
+          "failed": 17,
+          "passed": 1282
+        },
+        "DQ-005": {
+          "eligible": 1122,
+          "failed": 6,
+          "passed": 1116
+        },
+        "DQ-006": {
+          "eligible": 1299,
+          "failed": 16,
+          "passed": 1283
+        },
+        "DQ-007": {
+          "eligible": 1299,
+          "failed": 52,
+          "passed": 1247
+        },
+        "DQ-008": {
+          "eligible": 1260,
+          "failed": 13,
+          "passed": 1247
+        }
+      },
+      "2025-09-30": {
+        "DQ-001": {
+          "eligible": 1369,
+          "failed": 10,
+          "passed": 1359
+        },
+        "DQ-002": {
+          "eligible": 1365,
+          "failed": 4,
+          "passed": 1361
+        },
+        "DQ-003": {
+          "eligible": 1298,
+          "failed": 30,
+          "passed": 1268
+        },
+        "DQ-004": {
+          "eligible": 1365,
+          "failed": 17,
+          "passed": 1348
+        },
+        "DQ-005": {
+          "eligible": 1149,
+          "failed": 6,
+          "passed": 1143
+        },
+        "DQ-006": {
+          "eligible": 1365,
+          "failed": 35,
+          "passed": 1330
+        },
+        "DQ-007": {
+          "eligible": 1365,
+          "failed": 90,
+          "passed": 1275
+        },
+        "DQ-008": {
+          "eligible": 1305,
+          "failed": 14,
+          "passed": 1291
+        }
+      },
+      "2025-12-31": {
+        "DQ-001": {
+          "eligible": 1423,
+          "failed": 10,
+          "passed": 1413
+        },
+        "DQ-002": {
+          "eligible": 1419,
+          "failed": 4,
+          "passed": 1415
+        },
+        "DQ-003": {
+          "eligible": 1327,
+          "failed": 14,
+          "passed": 1313
+        },
+        "DQ-004": {
+          "eligible": 1419,
+          "failed": 19,
+          "passed": 1400
+        },
+        "DQ-005": {
+          "eligible": 1162,
+          "failed": 7,
+          "passed": 1155
+        },
+        "DQ-006": {
+          "eligible": 1419,
+          "failed": 20,
+          "passed": 1399
+        },
+        "DQ-007": {
+          "eligible": 1419,
+          "failed": 57,
+          "passed": 1362
+        },
+        "DQ-008": {
+          "eligible": 1334,
+          "failed": 14,
+          "passed": 1320
+        }
+      },
+      "2026-03-31": {
+        "DQ-001": {
+          "eligible": 1496,
+          "failed": 21,
+          "passed": 1475
+        },
+        "DQ-002": {
+          "eligible": 1492,
+          "failed": 4,
+          "passed": 1488
+        },
+        "DQ-003": {
+          "eligible": 1362,
+          "failed": 15,
+          "passed": 1347
+        },
+        "DQ-004": {
+          "eligible": 1492,
+          "failed": 24,
+          "passed": 1468
+        },
+        "DQ-005": {
+          "eligible": 1174,
+          "failed": 11,
+          "passed": 1163
+        },
+        "DQ-006": {
+          "eligible": 1492,
+          "failed": 27,
+          "passed": 1465
+        },
+        "DQ-007": {
+          "eligible": 1492,
+          "failed": 72,
+          "passed": 1420
+        },
+        "DQ-008": {
+          "eligible": 1369,
+          "failed": 15,
+          "passed": 1354
+        }
+      },
+      "2026-06-30": {
+        "DQ-001": {
+          "eligible": 1504,
+          "failed": 4,
+          "passed": 1500
+        },
+        "DQ-002": {
+          "eligible": 1500,
+          "failed": 4,
+          "passed": 1496
+        },
+        "DQ-003": {
+          "eligible": 1313,
+          "failed": 15,
+          "passed": 1298
+        },
+        "DQ-004": {
+          "eligible": 1500,
+          "failed": 16,
+          "passed": 1484
+        },
+        "DQ-005": {
+          "eligible": 1135,
+          "failed": 7,
+          "passed": 1128
+        },
+        "DQ-006": {
+          "eligible": 1500,
+          "failed": 4,
+          "passed": 1496
+        },
+        "DQ-007": {
+          "eligible": 1500,
+          "failed": 57,
+          "passed": 1443
+        },
+        "DQ-008": {
+          "eligible": 1320,
+          "failed": 6,
+          "passed": 1314
+        }
+      }
+    },
+    "score_by_snapshot": {
+      "2025-03-31": 98.5,
+      "2025-06-30": 98.6,
+      "2025-09-30": 97.9,
+      "2025-12-31": 98.6,
+      "2026-03-31": 98.2,
+      "2026-06-30": 98.9
+    }
+  },
+  "seed": 20261012,
+  "snapshot_dates": [
+    "2025-03-31",
+    "2025-06-30",
+    "2025-09-30",
+    "2025-12-31",
+    "2026-03-31",
+    "2026-06-30"
+  ]
+}

@@ -1,0 +1,33 @@
+/// Modelo semántico importado para analizar confiabilidad de calidad, recurrencia y eficacia de remediación. Gold es la verdad analítica y Dataverse contiene solo casos publicados.
+model Model
+	culture: es-MX
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: es-MX
+	discourageCompositeModels
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_ProTooling = ["MCP-PBIModeling","DevMode"]
+
+annotation PBI_QueryOrder = ["Cortes de calidad","Desempeño de reglas","Excepciones","Fecha","Regla","Sistema fuente","Severidad","Caso","Actividades del caso","Estado","Responsable","Excepción publicada","pFabricSqlServer","pFabricSqlDatabase","pDataverseEnvironmentUrl"]
+
+ref table 'Cortes de calidad'
+ref table 'Desempeño de reglas'
+ref table Excepciones
+ref table Fecha
+ref table Regla
+ref table 'Sistema fuente'
+ref table Severidad
+ref table Caso
+ref table 'Actividades del caso'
+ref table Estado
+ref table Responsable
+ref table 'Excepción publicada'
+
+ref cultureInfo es-MX
+

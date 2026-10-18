@@ -1,0 +1,29 @@
+/// Responsables de los casos publicados; no expone correo electrónico.
+table Responsable
+	lineageTag: e1e05540-e9bc-4446-afe0-aab13117cef5
+
+	column 'Responsable ID'
+		dataType: string
+		isHidden
+		lineageTag: f056f6a8-f987-4901-9014-0447c1558fa7
+		sourceColumn: ownerid
+
+	/// Persona o equipo propietario del caso publicado.
+	column Responsable
+		dataType: string
+		lineageTag: 385ebe74-688a-472f-821f-6686aa144de3
+		sourceColumn: owneridname
+
+	partition Responsable = m
+		mode: import
+		source =
+				let
+				    DataverseHost = Text.AfterDelimiter(pDataverseEnvironmentUrl, "://"),
+				    Source = CommonDataService.Database(DataverseHost, [CreateNavigationProperties=false]),
+				    Entity = Source{[Schema="dbo", Item="mprpa_dqremediationcase"]}[Data],
+				    Selected = Table.SelectColumns(Entity, {"ownerid", "owneridname"}),
+				    NonBlank = Table.SelectRows(Selected, each [ownerid] <> null),
+				    DistinctOwners = Table.Distinct(NonBlank)
+				in
+				    DistinctOwners
+

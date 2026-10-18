@@ -1,0 +1,45 @@
+﻿{
+    "generatedAt":  "2026-10-18T20:42:38.0259665Z",
+    "project":  "HR Data Quality \u0026 Lifecycle Workbench",
+    "gate":  "Phase 9",
+    "status":  "passed",
+    "tenantE2EExecuted":  false,
+    "visualRegressionExecuted":  false,
+    "mutationExecuted":  false,
+    "optionalVideoRecorded":  false,
+    "steps":  [
+                  {
+                      "step":  "Synthetic data regression",
+                      "status":  "passed",
+                      "durationSeconds":  7.56,
+                      "detail":  "Completed without errors."
+                  },
+                  {
+                      "step":  "Power Platform regression",
+                      "status":  "passed",
+                      "durationSeconds":  71.94,
+                      "detail":  "Completed without errors."
+                  },
+                  {
+                      "step":  "Power BI local readiness",
+                      "status":  "passed",
+                      "durationSeconds":  40.54,
+                      "detail":  "Completed without errors."
+                  },
+                  {
+                      "step":  "Power BI PBIR validation",
+                      "status":  "passed",
+                      "durationSeconds":  6.14,
+                      "detail":  "0 errors; 0 warning(s)."
+                  },
+                  {
+                      "step":  "Repository hygiene",
+                      "status":  "passed",
+                      "durationSeconds":  0.16,
+                      "detail":  "Credentials, authentication state, Power BI cache and local settings are ignored."
+                  }
+              ],
+    "publicationBlockers":  [
+
+                            ]
+}

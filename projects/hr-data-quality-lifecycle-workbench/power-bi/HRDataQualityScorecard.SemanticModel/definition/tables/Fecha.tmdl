@@ -1,0 +1,78 @@
+/// Calendario continuo entre el primer y el último corte. La marca Es snapshot identifica las seis fechas disponibles.
+table Fecha
+	lineageTag: d5acd54d-4a7b-4391-b583-ff662dd33226
+	dataCategory: Time
+
+	/// Fecha calendario usada para filtrar los cortes analíticos.
+	column 'Fecha de snapshot'
+		dataType: dateTime
+		isUnique
+		formatString: dd mmm yyyy
+		lineageTag: 8408eba2-bd99-4ff4-9f6c-01aeab801fd2
+		summarizeBy: none
+		sourceColumn: Fecha de snapshot
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// Año calendario de la fecha.
+	column Año
+		dataType: int64
+		lineageTag: a35ceb48-6578-45fa-b9d7-372778de7d0b
+		summarizeBy: none
+		sourceColumn: Año
+
+	/// Trimestre calendario identificado como T1 a T4.
+	column Trimestre
+		dataType: string
+		lineageTag: 1ca14448-0730-4972-8d3e-f3b7aa43c281
+		sourceColumn: Trimestre
+
+	/// Nombre completo del mes en español.
+	column Mes
+		dataType: string
+		lineageTag: 3c2343c0-2b50-44a8-813d-3ba41f992388
+		sourceColumn: Mes
+		sortByColumn: 'Número de mes'
+
+	column 'Número de mes'
+		dataType: int64
+		isHidden
+		lineageTag: 18971e4e-33cc-4f6c-9c61-b6e022b26594
+		summarizeBy: none
+		sourceColumn: Número de mes
+
+	/// Etiqueta abreviada de mes y año para ejes temporales.
+	column 'Etiqueta de mes'
+		dataType: string
+		lineageTag: 5dc23cb8-b0ee-4de9-91d9-734e00357506
+		sourceColumn: Etiqueta de mes
+
+	/// Indica si existe un corte de calidad disponible para esta fecha.
+	column 'Es snapshot'
+		dataType: boolean
+		lineageTag: 9a50659f-21ff-4189-8200-1aca613a6354
+		sourceColumn: Es snapshot
+
+	partition Fecha = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(pFabricSqlServer, pFabricSqlDatabase),
+				    Trend = Source{[Schema="dbo", Item="vw_dq_score_trend"]}[Data],
+				    SnapshotDates = List.Buffer(List.Distinct(List.Transform(Trend[SnapshotDate], each Date.From(_)))),
+				    MinDate = List.Min(SnapshotDates),
+				    MaxDate = List.Max(SnapshotDates),
+				    Dates = List.Dates(MinDate, Duration.Days(MaxDate - MinDate) + 1, #duration(1, 0, 0, 0)),
+				    Calendar = Table.FromList(Dates, Splitter.SplitByNothing(), {"Fecha de snapshot"}),
+				    TypedCalendar = Table.TransformColumnTypes(Calendar, {{"Fecha de snapshot", type date}}, "es-MX"),
+				    AddYear = Table.AddColumn(TypedCalendar, "Año", each Date.Year([Fecha de snapshot]), Int64.Type),
+				    AddQuarter = Table.AddColumn(AddYear, "Trimestre", each "T" & Number.ToText(Date.QuarterOfYear([Fecha de snapshot])), type text),
+				    AddMonth = Table.AddColumn(AddQuarter, "Mes", each Date.MonthName([Fecha de snapshot], "es-MX"), type text),
+				    AddMonthNumber = Table.AddColumn(AddMonth, "Número de mes", each Date.Month([Fecha de snapshot]), Int64.Type),
+				    AddMonthLabel = Table.AddColumn(AddMonthNumber, "Etiqueta de mes", each Date.ToText([Fecha de snapshot], "MMM yyyy", "es-MX"), type text),
+				    AddSnapshotFlag = Table.AddColumn(AddMonthLabel, "Es snapshot", each List.Contains(SnapshotDates, [Fecha de snapshot]), type logical)
+				in
+				    AddSnapshotFlag
+

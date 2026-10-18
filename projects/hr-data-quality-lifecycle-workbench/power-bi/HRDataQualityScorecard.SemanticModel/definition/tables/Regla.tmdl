@@ -1,0 +1,56 @@
+/// Catálogo de reglas de calidad con su dimensión, SLA y dominio propietario.
+table Regla
+	lineageTag: b8f27c7f-f225-4f12-8a9f-921e723bc2d7
+
+	column 'Código de regla'
+		dataType: string
+		isHidden
+		lineageTag: 3cd41a5d-eb3f-4aba-b07c-2845ed158c91
+		sourceColumn: RuleCode
+
+	/// Nombre funcional de la regla evaluada.
+	column 'Nombre de regla'
+		dataType: string
+		lineageTag: 2b822486-240a-47f5-a66e-2e9f369c92f8
+		sourceColumn: RuleName
+
+	/// Dimensión de calidad que clasifica la regla.
+	column 'Dimensión de calidad'
+		dataType: string
+		lineageTag: aa6571bd-971c-458e-ba1c-75f8ba29d281
+		sourceColumn: QualityDimension
+
+	/// Plazo operativo esperado para atender una excepción de la regla.
+	column 'Días hábiles SLA'
+		dataType: int64
+		lineageTag: 4b66cebe-941f-4ff6-88dd-4c2b788e0e03
+		summarizeBy: none
+		sourceColumn: SlaBusinessDays
+
+	/// Dominio funcional responsable de la regla.
+	column 'Dominio propietario'
+		dataType: string
+		lineageTag: 2e310520-2238-42ab-aa03-c2945e41d9c6
+		sourceColumn: OwnerDomain
+
+	partition Regla = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(pFabricSqlServer, pFabricSqlDatabase),
+				    Performance = Source{[Schema="dbo", Item="vw_dq_rule_performance"]}[Data],
+				    RuleBase = Table.Distinct(Table.SelectColumns(Performance, {"RuleCode", "RuleName", "QualityDimension"})),
+				    Exceptions = Source{[Schema="dbo", Item="vw_dq_exception_register"]}[Data],
+				    RuleAttributes = Table.Group(
+				        Table.SelectColumns(Exceptions, {"RuleCode", "SlaBusinessDays", "OwnerDomain"}),
+				        {"RuleCode"},
+				        {
+				            {"SlaBusinessDays", each let values = List.RemoveNulls([SlaBusinessDays]) in if List.IsEmpty(values) then null else List.Max(values), Int64.Type},
+				            {"OwnerDomain", each let values = List.RemoveNulls([OwnerDomain]) in if List.IsEmpty(values) then null else List.First(values), type text}
+				        }
+				    ),
+				    Joined = Table.NestedJoin(RuleBase, {"RuleCode"}, RuleAttributes, {"RuleCode"}, "Attributes", JoinKind.LeftOuter),
+				    Expanded = Table.ExpandTableColumn(Joined, "Attributes", {"SlaBusinessDays", "OwnerDomain"}, {"SlaBusinessDays", "OwnerDomain"})
+				in
+				    Expanded
+

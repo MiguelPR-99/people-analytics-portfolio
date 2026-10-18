@@ -1,0 +1,18 @@
+/// Servidor del SQL analytics endpoint de Fabric usado por las vistas Gold.
+expression pFabricSqlServer = "contoso.datawarehouse.fabric.microsoft.com" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 906e46c5-2ff1-466b-85b4-2017cd44122d
+
+	annotation PBI_ResultType = Text
+
+/// Base de datos del SQL analytics endpoint de Fabric.
+expression pFabricSqlDatabase = "lh_hr_data_quality" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: e9dd3e0b-a510-4566-ac44-3505793c3874
+
+	annotation PBI_ResultType = Text
+
+/// URL del entorno de Dataverse que contiene únicamente los casos publicados.
+expression pDataverseEnvironmentUrl = "https://contoso.crm.dynamics.com" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 1665526f-d53a-4a9f-9a26-c8695ecdf97e
+
+	annotation PBI_ResultType = Text
+

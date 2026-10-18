@@ -1,0 +1,205 @@
+/// Hecho de instancias de excepción por corte. Conserva las claves necesarias para recurrencia y cobertura de publicación.
+table Excepciones
+	lineageTag: c890ac4d-dee8-4f71-b936-dc6c2de04302
+
+	/// Conteo distinto de instancias de excepción en el contexto Gold visible.
+	measure 'Instancias de excepción' = DISTINCTCOUNT('Excepciones'[Instancia de excepción ID])
+		formatString: #,##0
+		displayFolder: Excepciones
+		lineageTag: 328e566e-a29a-467f-8a62-b71229bfd435
+
+	/// Claves observadas desde el primer corte hasta la fecha máxima visible, conservando regla, sistema y severidad.
+	measure '# Claves de recurrencia' =
+			VAR _snapshotMaximo = MAX('Fecha'[Fecha de snapshot])
+			VAR _claves =
+			    CALCULATETABLE(
+			        VALUES('Excepciones'[Clave de recurrencia]),
+			        REMOVEFILTERS('Fecha'),
+			        'Excepciones'[Fecha de snapshot] <= _snapshotMaximo
+			    )
+			RETURN
+			    COUNTROWS(_claves)
+		formatString: #,##0
+		isHidden
+		displayFolder: Recurrencia
+		lineageTag: c42647a6-29a3-4442-8eee-5b2fccb24628
+
+	/// Claves presentes en al menos dos cortes dentro de la ventana histórica hasta la fecha máxima visible.
+	measure '# Claves recurrentes' =
+			VAR _snapshotMaximo = MAX('Fecha'[Fecha de snapshot])
+			VAR _claves =
+			    CALCULATETABLE(
+			        VALUES('Excepciones'[Clave de recurrencia]),
+			        REMOVEFILTERS('Fecha'),
+			        'Excepciones'[Fecha de snapshot] <= _snapshotMaximo
+			    )
+			VAR _clavesConCortes =
+			    ADDCOLUMNS(
+			        _claves,
+			        "__Cortes",
+			            CALCULATE(
+			                DISTINCTCOUNT('Excepciones'[Fecha de snapshot]),
+			                REMOVEFILTERS('Fecha'),
+			                'Excepciones'[Fecha de snapshot] <= _snapshotMaximo
+			            )
+			    )
+			RETURN
+			    COUNTROWS(FILTER(_clavesConCortes, [__Cortes] >= 2))
+		formatString: #,##0
+		isHidden
+		displayFolder: Recurrencia
+		lineageTag: ea23569d-18bc-4463-924d-cf13b3aadfe5
+
+	/// Proporción de claves con presencia en dos o más cortes dentro de la ventana histórica visible.
+	measure 'Tasa de recurrencia' = DIVIDE([# Claves recurrentes], [# Claves de recurrencia])
+		formatString: 0.0%
+		displayFolder: Recurrencia
+		lineageTag: 40d9d5e9-a262-4860-ab63-8da290d6ac10
+
+	column 'Instancia de excepción ID'
+		dataType: string
+		isHidden
+		lineageTag: 0d5a1d12-c352-48c3-9329-cabbbee3cb98
+		sourceColumn: ExceptionInstanceID
+
+	column 'Clave de recurrencia'
+		dataType: string
+		isHidden
+		lineageTag: 4b57981f-567f-4d14-be06-5ff984a68bc0
+		sourceColumn: RecurrenceKey
+
+	column 'Código de regla'
+		dataType: string
+		isHidden
+		lineageTag: 81b1f82e-1aa0-4ffe-b754-9ba023a79ecb
+		sourceColumn: RuleCode
+
+	column 'Fecha de snapshot'
+		dataType: dateTime
+		isHidden
+		formatString: dd mmm yyyy
+		lineageTag: 4984b720-6fbf-4bde-a645-b4d4f2b4df37
+		summarizeBy: none
+		sourceColumn: SnapshotDate
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sistema fuente'
+		dataType: string
+		isHidden
+		lineageTag: 7d425c1f-c033-4e42-909e-cced83752188
+		sourceColumn: SourceSystem
+
+	column Severidad
+		dataType: string
+		isHidden
+		lineageTag: 9a346c1b-dea3-4be1-8048-85af4394d91f
+		sourceColumn: OperationalSeverity
+
+	column 'Días hábiles SLA'
+		dataType: int64
+		isHidden
+		lineageTag: d2acac24-ad90-41a1-9219-dbdf12c0a040
+		summarizeBy: none
+		sourceColumn: SlaBusinessDays
+
+	column ExceptionFingerprint
+		dataType: string
+		lineageTag: 3382f570-1eff-4dd9-851c-7bc584c1264e
+		summarizeBy: none
+		sourceColumn: ExceptionFingerprint
+
+		annotation SummarizationSetBy = Automatic
+
+	column RunID
+		dataType: string
+		lineageTag: 11d84b49-2e4d-4475-a645-eec58f7eafea
+		summarizeBy: none
+		sourceColumn: RunID
+
+		annotation SummarizationSetBy = Automatic
+
+	column RuleResultID
+		dataType: string
+		lineageTag: 5115f882-0a07-44d6-86b3-69d4d5885304
+		summarizeBy: none
+		sourceColumn: RuleResultID
+
+		annotation SummarizationSetBy = Automatic
+
+	column RuleName
+		dataType: string
+		lineageTag: fe3bacc1-98cf-45b8-9060-19c0b837b0ea
+		summarizeBy: none
+		sourceColumn: RuleName
+
+		annotation SummarizationSetBy = Automatic
+
+	column QualityDimension
+		dataType: string
+		lineageTag: 69045b0f-096c-43ab-b993-34d0a62cad52
+		summarizeBy: none
+		sourceColumn: QualityDimension
+
+		annotation SummarizationSetBy = Automatic
+
+	column BusinessKey
+		dataType: string
+		lineageTag: 7cea8a12-c5af-4a1b-9489-20bcb71985be
+		summarizeBy: none
+		sourceColumn: BusinessKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column FieldScope
+		dataType: string
+		lineageTag: 7fbcaaf0-43ff-484b-bbb6-97ab7d986b79
+		summarizeBy: none
+		sourceColumn: FieldScope
+
+		annotation SummarizationSetBy = Automatic
+
+	column OwnerDomain
+		dataType: string
+		lineageTag: 6964e2bb-81d2-4d6d-b7fd-a0c0e541004a
+		summarizeBy: none
+		sourceColumn: OwnerDomain
+
+		annotation SummarizationSetBy = Automatic
+
+	column ObservedValue
+		dataType: string
+		lineageTag: 29eb5229-f4de-470d-b116-4afc2ec108d4
+		summarizeBy: none
+		sourceColumn: ObservedValue
+
+		annotation SummarizationSetBy = Automatic
+
+	column ExpectedCondition
+		dataType: string
+		lineageTag: ff04ca3d-4d2c-4e31-8e68-946947f11d9e
+		summarizeBy: none
+		sourceColumn: ExpectedCondition
+
+		annotation SummarizationSetBy = Automatic
+
+	column EvaluatedAt
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c9b37836-93ef-4dab-9432-fd79e94aaaf0
+		summarizeBy: none
+		sourceColumn: EvaluatedAt
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Excepciones = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(pFabricSqlServer, pFabricSqlDatabase),
+				    View = Source{[Schema="dbo", Item="vw_dq_exception_register"]}[Data]
+				in
+				    View
+

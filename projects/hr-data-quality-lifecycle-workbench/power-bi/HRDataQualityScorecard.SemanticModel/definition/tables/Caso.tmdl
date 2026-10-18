@@ -1,0 +1,185 @@
+/// Cabecera operativa con una fila por caso publicado en Dataverse; no representa toda la población de excepciones Gold.
+table Caso
+	lineageTag: df2fca57-f06c-404a-9fdb-738330ba9aa4
+
+	/// Número de casos que existen en Dataverse. No representa todas las excepciones Gold.
+	measure 'Casos publicados' = DISTINCTCOUNT('Caso'[Caso ID])
+		formatString: #,##0
+		displayFolder: Casos publicados
+		lineageTag: 3aebbbe6-8741-4c93-b24d-500e312e0b69
+
+	/// Casos publicados cuyo estado actual no es terminal; Rejected permanece abierto por diseño.
+	measure 'Casos publicados abiertos' =
+			CALCULATE(
+			    [Casos publicados],
+			    KEEPFILTERS('Estado'[Es terminal] = FALSE())
+			)
+		formatString: #,##0
+		displayFolder: Casos publicados
+		lineageTag: 169faa5c-28e4-494d-8cda-4b0315ed91b4
+
+	/// Casos Resolved o Waived resueltos antes o en su vencimiento, sobre casos de esos estados con ambas fechas informadas.
+	measure 'Cumplimiento SLA' =
+			VAR _casosElegibles =
+			    CALCULATETABLE(
+			        FILTER(
+			            'Caso',
+			            NOT ISBLANK('Caso'[Vence el])
+			                && NOT ISBLANK('Caso'[Resuelto el])
+			        ),
+			        KEEPFILTERS('Estado'[Código de estado] IN {"RESOLVED", "WAIVED"})
+			    )
+			VAR _casosEnSLA =
+			    COUNTROWS(
+			        FILTER(
+			            _casosElegibles,
+			            'Caso'[Resuelto el] <= 'Caso'[Vence el]
+			        )
+			    )
+			RETURN
+			    DIVIDE(_casosEnSLA, COUNTROWS(_casosElegibles))
+		formatString: 0.0%
+		displayFolder: SLA
+		lineageTag: cac2a99e-8d35-43b2-a650-525a30df0aff
+
+	/// Casos terminales con corrección de origen confirmada posteriormente, sobre casos Resolved o Waived.
+	measure 'Tasa de corrección confirmada' =
+			VAR _casosTerminales =
+			    CALCULATETABLE(
+			        VALUES('Caso'[Caso ID]),
+			        KEEPFILTERS('Estado'[Código de estado] IN {"RESOLVED", "WAIVED"})
+			    )
+			VAR _casosConfirmados =
+			    COALESCE(
+			        CALCULATE(
+			            [Casos publicados],
+			            KEEPFILTERS('Estado'[Código de estado] IN {"RESOLVED", "WAIVED"}),
+			            KEEPFILTERS('Caso'[Estado de corrección de origen] = "Confirmed Later")
+			        ),
+			        0
+			    )
+			RETURN
+			    DIVIDE(_casosConfirmados, COUNTROWS(_casosTerminales))
+		formatString: 0.0%
+		displayFolder: Eficacia
+		lineageTag: ff9f785b-8c73-4d96-91f1-35fe27a4b4ff
+
+	/// Medida de presentación para la tarjeta SLA. Explica explícitamente la ausencia de denominador sin convertir el KPI numérico subyacente en cero.
+	measure 'Estado de cumplimiento SLA' =
+			VAR _sla = [Cumplimiento SLA]
+			RETURN
+			    IF(
+			        ISBLANK(_sla),
+			        "Sin casos elegibles",
+			        FORMAT(_sla, "0.0%")
+			    )
+		isHidden
+		displayFolder: SLA
+		lineageTag: 4c33f73d-f001-4fbc-8641-53cc87cc6126
+
+	column 'Caso ID'
+		dataType: string
+		isHidden
+		lineageTag: 502bf3fb-e83d-4254-89bd-d76e1ab67a9d
+		sourceColumn: mprpa_dqremediationcaseid
+
+	/// Identificador operativo visible del caso publicado.
+	column 'Número de caso'
+		dataType: string
+		lineageTag: c8646de0-f9cc-4b09-a6a2-9afdf201cfc0
+		sourceColumn: mprpa_casenumber
+
+	/// Resumen del problema tratado por el caso.
+	column 'Título del caso'
+		dataType: string
+		lineageTag: a0995766-47e0-4412-848e-935f05a59002
+		sourceColumn: mprpa_casetitle
+
+	column 'Estado ID'
+		dataType: string
+		isHidden
+		lineageTag: 1dfa4ba1-3b05-414c-8a7a-b4e7a99a2818
+		sourceColumn: mprpa_casestatus
+
+	column 'Excepción publicada ID'
+		dataType: string
+		isHidden
+		lineageTag: 81ce01f0-d687-465f-aa9d-15d948ecbabf
+		sourceColumn: mprpa_exceptionreference
+
+	column 'Responsable ID'
+		dataType: string
+		isHidden
+		lineageTag: 4d81dcee-96ed-45a6-83ad-7147c59e84df
+		sourceColumn: ownerid
+
+	/// Fecha límite calculada para la remediación.
+	column 'Vence el'
+		dataType: dateTime
+		formatString: dd mmm yyyy HH:mm
+		lineageTag: a1fb9d9e-6151-4992-a211-84fe2f59de63
+		sourceColumn: mprpa_dueat
+
+	/// Momento en que el caso alcanzó un cierre terminal.
+	column 'Resuelto el'
+		dataType: dateTime
+		formatString: dd mmm yyyy HH:mm
+		lineageTag: 6b47a649-352b-49bb-912f-752c22ae50c2
+		sourceColumn: mprpa_resolvedat
+
+	/// Clasificación administrativa de la resolución del caso.
+	column 'Tipo de resolución'
+		dataType: string
+		lineageTag: 94a71982-7cdb-4ed5-bd83-aa9840756e90
+		sourceColumn: mprpa_resolutiontypename
+
+	/// Verificación posterior de si la fuente quedó realmente corregida.
+	column 'Estado de corrección de origen'
+		dataType: string
+		lineageTag: 86451892-bf56-49aa-9503-663b26f84a39
+		sourceColumn: mprpa_sourcecorrectionstatename
+
+	/// Indica si el caso cuenta con la evidencia requerida para cierre.
+	column 'Evidencia completa'
+		dataType: boolean
+		lineageTag: 9d75cc43-3533-416b-8530-babbf2f1f3a9
+		sourceColumn: mprpa_evidencecomplete
+
+	column 'Última transición'
+		dataType: dateTime
+		isHidden
+		formatString: dd mmm yyyy HH:mm
+		lineageTag: 1a654513-8e94-4380-bf22-68fe007db786
+		sourceColumn: mprpa_lasttransitionat
+
+	column 'Inicio SLA'
+		dataType: dateTime
+		isHidden
+		formatString: dd mmm yyyy HH:mm
+		lineageTag: 3b570535-3832-475a-94e9-331e5de95a37
+		sourceColumn: mprpa_slastartat
+
+	column 'Instancia de excepción ID'
+		dataType: string
+		isHidden
+		lineageTag: 673f7ff6-dd6e-4ed4-a0dd-dce8db99c80f
+		sourceColumn: mprpa_exceptioninstanceid
+
+	/// Etiqueta de presentación que conserva el valor fuente y muestra los casos abiertos sin tipo de resolución como Sin resolución.
+	column 'Tipo de resolución visible' = COALESCE('Caso'[Tipo de resolución], "Sin resolución")
+		dataType: string
+		isHidden
+		lineageTag: d4c50342-e4b7-4b14-a5cb-85465a6bd6ff
+		summarizeBy: none
+
+	partition Caso = m
+		mode: import
+		source =
+				let
+				    DataverseHost = Text.AfterDelimiter(pDataverseEnvironmentUrl, "://"),
+				    Source = CommonDataService.Database(DataverseHost, [CreateNavigationProperties=false]),
+				    Entity = Source{[Schema="dbo", Item="mprpa_dqremediationcase"]}[Data],
+				    Selected = Table.SelectColumns(Entity, {"mprpa_dqremediationcaseid", "mprpa_casenumber", "mprpa_casetitle", "mprpa_casestatus", "mprpa_exceptionreference", "ownerid", "mprpa_dueat", "mprpa_resolvedat", "mprpa_resolutiontypename", "mprpa_sourcecorrectionstatename", "mprpa_evidencecomplete", "mprpa_lasttransitionat", "mprpa_slastartat", "mprpa_exceptioninstanceid"})
+				in
+				    Selected
+

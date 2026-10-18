@@ -1,0 +1,4 @@
+/// Modelo semántico local del HR Data Quality Scorecard. Combina la verdad analítica Gold con la muestra operativa publicada en Dataverse.
+database
+	compatibilityLevel: 1702
+

@@ -1,0 +1,193 @@
+/// Hecho con una fila por corte, regla y sistema fuente; permite explicar el score y los checks fallidos.
+table 'Desempeño de reglas'
+	lineageTag: b401fd94-624c-4394-8721-ee46d8592384
+
+	/// Score ponderado recalculado desde numerador y denominador; responde a fecha, regla y sistema fuente.
+	measure 'Data Quality Score' = DIVIDE(SUM('Desempeño de reglas'[Aprobado ponderado]), SUM('Desempeño de reglas'[Elegible ponderado]))
+		formatString: 0.0%
+		displayFolder: Calidad
+		lineageTag: 3668314a-4193-44d7-bf3a-7c04b0200af3
+
+	/// Data Quality Score en la fecha máxima visible.
+	measure 'Data Quality Score actual' =
+			VAR _snapshotActual = MAX('Fecha'[Fecha de snapshot])
+			RETURN
+			    CALCULATE(
+			        [Data Quality Score],
+			        KEEPFILTERS('Fecha'[Fecha de snapshot] = _snapshotActual)
+			    )
+		formatString: 0.0%
+		displayFolder: Calidad
+		lineageTag: 2a575720-8eb4-4bc8-8ace-d879583d1909
+
+	/// Score del corte global inmediatamente anterior a la fecha máxima visible, conservando filtros válidos de regla y sistema.
+	measure 'DQ Score anterior' =
+			VAR _snapshotActual = MAX('Fecha'[Fecha de snapshot])
+			VAR _snapshotAnterior =
+			    CALCULATE(
+			        MAX('Cortes de calidad'[Fecha de snapshot]),
+			        REMOVEFILTERS('Fecha'),
+			        'Cortes de calidad'[Fecha de snapshot] < _snapshotActual
+			    )
+			RETURN
+			    IF(
+			        NOT ISBLANK(_snapshotAnterior),
+			        CALCULATE(
+			            [Data Quality Score],
+			            REMOVEFILTERS('Fecha'),
+			            TREATAS({_snapshotAnterior}, 'Fecha'[Fecha de snapshot])
+			        )
+			    )
+		formatString: 0.0%
+		displayFolder: Calidad
+		lineageTag: eba60158-f3f0-4dfa-a104-236e7a147d5a
+
+	/// Cambio del score actual frente al corte anterior expresado en puntos porcentuales.
+	measure 'Variación DQ Score (pp)' =
+			VAR _actual = [Data Quality Score actual]
+			VAR _anterior = [DQ Score anterior]
+			RETURN
+			    IF(
+			        NOT ISBLANK(_actual) && NOT ISBLANK(_anterior),
+			        (_actual - _anterior) * 100
+			    )
+		formatString: +0.0;-0.0;0.0 "pp"
+		displayFolder: Calidad
+		lineageTag: e76e5822-ee1a-4aa3-a96b-3442a5885608
+
+	/// Número de comprobaciones que no cumplieron la regla en el contexto visible.
+	measure 'Checks fallidos' = SUM('Desempeño de reglas'[Checks fallidos base])
+		formatString: #,##0
+		displayFolder: Volumen
+		lineageTag: edb50007-22eb-4c2d-8667-81839a3f83f4
+
+	column 'Fecha de snapshot'
+		dataType: dateTime
+		isHidden
+		formatString: dd mmm yyyy
+		lineageTag: 2d20c4ec-30eb-4edc-8abc-b0324a2b4bf9
+		summarizeBy: none
+		sourceColumn: SnapshotDate
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Código de regla'
+		dataType: string
+		isHidden
+		lineageTag: 03bc845f-a47a-4201-84fa-b468c9ae59ff
+		sourceColumn: RuleCode
+
+	column 'Sistema fuente'
+		dataType: string
+		isHidden
+		lineageTag: 0e48cb2f-bd29-4316-a066-9959cacb59de
+		sourceColumn: SourceSystem
+
+	column 'Checks elegibles base'
+		dataType: int64
+		isHidden
+		lineageTag: c6fb8c76-bdd4-494b-8d32-3b8fe352b992
+		summarizeBy: none
+		sourceColumn: EligibleChecks
+
+	column 'Checks aprobados base'
+		dataType: int64
+		isHidden
+		lineageTag: 242215a4-0259-4476-86a1-c2b5895165ce
+		summarizeBy: none
+		sourceColumn: PassedChecks
+
+	column 'Checks fallidos base'
+		dataType: int64
+		isHidden
+		lineageTag: 52d148ea-5039-4d3d-b304-1fe6f5d986d5
+		summarizeBy: none
+		sourceColumn: FailedChecks
+
+	column 'Elegible ponderado'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 6bb443c0-a767-4d48-ad90-3eb27af0b47a
+		summarizeBy: sum
+		sourceColumn: WeightedEligible
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Aprobado ponderado'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a07e993f-d9bf-434a-8f8e-83cd26cfc688
+		summarizeBy: sum
+		sourceColumn: WeightedPassed
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Registros evaluados base'
+		dataType: int64
+		isHidden
+		lineageTag: 3aa3fa50-a7a4-4369-ab65-10b4957c088b
+		summarizeBy: none
+		sourceColumn: RecordsEvaluated
+
+	column 'Registros con excepción base'
+		dataType: int64
+		isHidden
+		lineageTag: a01f0a40-8b70-48ba-bd56-5f39ec7e163f
+		summarizeBy: none
+		sourceColumn: RecordsWithException
+
+	column 'Score fuente'
+		dataType: double
+		isHidden
+		lineageTag: 92fee381-eab7-499f-802c-24f840381a30
+		summarizeBy: sum
+		sourceColumn: DQScore
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Fecha de cálculo'
+		dataType: dateTime
+		isHidden
+		formatString: dd mmm yyyy HH:mm
+		lineageTag: 3e17b066-c4f7-46c4-beea-55f2b231179c
+		sourceColumn: CalculatedAt
+
+	column RuleName
+		dataType: string
+		lineageTag: 1e83e803-8621-4b64-bb8f-415df95e77a8
+		summarizeBy: none
+		sourceColumn: RuleName
+
+		annotation SummarizationSetBy = Automatic
+
+	column QualityDimension
+		dataType: string
+		lineageTag: db8b3931-c8b0-4e89-aff9-8c5e809bea15
+		summarizeBy: none
+		sourceColumn: QualityDimension
+
+		annotation SummarizationSetBy = Automatic
+
+	column RunID
+		dataType: string
+		lineageTag: b0730cd5-fb59-419e-81da-7a97a0fe027a
+		summarizeBy: none
+		sourceColumn: RunID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Desempeño de reglas' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(pFabricSqlServer, pFabricSqlDatabase),
+				    View = Source{[Schema="dbo", Item="vw_dq_rule_performance"]}[Data]
+				in
+				    View
+

@@ -1,0 +1,42 @@
+Create an official Power Apps Generative Page named "DQ Command Center" for the existing model-driven app "HR Data Quality Workbench". Implement it in React and TypeScript using the supported Generative Page runtime, Fluent UI components, and the Power Apps dataApi. Reuse the existing Dataverse schema; do not create or modify tables.
+
+DATA SOURCES
+Use these five existing Dataverse tables:
+1. mprpa_dqexceptionreference — DQ Exception Reference. Treat every record as functionally immutable: query only; never create, update, or delete from this page.
+2. mprpa_dqremediationcase — DQ Remediation Case.
+3. mprpa_dqcaseactivity — DQ Case Activity.
+4. mprpa_dqcaseevidence — DQ Case Evidence.
+5. mprpa_dqstatus — DQ Status.
+
+Read the existing `DQ Operational App URL` solution environment variable through `environmentvariabledefinition` and `environmentvariablevalue`. Query only that definition/value; do not enumerate or expose unrelated configuration. Do not hardcode tenant URLs or app IDs.
+
+USER AND TASK
+The primary user is an HR Data Steward. They need to understand backlog health, filter the exception queue, select the highest-risk exception, review whether its remediation case is ready, and open the existing model-driven remediation-case form. All data is synthetic. Never imply that the page is an internal Siemens Energy product or contains real employee data.
+
+VISUAL DIRECTION
+Reproduce the approved "Readiness Rail" composition faithfully while adapting it to the Power Apps host:
+- Desktop-first responsive command-center layout.
+- Broad deep-petrol header (#093838) with large "DQ Command Center" title, subtitle "HR data quality operations | Industrial energy", last-updated timestamp, Refresh action, and Time range, Data domain, and Severity filters.
+- Technical-white canvas (#F6F7F7), graphite text (#0C2631), electric teal (#089591), restrained borders (#C1C6CF), amber warning (#F5A623), and critical red (#D8342A).
+- No gradients, glass effects, stock photography, logo, or generic grid of floating cards. Use crisp industrial geometry, restrained corner radii, strong typography, and visible focus states.
+- A horizontal Operational health rail above the queue showing total exceptions, critical, high, medium, overdue, and evidence-ready counts derived from Dataverse. Use compact bars or simple data marks only when based on real queried values.
+- A dominant Priority queue on the left, approximately 72 percent width. Include Exception Label or Business Key, Rule Name, Quality Dimension, Operational Severity, Owner Domain or current case owner, status, and SLA/due state. Sort critical and overdue work first. The selected row uses a pale teal fill and a thin teal signal.
+- A Case readiness rail on the right, approximately 28 percent width. Show the selected exception and linked case, then Ownership, Source correction, Evidence, Approval, and SLA stages. Each stage needs text plus icon/status so meaning never depends on color alone.
+- Primary action: "Open remediation case". Navigate to the existing model-driven DQ Remediation Case form for the selected case using `DQ Operational App URL`. If no linked case exists, use the supported `dataApi.createRow` method to create a complete DQ Remediation Case first: copy the immutable exception identifiers, bind the selected exception and initial `New` status, initialize `SLA Start At`, a weekday-based MVP `Due At`, and `Last Transition At`, retain Dataverse's invoking-user owner default, and only then open the created record by GUID. Disable the action while creation is in progress and surface a contained error if creation fails. Never create or modify the exception-reference row.
+- Footer status strip: "Synthetic demo data", Fabric snapshot date from the selected or newest exception, Dataverse connection health when available, and last refresh time.
+
+BEHAVIOR
+- Load records with dataApi.queryTable and typed Dataverse definitions.
+- Keep filtering and selected-row state in React state.
+- Refresh must requery data and preserve the current filters when possible.
+- The time-range, domain, and severity filters must combine.
+- Link exceptions to remediation cases through the existing Exception Reference relationship or Exception Instance ID, without fabricating matches.
+- Evidence readiness must be derived from the linked case and related DQ Case Evidence records. Do not mark evidence complete only because a file exists; respect Evidence Complete and Supports Closure.
+- Use the existing DQ Status records for visible status text.
+- Do not expose technical GUIDs, fingerprints, free text beyond what is necessary, or unrelated personal data.
+
+QUALITY
+- Include loading skeletons, empty state, permission/access error, query error with Retry, and disabled primary action when no case is selected.
+- Keyboard navigation, semantic headings, labelled controls, visible focus, adequate contrast, and responsive behavior are required.
+- Format dates using the current user's locale; do not hardcode a locale.
+- Keep components small and maintainable. Separate data querying/mapping, filters, metrics, queue, readiness rail, and navigation concerns. Avoid duplicated query logic and avoid any embedded credentials.
