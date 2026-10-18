@@ -66,15 +66,15 @@ These results are designed demonstration patterns, not findings about a real org
 
 ## Explore the implementation
 
-- [Architecture, boundaries, and repository map](docs/technical-overview.md)
-- [Data design and grain](docs/data-design.es.md)
-- [Quality rules and expected behavior](docs/quality-rules.es.md)
-- [Fabric implementation](docs/fabric-implementation.es.md)
-- [Dataverse design](docs/dataverse-design.es.md)
-- [Power Apps architecture](docs/generative-page-architecture.es.md)
-- [Power Automate design and controls](docs/phase-7-automation-design.es.md)
-- [Power BI design](docs/phase-8-bi-design.es.md)
-- [Optional video recording guide](docs/video-recording-guide.md)
+The implementation deliberately separates analytical work from operational work:
+
+1. Synthetic sources create a repeatable problem without using real workforce information.
+2. Fabric retains the full population and turns cross-system conflicts into explainable exceptions.
+3. Only prioritized exceptions move to Dataverse, preventing the full analytical population from becoming an operational queue.
+4. Power Apps supports human investigation; Power Automate coordinates asynchronous steps and approvals.
+5. Power BI reconciles analytical trends with case progress without treating administrative closure as proof of source correction.
+
+[Follow the technical narrative and its decisions](docs/technical-overview.md). The journey links to models, rules, automations, tests, and other reproducible artifacts when that additional detail is useful.
 
 The public Power BI parameters use safe example values. Replace them in Power BI Desktop with your own Fabric SQL endpoint, Lakehouse database, and Dataverse environment before refreshing.
 
