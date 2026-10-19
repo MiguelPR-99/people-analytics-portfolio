@@ -4,9 +4,10 @@ Caso de portafolio en Power BI para comprender la distribución de talento, los 
 
 [← Volver al portafolio](../../README.es.md) · [English](README.md)
 
-[![Reporte interactivo](https://img.shields.io/badge/Power%20BI-Reporte%20interactivo-F2C811?logo=powerbi&logoColor=black)](https://app.powerbi.com/view?r=eyJrIjoiMjM2NGFkZjYtOWNiNy00MWZhLWJjOGEtYzY5ZGZhZTk2N2E3IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9)
-![Estado](https://img.shields.io/badge/estado-terminado-14866d)
-![Datos](https://img.shields.io/badge/datos-100%25%20sint%C3%A9ticos-4c78a8)
+[![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?logo=powerbi&logoColor=black)](https://app.powerbi.com/view?r=eyJrIjoiMjM2NGFkZjYtOWNiNy00MWZhLWJjOGEtYzY5ZGZhZTk2N2E3IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9)
+![Power Query](https://img.shields.io/badge/Power%20Query-217346?logo=powerquery&logoColor=white)
+![DAX](https://img.shields.io/badge/DAX-F2C811?logo=powerbi&logoColor=black)
+![Excel](https://img.shields.io/badge/Excel-217346?logo=microsoftexcel&logoColor=white)
 
 > Demostración de portafolio con empleados y evaluaciones sintéticas. El reporte apoya conversaciones estructuradas; no automatiza decisiones laborales.
 

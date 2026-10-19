@@ -4,6 +4,14 @@ Caso end-to-end de Digital HR que convierte registros laborales dispersos en exc
 
 [← Volver al portafolio](../../README.es.md) · [English](README.md)
 
+![Microsoft Fabric](https://img.shields.io/badge/Microsoft%20Fabric-5B5FC7?logo=microsoft&logoColor=white)
+![Dataverse](https://img.shields.io/badge/Dataverse-088142?logo=microsoftdataverse&logoColor=white)
+![Power Apps](https://img.shields.io/badge/Power%20Apps-742774?logo=powerapps&logoColor=white)
+![Power Automate](https://img.shields.io/badge/Power%20Automate-0066FF?logo=powerautomate&logoColor=white)
+![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?logo=powerbi&logoColor=black)
+![Python / PySpark](https://img.shields.io/badge/Python%20%2F%20PySpark-3776AB?logo=python&logoColor=white)
+![SQL](https://img.shields.io/badge/SQL-CC2927?logo=microsoftsqlserver&logoColor=white)
+
 > Proyecto independiente de portafolio. No es un sistema oficial ni está afiliado o respaldado por Siemens Energy. Los registros laborales, resultados y escenarios son sintéticos. El autor puede aparecer únicamente como propietario de registros creados en el entorno de demostración.
 
 ## Resumen ejecutivo

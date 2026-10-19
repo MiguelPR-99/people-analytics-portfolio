@@ -4,9 +4,10 @@ Power BI portfolio case for understanding talent distribution, year-over-year mo
 
 [← Back to portfolio](../../README.md) · [Español](README.es.md)
 
-[![Live report](https://img.shields.io/badge/Power%20BI-Live%20Report-F2C811?logo=powerbi&logoColor=black)](https://app.powerbi.com/view?r=eyJrIjoiMjM2NGFkZjYtOWNiNy00MWZhLWJjOGEtYzY5ZGZhZTk2N2E3IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9)
-![Status](https://img.shields.io/badge/status-completed-14866d)
-![Data](https://img.shields.io/badge/data-100%25%20synthetic-4c78a8)
+[![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?logo=powerbi&logoColor=black)](https://app.powerbi.com/view?r=eyJrIjoiMjM2NGFkZjYtOWNiNy00MWZhLWJjOGEtYzY5ZGZhZTk2N2E3IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9)
+![Power Query](https://img.shields.io/badge/Power%20Query-217346?logo=powerquery&logoColor=white)
+![DAX](https://img.shields.io/badge/DAX-F2C811?logo=powerbi&logoColor=black)
+![Excel](https://img.shields.io/badge/Excel-217346?logo=microsoftexcel&logoColor=white)
 
 > Portfolio demonstration with synthetic employees and reviews. The report supports structured discussion; it does not automate employment decisions.
 

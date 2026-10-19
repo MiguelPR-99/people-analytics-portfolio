@@ -4,9 +4,10 @@ Caso de portafolio en Power BI para monitorear demanda, niveles de servicio, bac
 
 [← Volver al portafolio](../../README.es.md) · [English](README.md)
 
-[![Reporte interactivo](https://img.shields.io/badge/Power%20BI-Reporte%20interactivo-F2C811?logo=powerbi&logoColor=black)](https://app.powerbi.com/view?r=eyJrIjoiMjU5MDEzODEtMDBkMi00MmUzLTlhNTgtMmQ4N2E1NDkyZDM2IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9)
-![Estado](https://img.shields.io/badge/estado-terminado-14866d)
-![Datos](https://img.shields.io/badge/datos-100%25%20sint%C3%A9ticos-4c78a8)
+[![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?logo=powerbi&logoColor=black)](https://app.powerbi.com/view?r=eyJrIjoiMjU5MDEzODEtMDBkMi00MmUzLTlhNTgtMmQ4N2E1NDkyZDM2IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9)
+![Power Query](https://img.shields.io/badge/Power%20Query-217346?logo=powerquery&logoColor=white)
+![DAX](https://img.shields.io/badge/DAX-F2C811?logo=powerbi&logoColor=black)
+![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
 
 > Proyecto independiente. El lenguaje visual se inspira en elementos públicos de la marca Siemens Energy, pero no existe afiliación ni respaldo de Siemens Energy.
 
