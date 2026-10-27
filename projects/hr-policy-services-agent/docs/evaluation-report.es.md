@@ -1,59 +1,59 @@
-# Informe de evaluación
+# Evaluación del agente
 
-[← Volver al caso](../README.es.md) · [English](evaluation-report.md)
+[← Caso principal](../README.md) · [English](evaluation-report.en.md)
 
-## Objetivo
+La evaluación revisa si el agente responde a preguntas sobre las políticas, reconoce cuando falta información y respeta las instrucciones de privacidad e idioma. El conjunto final contiene quince preguntas de respuesta única. La conversación para crear un ticket se muestra por separado en la demostración.
 
-Comprobar que el agente responde con evidencia cuando corresponde, se abstiene cuando no dispone de ella, protege información restringida, utiliza el idioma solicitado y mantiene la revisión humana en asuntos sensibles.
+## Qué se evaluó
 
-## Diseño
+Las preguntas cubren vacaciones, beneficios, onboarding, documentos de RH, información no incluida en las fuentes, datos personales restringidos, asuntos sensibles y respuestas en español e inglés.
 
-- Tipo: respuesta única.
-- Casos: 15.
-- Métodos: calidad general y coincidencia de significado.
-- Umbral de coincidencia: 50.
-- Perfil: usuario autenticado con las conexiones requeridas.
-- Fuentes: cuatro PDF sintéticos cargados directamente.
+Se utilizó la evaluación integrada de Copilot Studio con un usuario autenticado y cuatro PDF sintéticos cargados directamente. Se aplicaron dos métodos:
 
-Los casos incluyen vacaciones, beneficios, onboarding, documentos, falta de evidencia, privacidad, asuntos sensibles y preguntas en español e inglés.
+- **Calidad de la respuesta:** el evaluador de IA califica la respuesta según sus criterios.
+- **Coincidencia de significado:** compara la respuesta con el resultado esperado. El umbral configurado fue 50.
+
+[Preguntas y respuestas esperadas](../evaluation/test-cases.csv) · [Exportación de resultados](../evaluation/final-results.csv)
 
 ## Resultado final
 
-| Método | Aprobados | Resultado |
-|---|---:|---:|
-| Calidad general | 12 de 15 | 80% |
-| Coincidencia de significado | 15 de 15 | 100% |
+| Método | Preguntas aprobadas | Cómo interpretarlo |
+|---|---:|---|
+| Calidad de la respuesta | 12 de 15 (80%) | Tres respuestas fueron clasificadas como “sin responder”. |
+| Coincidencia de significado | 15 de 15 (100% del conjunto) | Todas aprobaron el criterio configurado frente a la respuesta esperada. |
 
-## Interpretación de los tres fallos de calidad
+El 100% corresponde a la proporción de preguntas aprobadas en este conjunto. No significa que las respuestas fueran idénticas a las esperadas ni que el agente tenga un 100% de precisión ante cualquier consulta.
 
-El evaluador de calidad clasificó tres respuestas como “sin responder” porque el agente se negó a proporcionar una respuesta directa:
+## Por qué tres respuestas no aprobaron el primer método
 
-1. Política de trabajo remoto no incluida en las fuentes.
-2. Salario, evaluación de desempeño e información médica individual.
-3. Determinación individual de permisos legales o elegibilidad médica específica de un país.
+El evaluador clasificó como “sin responder” las respuestas a estas solicitudes:
 
-Estas negativas son el resultado esperado. Las tres aprobaron la coincidencia de significado porque respetaron la respuesta segura definida en el conjunto de pruebas.
+1. Una política de trabajo remoto que no estaba incluida en las fuentes.
+2. El salario, desempeño e información médica de una persona.
+3. Una determinación individual sobre permisos legales o elegibilidad médica de un país.
 
-Por este motivo, el 80% no representa tres errores factuales. Representa una limitación del evaluador general al calificar respuestas que deben abstenerse por diseño.
+En esos casos se esperaba que el agente no proporcionara la información solicitada. Las tres respuestas aprobaron la coincidencia de significado porque se ajustaron a ese resultado esperado. El 80% no se interpreta aquí como tres errores factuales; los métodos están valorando aspectos distintos.
 
-## Evolución de la prueba
+## Cambios durante la evaluación
 
-| Ejecución | Calidad | Coincidencia | Observación |
+| Ejecución documentada | Calidad | Coincidencia | Cambio u observación |
 |---|---:|---:|---|
-| Inicial | 33% | — | Una fuente de OneDrive solicitaba conexión durante el lote |
-| Después de configurar la conexión | 27% | 20% | El problema persistió en la evaluación automática |
-| Después de eliminar la fuente duplicada | 80% | 87% | La recuperación de los PDF funcionó |
-| Regla bilingüe reforzada | 80% | 93% | Un caso inglés seguía respondiendo en español durante el lote |
-| Caso de idioma explícito | 80% | 100% | Resultado final |
+| Inicial | 33% | — | Una fuente de OneDrive solicitaba conexión durante el lote. |
+| Después de configurar la conexión | 27% | 20% | La solicitud de conexión persistió en la evaluación automática. |
+| Después de retirar la fuente duplicada | 80% | 87% | La búsqueda pudo utilizar los PDF cargados directamente. |
+| Instrucciones de idioma reforzadas | 80% | 93% | Una pregunta en inglés seguía recibiendo respuesta en español. |
+| Pregunta de idioma explícito | 80% | 100% | Se pidió responder completamente en inglés. |
 
-## Limitaciones
+El historial incluye cambios tanto en la configuración y las instrucciones como en una pregunta. Por eso, la diferencia entre 93% y 100% no se presenta como una mejora del agente medida con un conjunto idéntico.
 
-- La evaluación integrada utiliza calificadores de IA; el resultado de calidad requiere interpretación humana en casos de negativa segura.
-- La demostración usa políticas y registros sintéticos y no mide precisión sobre políticas reales.
-- El archivo exportado conserva el detalle completo para auditoría. La primera respuesta aparece duplicada en el texto exportado, aunque ambos métodos la calificaron como aprobada.
-- La evaluación no sustituye pruebas de seguridad, cumplimiento o rendimiento necesarias para producción.
+El CSV de preguntas conserva ahora la versión exacta de las quince preguntas y respuestas esperadas que aparecen en la exportación final, incluida la instrucción de idioma de la pregunta 14. Los resultados exportados se mantienen sin cambios.
 
-## Archivos
+## Qué demuestra y qué queda fuera
 
-- [Casos de prueba](../evaluation/test-cases.csv)
-- [Resultados finales](../evaluation/final-results.csv)
+Estas pruebas aportan evidencia sobre las respuestas a las quince preguntas publicadas. La demostración muestra, además, un recorrido de consulta, confirmación y creación de ticket. Las quince preguntas no son quince pruebas completas de ese flujo.
+
+Los calificadores de IA requieren interpretación, especialmente cuando se espera que el agente se abstenga. La primera respuesta aparece duplicada en el texto de la exportación; ambos métodos la clasificaron como aprobada.
+
+El escenario utiliza políticas y datos sintéticos. No mide el comportamiento ante cualquier política real ni demuestra ahorro de tiempo en una operación. Tampoco sustituye pruebas adicionales de conversaciones, seguridad o rendimiento antes de usar la solución en producción.
+
+[Ver la demostración](../README.md#demostración-end-to-end) · [Consultar la arquitectura](architecture.md)

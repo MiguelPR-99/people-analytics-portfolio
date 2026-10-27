@@ -18,7 +18,7 @@ A Digital HR case connecting workforce-data inconsistency detection with investi
 
 ### Project 2 — HR Policy & Services Agent
 
-A bilingual HR self-service agent that answers with evidence, cites policy sources, detects knowledge gaps, and creates synthetic service requests with confirmation and safe human escalation.
+An HR self-service agent for policy questions and follow-up requests. It responds in English or Spanish and asks for confirmation before creating a ticket.
 
 [Explore the full case study](projects/hr-policy-services-agent/README.en.md) · [Watch the end-to-end demonstration](projects/hr-policy-services-agent/README.en.md#end-to-end-demonstration)
 

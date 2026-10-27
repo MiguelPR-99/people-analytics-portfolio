@@ -18,7 +18,7 @@ Herramienta para detectar problemas en los datos de personal, gestionar su revis
 
 ### Proyecto 2 — HR Policy & Services Agent
 
-Agente bilingüe de autoservicio de RH que responde con evidencia, cita políticas, detecta vacíos de información y crea solicitudes sintéticas con confirmación y escalación humana segura.
+Agente de autoservicio de RH para consultar políticas y crear solicitudes de seguimiento. Responde en español o inglés y pide confirmación antes de registrar un ticket.
 
 [Explorar el caso completo](projects/hr-policy-services-agent/README.md) · [Ver demostración end-to-end](projects/hr-policy-services-agent/README.md#demostración-end-to-end)
 

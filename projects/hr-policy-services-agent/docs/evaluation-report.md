@@ -1,59 +1,59 @@
-# Evaluation report
+# Evaluación del agente
 
-[← Back to case study](../README.md) · [Español](evaluation-report.es.md)
+[← Caso principal](../README.md) · [English](evaluation-report.en.md)
 
-## Objective
+La evaluación revisa si el agente responde a preguntas sobre las políticas, reconoce cuando falta información y respeta las instrucciones de privacidad e idioma. El conjunto final contiene quince preguntas de respuesta única. La conversación para crear un ticket se muestra por separado en la demostración.
 
-Verify that the agent answers with evidence when appropriate, abstains when evidence is unavailable, protects restricted information, follows the requested language, and retains human review for sensitive matters.
+## Qué se evaluó
 
-## Design
+Las preguntas cubren vacaciones, beneficios, onboarding, documentos de RH, información no incluida en las fuentes, datos personales restringidos, asuntos sensibles y respuestas en español e inglés.
 
-- Type: single response.
-- Test cases: 15.
-- Methods: general quality and semantic similarity.
-- Similarity passing score: 50.
-- Profile: authenticated user with required connections.
-- Sources: four directly uploaded synthetic PDFs.
+Se utilizó la evaluación integrada de Copilot Studio con un usuario autenticado y cuatro PDF sintéticos cargados directamente. Se aplicaron dos métodos:
 
-Cases cover leave, benefits, onboarding, documents, missing evidence, privacy, sensitive matters, and questions in Spanish and English.
+- **Calidad de la respuesta:** el evaluador de IA califica la respuesta según sus criterios.
+- **Coincidencia de significado:** compara la respuesta con el resultado esperado. El umbral configurado fue 50.
 
-## Final result
+[Preguntas y respuestas esperadas](../evaluation/test-cases.csv) · [Exportación de resultados](../evaluation/final-results.csv)
 
-| Method | Passed | Result |
-|---|---:|---:|
-| General quality | 12 of 15 | 80% |
-| Semantic similarity | 15 of 15 | 100% |
+## Resultado final
 
-## Interpretation of the three quality failures
+| Método | Preguntas aprobadas | Cómo interpretarlo |
+|---|---:|---|
+| Calidad de la respuesta | 12 de 15 (80%) | Tres respuestas fueron clasificadas como “sin responder”. |
+| Coincidencia de significado | 15 de 15 (100% del conjunto) | Todas aprobaron el criterio configurado frente a la respuesta esperada. |
 
-The general-quality evaluator classified three responses as “unanswered” because the agent declined to provide a direct answer:
+El 100% corresponde a la proporción de preguntas aprobadas en este conjunto. No significa que las respuestas fueran idénticas a las esperadas ni que el agente tenga un 100% de precisión ante cualquier consulta.
 
-1. A remote-work policy not contained in the configured sources.
-2. Individual salary, performance-rating, and medical information.
-3. An individual country-specific statutory-leave or medical-eligibility determination.
+## Por qué tres respuestas no aprobaron el primer método
 
-These refusals are expected behavior. All three passed semantic similarity because they matched the safe response defined in the test set.
+El evaluador clasificó como “sin responder” las respuestas a estas solicitudes:
 
-The 80% score therefore does not represent three factual errors. It reflects a limitation of the general evaluator when grading responses that are required to abstain by design.
+1. Una política de trabajo remoto que no estaba incluida en las fuentes.
+2. El salario, desempeño e información médica de una persona.
+3. Una determinación individual sobre permisos legales o elegibilidad médica de un país.
 
-## Test evolution
+En esos casos se esperaba que el agente no proporcionara la información solicitada. Las tres respuestas aprobaron la coincidencia de significado porque se ajustaron a ese resultado esperado. El 80% no se interpreta aquí como tres errores factuales; los métodos están valorando aspectos distintos.
 
-| Run | Quality | Similarity | Observation |
+## Cambios durante la evaluación
+
+| Ejecución documentada | Calidad | Coincidencia | Cambio u observación |
 |---|---:|---:|---|
-| Initial | 33% | — | A OneDrive source requested a connection during the batch |
-| After configuring the connection | 27% | 20% | The automated evaluation still showed the prompt |
-| After removing the duplicate source | 80% | 87% | Direct-PDF retrieval worked |
-| Reinforced bilingual rule | 80% | 93% | One English case still answered in Spanish during the batch |
-| Explicit language criterion | 80% | 100% | Final result |
+| Inicial | 33% | — | Una fuente de OneDrive solicitaba conexión durante el lote. |
+| Después de configurar la conexión | 27% | 20% | La solicitud de conexión persistió en la evaluación automática. |
+| Después de retirar la fuente duplicada | 80% | 87% | La búsqueda pudo utilizar los PDF cargados directamente. |
+| Instrucciones de idioma reforzadas | 80% | 93% | Una pregunta en inglés seguía recibiendo respuesta en español. |
+| Pregunta de idioma explícito | 80% | 100% | Se pidió responder completamente en inglés. |
 
-## Limitations
+El historial incluye cambios tanto en la configuración y las instrucciones como en una pregunta. Por eso, la diferencia entre 93% y 100% no se presenta como una mejora del agente medida con un conjunto idéntico.
 
-- Integrated evaluation uses AI graders; safe-refusal quality results require human interpretation.
-- The demonstration uses synthetic policies and records and does not measure accuracy against real company policies.
-- The exported file retains full detail for audit. Its first response is duplicated in the exported text, although both methods scored it as passed.
-- Evaluation does not replace the security, compliance, and performance testing required for production.
+El CSV de preguntas conserva ahora la versión exacta de las quince preguntas y respuestas esperadas que aparecen en la exportación final, incluida la instrucción de idioma de la pregunta 14. Los resultados exportados se mantienen sin cambios.
 
-## Files
+## Qué demuestra y qué queda fuera
 
-- [Test cases](../evaluation/test-cases.csv)
-- [Final results](../evaluation/final-results.csv)
+Estas pruebas aportan evidencia sobre las respuestas a las quince preguntas publicadas. La demostración muestra, además, un recorrido de consulta, confirmación y creación de ticket. Las quince preguntas no son quince pruebas completas de ese flujo.
+
+Los calificadores de IA requieren interpretación, especialmente cuando se espera que el agente se abstenga. La primera respuesta aparece duplicada en el texto de la exportación; ambos métodos la clasificaron como aprobada.
+
+El escenario utiliza políticas y datos sintéticos. No mide el comportamiento ante cualquier política real ni demuestra ahorro de tiempo en una operación. Tampoco sustituye pruebas adicionales de conversaciones, seguridad o rendimiento antes de usar la solución en producción.
+
+[Ver la demostración](../README.md#demostración-end-to-end) · [Consultar la arquitectura](architecture.md)

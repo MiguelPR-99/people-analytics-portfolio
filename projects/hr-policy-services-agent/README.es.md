@@ -1,6 +1,6 @@
 # Proyecto 2: HR Policy & Services Agent
 
-Caso de Digital HR desarrollado con Microsoft Copilot Studio y Power Automate para responder consultas de políticas con evidencia y convertir solicitudes que requieren seguimiento en tickets sintéticos de HR Services.
+Un agente de autoservicio de RH para consultar políticas y crear tickets cuando se necesita seguimiento.
 
 [← Volver al portafolio](../../README.md) · [English](README.en.md)
 
@@ -9,131 +9,46 @@ Caso de Digital HR desarrollado con Microsoft Copilot Studio y Power Automate pa
 ![Microsoft Lists](https://img.shields.io/badge/Microsoft%20Lists-0078D4?logo=microsoftlists&logoColor=white)
 ![Microsoft 365](https://img.shields.io/badge/Microsoft%20365-D83B01?logo=microsoftoffice&logoColor=white)
 
-> Proyecto independiente de portafolio. No es un sistema oficial ni está afiliado o respaldado por Siemens Energy. Las políticas, personas, solicitudes y resultados son sintéticos.
+> Políticas, personas y solicitudes sintéticas. Proyecto independiente, sin afiliación ni respaldo de Siemens Energy.
 
-## Resumen ejecutivo
+## El problema
 
-El agente cubre dos necesidades frecuentes de HR Services:
+Una persona quiere saber cómo registrar a un dependiente en sus beneficios. Puede encontrar la respuesta en una política, pero quizá también necesite abrir una solicitud y saber qué sigue.
 
-1. Responder preguntas sobre vacaciones, beneficios, onboarding y documentos de RH con citas verificables.
-2. Crear una solicitud de servicio cuando el usuario necesita seguimiento humano, sin recopilar información sensible innecesaria.
-
-La solución combina búsqueda sobre documentos configurados, instrucciones de uso responsable, un flujo de Power Automate y Microsoft Lists. Antes de crear un ticket, muestra un resumen y exige una confirmación explícita.
+Desarrollé este proyecto para conectar ambos pasos: consultar la información disponible y crear un ticket con los datos necesarios, después de que el usuario lo confirme.
 
 ## Demostración end-to-end
 
-Este recorrido de un minuto muestra la experiencia completa: una consulta sobre beneficios se responde con evidencia recuperada; después, el agente reúne únicamente datos sintéticos, presenta un resumen, espera una confirmación explícita y crea la solicitud mediante Power Automate. El resultado incluye folio, servicio, estado y fechas objetivo, y queda registrado en Microsoft Lists.
+El recorrido muestra una consulta sobre beneficios, la respuesta con su fuente y la creación de una solicitud. El agente presenta un resumen, espera la confirmación y devuelve el folio que generó Power Automate. El registro queda guardado en Microsoft Lists.
 
-![Demostración end-to-end del HR Policy & Services Agent](assets/demo/hr-policy-services-agent-demo.gif)
+![Consulta y creación de un ticket con el HR Policy & Services Agent](assets/demo/hr-policy-services-agent-demo.gif)
 
-[Abrir la demostración en MP4](assets/demo/hr-policy-services-agent-demo.mp4)
-
-La grabación aporta cuatro evidencias observables:
-
-- **Fundamentación:** recupera `EPS-SYN-POL-002` y conserva la sección utilizada.
-- **Control de la acción:** presenta los datos y espera una confirmación en un mensaje posterior.
-- **Ejecución:** Power Automate devuelve una salida estructurada con folio, servicio, estado y SLA.
-- **Trazabilidad:** la nueva solicitud aparece en Microsoft Lists.
-
-Todos los nombres, correos y registros mostrados son sintéticos.
-
-## Qué resuelve
-
-- Reduce la búsqueda manual de políticas y conserva la fuente utilizada.
-- Reconoce cuando la evidencia disponible no permite responder con certeza.
-- Mantiene la conversación en español o inglés según el mensaje del usuario.
-- Rechaza solicitudes de salario, desempeño o información médica individual.
-- Dirige asuntos sensibles a revisión humana mediante `ESC-01`.
-- Valida el servicio y crea un ticket con prioridad, cola y fechas objetivo.
-
-## Evidencia complementaria
-
-Las siguientes capturas permiten revisar con mayor detalle los controles representados en la demostración.
-
-### Respuesta fundamentada
-
-El agente recupera el documento pertinente, responde la pregunta y muestra la sección utilizada.
-
-![Respuesta fundamentada con citas](assets/screenshots/grounded-policy-answer.png)
-
-### Protección de información restringida
-
-Las solicitudes sobre salario, evaluación de desempeño o información médica individual se rechazan sin intentar recuperar ni inferir esos datos.
-
-![Protección de información restringida](assets/screenshots/privacy-guardrail.png)
+[Ver el video en MP4](assets/demo/hr-policy-services-agent-demo.mp4)
 
 ## Cómo funciona
 
-```mermaid
-flowchart LR
-    U[Usuario] --> A[Agente en Copilot Studio]
-    A --> K[Políticas sintéticas en PDF]
-    K --> A
-    A -->|Respuesta con cita| U
-    A -->|Seguimiento requerido| C[Resumen y confirmación]
-    C -->|Confirmación explícita| F[Power Automate]
-    F --> S[Catálogo de servicios]
-    F --> R[HR Service Requests]
-    R --> A
-    A -->|Folio y SLA| U
-```
+1. **Copilot Studio consulta cuatro PDF sintéticos.** Responde indicando la política y la sección utilizadas. Si no encuentra información suficiente, lo reconoce y ofrece seguimiento por parte de RH.
+2. **El agente prepara la solicitud.** Recoge un resumen breve y datos de contacto sintéticos, muestra lo que va a registrar y espera una confirmación en un mensaje posterior.
+3. **Power Automate crea el ticket.** Valida el servicio contra el catálogo, calcula las fechas de atención y guarda la solicitud en Microsoft Lists. El agente muestra el folio y los datos devueltos por el flujo.
 
-1. Copilot Studio interpreta la pregunta y consulta cuatro políticas sintéticas.
-2. Si existe evidencia suficiente, responde con documento y sección.
-3. Si falta evidencia o el caso requiere una persona, ofrece crear una solicitud.
-4. El agente recoge únicamente datos sintéticos y un resumen no sensible.
-5. Después de la confirmación, Power Automate valida el código, calcula fechas y registra el ticket.
+## Decisiones importantes
 
-[Consultar la arquitectura y los controles](docs/architecture.es.md)
+Separé el permiso para que RH contacte al usuario de la confirmación para crear el ticket. Si el usuario cambia los datos, el agente debe mostrar un nuevo resumen y volver a pedir confirmación.
 
-## Evaluación
+También configuré instrucciones para rechazar consultas sobre datos personales restringidos y ofrecer seguimiento con una persona de RH cuando el tema lo requiere. Los ejemplos publicados permiten revisar ese comportamiento.
 
-El conjunto final contiene 15 escenarios de políticas, falta de evidencia, privacidad, escalación e idioma.
+[Ver una respuesta con su fuente](assets/screenshots/grounded-policy-answer.png) · [Ver un ejemplo de rechazo de información restringida](assets/screenshots/privacy-guardrail.png)
 
-| Resultado | Valor |
-|---|---:|
-| Casos ejecutados | 15/15 |
-| Calidad general | 12/15 · 80% |
-| Coincidencia de significado | 15/15 · 100% |
-| Preguntas bilingües | Aprobadas |
+## Desarrollo y pruebas
 
-Los tres casos no aprobados por el evaluador de calidad son negativas intencionales: política remota sin evidencia, datos personales restringidos y determinación legal o médica individual. Los tres coincidieron con la respuesta segura esperada.
+Evalué quince preguntas sobre políticas, falta de información, privacidad e idioma. Esas pruebas revisan respuestas individuales; la demostración muestra por separado la conversación y la creación del ticket.
 
-[Revisar metodología, resultados y limitaciones](docs/evaluation-report.es.md)
+Durante la evaluación, una fuente duplicada de OneDrive pedía una conexión adicional. Al retirarla y conservar los PDF cargados directamente, el agente pudo consultar las políticas durante las pruebas. También ajusté las instrucciones de idioma y la pregunta bilingüe del conjunto de pruebas.
 
-## Iteraciones principales
+Aprendí a configurar las fuentes de conocimiento, establecer cuándo puede actuar el agente e interpretar los resultados de las pruebas.
 
-- Una fuente duplicada de OneDrive provocaba solicitudes de conexión durante la evaluación automática. Se eliminó y se conservaron los PDF cargados directamente.
-- La regla de idioma se colocó al inicio de las instrucciones y se añadió una comprobación final de idioma.
-- El conjunto de pruebas hizo explícito el idioma esperado en el caso bilingüe. La coincidencia de significado pasó de 93% a 100%.
+## Más detalles
 
-## Recursos
-
-- [Demostración animada](assets/demo/hr-policy-services-agent-demo.gif)
-- [Demostración en video](assets/demo/hr-policy-services-agent-demo.mp4)
-- [Instrucciones finales del agente](prompts/agent-instructions.txt)
-- [Casos de prueba](evaluation/test-cases.csv)
-- [Resultados completos de la evaluación](evaluation/final-results.csv)
-- [Documentos sintéticos de conocimiento](knowledge/)
-- [Arquitectura y controles](docs/architecture.es.md)
-- [Informe de evaluación](docs/evaluation-report.es.md)
-
-## Herramientas
-
-- Microsoft Copilot Studio
-- Power Automate
-- Microsoft Lists
-- Microsoft 365
-- Evaluación integrada de Copilot Studio
-
-## Uso responsable
-
-- El agente no accede a datos reales de empleados ni a sistemas internos de una empresa.
-- Los correos aceptados para la demostración deben usar `@example.com`.
-- No solicita, muestra ni infiere salario, desempeño individual o información médica.
-- Los casos sensibles requieren revisión humana; el agente no investiga ni toma decisiones laborales.
-- La creación de tickets exige confirmación explícita y utiliza únicamente datos sintéticos.
-
-## Autor
+[Arquitectura y controles](docs/architecture.md) · [Método y resultados de evaluación](docs/evaluation-report.md) · [Instrucciones del agente](prompts/agent-instructions.txt)
 
 Miguel — [Perfil de GitHub](https://github.com/MiguelPR-99)
