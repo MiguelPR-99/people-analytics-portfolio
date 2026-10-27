@@ -1,89 +1,97 @@
-# Recorrido técnico del proyecto 3
+# Cómo está construido el proyecto 3
 
 [← Caso principal](../README.md) · [English](technical-overview.en.md)
 
-El recorrido sigue una inconsistencia desde los archivos de origen hasta su investigación y seguimiento. Fabric conserva el análisis completo; Dataverse registra el trabajo sobre una muestra de excepciones. Power Apps, Power Automate y Power BI utilizan esas dos perspectivas con responsabilidades distintas.
+El proyecto sigue el recorrido de un problema de datos: detectarlo, decidir si requiere un caso, investigarlo y consultar el resultado. Fabric conserva el análisis completo. Dataverse guarda los casos de revisión, y Power Apps y Power Automate permiten gestionarlos. Power BI muestra lo que ocurre en ambos lados.
 
 ```mermaid
 flowchart LR
-    S["Fuentes sintéticas"] --> F["Fabric: preparación y reglas"]
-    F -->|"Muestra controlada"| D["Dataverse: referencias y casos"]
-    A["Power Apps: investigación"] <-->|"Consulta y registro"| D
+    S["Datos sintéticos de RH"] --> F["Fabric: preparación y reglas"]
+    F -->|"Importación de una selección"| D["Dataverse: excepciones y casos"]
+    A["Power Apps: revisión del caso"] <-->|"Consulta y registro"| D
     D -->|"Cambios en el caso"| P["Power Automate: avisos y aprobación"]
-    P -->|"Resultado y actividad"| D
-    F --> B["Power BI: calidad y seguimiento"]
+    P -->|"Resultado e historial"| D
+    F --> B["Power BI: dashboard"]
     D --> B
 ```
 
-## 1. Construir un escenario repetible
+## 1. Preparar datos que permitan probar el proceso
 
-Tres fuentes representan el registro de empleados, los eventos de ciclo de vida y las referencias organizacionales. El generador utiliza una semilla fija e introduce anomalías conocidas, de modo que el escenario se puede regenerar y contrastar con las reglas.
+El generador crea tres fuentes: registros de empleados, movimientos de personal y un catálogo de estructura organizacional. Utiliza una semilla fija e introduce errores conocidos para poder repetir el escenario y comprobar qué detecta cada regla.
 
-Por ejemplo, la regla DQ-007 compara el estado del empleado con los eventos completados que ya deberían estar reflejados en él. Permite dos días hábiles de sincronización antes de señalar una discrepancia. Así distingue una demora aceptada de un conflicto que necesita revisión.
+Por ejemplo, DQ-007 compara el registro del empleado con sus movimientos ya completados. Si un cambio de puesto aún no aparece en el registro, la regla permite dos días hábiles para la sincronización. Sólo después de ese plazo señala la diferencia como un problema.
 
-[Diseño de datos](data-design.es.md) · [Reglas y tolerancias](quality-rules.es.md) · [Validación del generador](synthetic-data-validation.es.md)
+[Diseño de los datos](data-design.es.md) · [Reglas y tolerancias](quality-rules.es.md) · [Pruebas del generador](synthetic-data-validation.es.md)
 
-## 2. Preparar y evaluar los datos en Fabric
+## 2. Procesar y evaluar los datos en Fabric
 
-Bronze conserva los archivos originales. Silver normaliza tipos y estructura, y marca ambigüedades como claves duplicadas. Gold evalúa las ocho reglas y prepara las excepciones, la recurrencia y las vistas que consume Power BI.
+El lakehouse sigue las capas Bronze, Silver y Gold. Bronze conserva los archivos originales. Silver prepara los tipos y la estructura, sin ocultar problemas como claves duplicadas. Gold aplica las ocho reglas y genera los resultados que se consultan en Power BI.
 
-Mantener el historial permite revisar si un problema reaparece entre cortes, incluso cuando nunca se creó un caso para investigarlo. Los notebooks utilizan PySpark; las vistas SQL definen las salidas de consumo y la muestra de exportación.
+El historial permite saber si un problema vuelve a aparecer en otro snapshot, es decir, en otro corte de los datos. Ese análisis incluye todas las excepciones, aunque no se haya abierto un caso para revisarlas.
 
-[Implementación de Fabric](fabric-implementation.es.md) · [Notebooks](../notebooks/) · [Vistas SQL](../sql/)
+Los notebooks utilizan PySpark. Las vistas SQL exponen los resultados para Power BI y la selección de excepciones que se exporta a Dataverse.
 
-## 3. Seleccionar excepciones y registrar casos en Dataverse
+[Implementación en Fabric](fabric-implementation.es.md) · [Notebooks](../notebooks/) · [Vistas SQL](../sql/)
 
-Una excepción es el resultado de una regla fallida. Una referencia publicada conserva sus datos en Dataverse. Un caso es el registro operativo que se abre para investigarla. Esas tres entidades no representan el mismo volumen.
+## 3. Llevar una selección a Dataverse
 
-La carga de demostración selecciona ocho referencias, una por regla, mediante una consulta SQL y una importación. La muestra permite recorrer distintos tipos de problema; no representa un motor automático de priorización ni una integración continua con Fabric.
+Conviene distinguir tres registros: la excepción que detecta Fabric, su referencia importada a Dataverse y el caso que se crea para investigarla. Importar una excepción no abre automáticamente un caso.
 
-Dataverse conserva casos, responsables, actividades, evidencia y estados. Las claves alternativas evitan duplicar un caso para la misma instancia de excepción; las relaciones y la auditoría mantienen el vínculo con lo detectado. La referencia original permanece separada del registro editable de investigación.
+Para la demostración se eligieron ocho excepciones, una por regla, mediante una consulta SQL y una importación. Esto permite probar distintos problemas sin cargar todos los resultados del análisis en la app. La selección es parte de la demostración; no hay un motor automático de priorización ni una sincronización continua con Fabric.
 
-[Consulta de exportación](../sql/03_export_dataverse_demo_exceptions.sql) · [Modelo de Dataverse](dataverse-design.es.md) · [Verificación de datos y controles](phase-5-gate-review.es.md)
+Dataverse guarda el responsable, el estado, las actividades y la evidencia de cada caso. Una clave alternativa impide crear dos casos para la misma instancia de excepción. La referencia importada se conserva por separado, de modo que la investigación no sobrescriba el problema original.
 
-## 4. Investigar desde Power Apps
+[Consulta de exportación](../sql/03_export_dataverse_demo_exceptions.sql) · [Modelo de Dataverse](dataverse-design.es.md) · [Pruebas de los controles](phase-5-gate-review.es.md)
 
-El Command Center es una Generative Page con React y TypeScript. Consulta Dataverse mediante las API soportadas y permite filtrar excepciones, revisar contexto y crear o abrir el caso. La edición completa continúa en la aplicación basada en modelo.
+## 4. Revisar y documentar desde Power Apps
 
-Durante las pruebas, el botón inicial abría un formulario vacío cuyos campos técnicos obligatorios estaban bloqueados. La corrección mantuvo esas restricciones: ahora crea el caso con su referencia, estado inicial, responsable y marcas temporales antes de abrirlo por GUID. Una prueba de creación contra la aplicación publicada comprobó ese recorrido.
+El Command Center es una Generative Page desarrollada con React y TypeScript. Usa las API de Power Apps para consultar Dataverse y permite filtrar excepciones, ver su detalle y crear o abrir un caso. La edición completa se realiza en la model-driven app, que contiene los formularios y las vistas del caso.
 
-[Arquitectura de la interfaz](generative-page-architecture.es.md) · [Iteración y pruebas de Power Apps](phase-6-gate-review.es.md) · [Código de la aplicación](../power-apps/)
+La primera versión abría un formulario nuevo vacío. Como varios campos técnicos eran obligatorios y estaban bloqueados, no se podía completar el registro. La corrección consistió en crear primero el caso con la referencia de la excepción, el estado inicial, el responsable y las fechas necesarias. Después, la app abre ese registro por su GUID.
 
-## 5. Coordinar avisos y aprobaciones con Power Automate
+Una prueba con Playwright sobre la app publicada comprobó que el caso se creara antes de abrirse.
 
-Power Automate se ocupa de tareas que deben continuar aunque la pantalla se cierre: avisar de una asignación, validar una solicitud de aprobación, esperar la respuesta y registrar el resultado.
+[Arquitectura de Power Apps](generative-page-architecture.es.md) · [Corrección y pruebas de la app](phase-6-gate-review.es.md) · [Código](../power-apps/)
 
-Los flujos comprueban evidencia y condiciones antes de solicitar aprobación. Conservan identificadores para evitar ejecuciones duplicadas y registran errores o vencimientos de espera. Las decisiones quedan asociadas al caso en Dataverse.
+## 5. Continuar el proceso con Power Automate
 
-La verificación documenta aprobación, rechazo, exención y timeout. La reasignación entre dos usuarios no se probó porque el entorno tenía una sola identidad; los recordatorios periódicos de SLA quedan pendientes.
+Power Automate gestiona las tareas que no deberían depender de mantener una pantalla abierta: notificar al responsable, comprobar los requisitos de una aprobación, esperar la respuesta y registrar el resultado en Dataverse.
 
-[Diseño de los flujos](phase-7-automation-design.es.md) · [Resultados y límites de la verificación](phase-7-gate-review.es.md)
+Los flujos comprueban que exista la evidencia requerida y guardan identificadores para evitar repetir avisos o solicitudes. Si ocurre un error o se agota el tiempo de espera de una aprobación (timeout), lo registran en el historial del caso.
 
-## 6. Reunir calidad y seguimiento en Power BI
+Se probaron las rutas de aprobación, rechazo, exención (estado Waived) y timeout. La reasignación entre dos usuarios quedó sin probar porque el entorno sólo tenía una cuenta. Los recordatorios periódicos de SLA tampoco forman parte de esta versión.
 
-El modelo combina las vistas Gold de Fabric con las tablas operativas de Dataverse mediante Import. Esta elección permite actualizar y reconciliar ambas fuentes para el volumen de la demostración. El modelo y el reporte se conservan como archivos PBIP, TMDL y PBIR.
+[Diseño de los flujos](phase-7-automation-design.es.md) · [Pruebas y limitaciones](phase-7-gate-review.es.md)
 
-El reporte distingue el estado del caso de la confirmación de corrección del origen. Resolverlo o conceder una exención no demuestra que el próximo corte dejará de producir la excepción. La aplicación no escribe en un sistema real de RH.
+## 6. Consultar los resultados en Power BI
 
-En la captura publicada se observan seis cortes con 923 instancias de excepción, cinco casos creados y tres abiertos. Las instancias pueden incluir problemas que reaparecen entre cortes; no equivalen a 923 empleados ni a 923 casos distintos.
+Power BI combina las vistas Gold de Fabric con las tablas de Dataverse mediante el modo Import. Para el volumen de esta demostración, permite actualizar ambas fuentes y comprobar que los totales coincidan. El modelo y el reporte están versionados en formatos PBIP, TMDL y PBIR.
 
-El score final de 98.9% es la proporción ponderada de comprobaciones elegibles que aprobaron, con mayor peso para las de mayor severidad. No es el porcentaje de empleados sin errores. La variación de +0.7 puntos porcentuales pertenece al escenario sintético y no demuestra un efecto de las automatizaciones.
+El dashboard diferencia el cierre de un caso de la confirmación de que el dato se corrigió en el sistema de origen. Resolver un caso o aprobar una exención no demuestra que el error haya desaparecido. La aplicación no modifica un sistema real de RH.
 
-[Diseño y denominadores de Power BI](phase-8-bi-design.es.md) · [Reconciliación de resultados](phase-8-gate-review.es.md) · [Modelo y reporte](../power-bi/)
+La captura publicada muestra seis snapshots con 923 instancias de excepción, cinco casos creados y tres abiertos. Un mismo problema puede reaparecer en varios snapshots, por lo que esas 923 instancias no equivalen a 923 empleados ni a 923 casos distintos.
 
-## Desarrollo asistido por IA y pruebas
+El Data Quality Score de 98.9% se calcula con las comprobaciones que aprobaron respecto de las que correspondía evaluar, ponderadas por severidad. No significa que el 98.9% de los empleados tenga todos sus datos correctos. La mejora de 0.7 puntos porcentuales está diseñada en el escenario sintético; no es un resultado atribuible a las automatizaciones.
 
-Utilicé IA para apoyar la construcción, junto con MCP para operar el modelo semántico y herramientas de línea de comandos para generar y validar artefactos. El proyecto incorpora comprobación de tipos, pruebas de componentes, pruebas con Playwright y revisión visual. La IA forma parte del proceso de desarrollo; las reglas de calidad de esta solución son explícitas y deterministas.
+[Modelo de Power BI y definición de métricas](phase-8-bi-design.es.md) · [Comprobación de resultados](phase-8-gate-review.es.md) · [Modelo y reporte](../power-bi/)
 
-La evidencia distingue lo ejecutado en cada momento. Las fases 6 y 7 documentan pruebas contra la aplicación publicada y una creación controlada. La regresión local del 18 de octubre de 2026 no repitió las pruebas de navegador, la comparación visual ni la creación de registros.
+## Cómo utilicé IA y comprobé el trabajo
+
+Me apoyé en IA para desarrollar la solución. Utilicé MCP para trabajar con el modelo semántico y herramientas de línea de comandos para generar y validar los archivos del proyecto. Las comprobaciones incluyen typecheck, pruebas de componentes, pruebas con Playwright y revisión visual.
+
+La IA apoyó la construcción; la detección de errores utiliza las ocho reglas definidas en el proyecto. Cada una tiene condiciones explícitas que se pueden revisar y volver a ejecutar.
+
+Los informes indican qué se probó en cada fase. Las fases 6 y 7 documentan pruebas sobre la app publicada y una creación controlada de un caso. La regresión local del 18 de octubre de 2026 no repitió las pruebas en navegador, la comparación visual ni la creación de registros.
 
 [Evidencias y alcance de las pruebas](../evidence/phase-9/evidence-manifest.md)
 
-## Alcance y siguientes pasos
+## Qué haría falta para usarlo en una operación real
 
-La demostración utiliza datos sintéticos y un entorno de desarrollo. Antes de aplicarla a una operación real habría que definir criterios de selección con el equipo, integrar la corrección con los responsables de origen y revisar accesos, retención, carga incremental, rendimiento, costos y despliegue entre entornos. Las pruebas con distintos perfiles y usuarios reales también quedan pendientes.
+La solución se probó con datos sintéticos en un entorno de desarrollo. El siguiente paso sería acordar con el equipo qué problemas deben convertirse en casos y cómo confirmar las correcciones con los responsables de los sistemas de origen.
 
-## Referencias para reproducir o ampliar
+También habría que revisar permisos, conservación de datos, cargas incrementales, rendimiento y costos, además del despliegue entre entornos. Quedan pendientes las pruebas con distintos perfiles de acceso y con usuarios reales.
+
+## Archivos para reproducir o ampliar el proyecto
 
 [Diccionario de datos](data-dictionary.es.md) · [Operación de Power Platform](power-platform-maintenance.es.md) · [Plan de pruebas y publicación](phase-9-test-and-publication-plan.es.md)
 
@@ -94,4 +102,4 @@ python -m unittest discover -s scripts/tests -v
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify_phase9.ps1
 ```
 
-Antes de actualizar Power BI, sustituye los parámetros de ejemplo por tu endpoint SQL de Fabric, base del Lakehouse y entorno de Dataverse. Las credenciales y la configuración local no se incluyen en el repositorio.
+Para actualizar Power BI en tu entorno, sustituye los parámetros de ejemplo por el endpoint SQL de Fabric, la base del lakehouse y el entorno de Dataverse que correspondan. Las credenciales y la configuración local no están incluidas en el repositorio.

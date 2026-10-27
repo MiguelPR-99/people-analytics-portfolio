@@ -1,6 +1,6 @@
 # Portafolio de People Analytics y Digital HR
 
-Construyo productos de apoyo a decisiones que conectan procesos de Recursos Humanos, datos de la fuerza laboral y operación del negocio.
+Desarrollo herramientas para analizar datos de personal y mejorar los procesos de Recursos Humanos.
 
 Estoy construyendo este portafolio en torno a People Analytics, HR Data, HR Services, mejora de procesos e inteligencia artificial responsable.
 
@@ -10,7 +10,7 @@ Estoy construyendo este portafolio en torno a People Analytics, HR Data, HR Serv
 
 ### Proyecto 3 — HR Data Quality & Lifecycle Workbench
 
-Caso de Digital HR que conecta la detección de inconsistencias en datos laborales con su investigación y seguimiento mediante Fabric, Power Apps, Dataverse, Power Automate y Power BI.
+Herramienta para detectar problemas en los datos de personal, gestionar su revisión y consultar el avance de los casos. Combina Fabric, Power Apps, Dataverse, Power Automate y Power BI.
 
 [Explorar el caso completo](projects/hr-data-quality-lifecycle-workbench/README.md) · [Revisar la ruta técnica](projects/hr-data-quality-lifecycle-workbench/docs/technical-overview.md)
 
