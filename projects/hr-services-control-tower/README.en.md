@@ -1,116 +1,56 @@
 # Project 1: HR Services Control Tower
 
-Power BI portfolio case for monitoring demand, service levels, backlog, capacity, process quality, and employee experience in a simulated HR Services operation.
+A Power BI dashboard for reviewing HR requests and deciding where the team should focus its attention.
 
 [← Back to portfolio](../../README.en.md) · [Español](README.md)
 
-[![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?logo=powerbi&logoColor=black)](https://app.powerbi.com/view?r=eyJrIjoiMjU5MDEzODEtMDBkMi00MmUzLTlhNTgtMmQ4N2E1NDkyZDM2IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9)
+![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?logo=powerbi&logoColor=black)
 ![Power Query](https://img.shields.io/badge/Power%20Query-217346?logo=powerquery&logoColor=white)
 ![DAX](https://img.shields.io/badge/DAX-F2C811?logo=powerbi&logoColor=black)
 ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
 
-> Independent portfolio project. The visual language is inspired by public Siemens Energy brand cues, but the project is not affiliated with or endorsed by Siemens Energy.
+> Synthetic data and results. Independent project, not affiliated with or endorsed by Siemens Energy.
 
-## Live demo
+## The problem
 
-**[Open the interactive Power BI report](https://app.powerbi.com/view?r=eyJrIjoiMjU5MDEzODEtMDBkMi00MmUzLTlhNTgtMmQ4N2E1NDkyZDM2IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9)**
+An HR Services team receives requests about payroll, benefits, documents, and employee changes. To organize its work, it needs to know whether cases are being resolved as fast as they arrive and where pending work is accumulating.
 
-The public report contains only synthetic data.
+I developed this case using 9,000 synthetic requests to explore those questions alongside service times, capacity, and satisfaction.
 
-## What the project solves
+## View the project
 
-The report turns 9,000 synthetic HR service cases into four decision-oriented views. It helps answer:
+[Download the PBIX](power-bi/Project-1-HR-Services-Control-Tower.pbix?raw=true) · [How to open it in Power BI Desktop](docs/power-bi-fast-track.en.md)
 
-- Is demand being absorbed, or is backlog growing?
-- Which services explain SLA breaches?
-- Where are capacity and process delays occurring?
-- How do incomplete requests, transfers, and reopens relate to employee experience?
+You can review the screenshots on GitHub. The PBIX includes the report and the demonstration's imported data, allowing you to explore filters in Power BI Desktop. Reloading the CSV files requires updating source paths, as explained in the guide.
 
-## Report pages
+The executive view shows demand, pending cases, and compliance with service-level agreement (SLA) targets.
 
-### Executive Overview
+![HR Services Control Tower executive view](assets/screenshots/executive-overview.png)
 
-Demand, backlog, SLA, resolution time, and first-contact resolution.
+The walkthrough continues with [SLA and backlog](assets/screenshots/sla-backlog-analysis.png), [service capacity](assets/screenshots/operational-drivers.png), and [process and satisfaction](assets/screenshots/process-experience.png).
 
-![Executive Overview](assets/screenshots/executive-overview.png)
+## One result to explore
 
-### SLA & Backlog Analysis
+At the scenario cutoff, 503 of the 679 pending cases had exceeded their resolution target. The dashboard lets the reader review their distribution by service and explore waiting times, available capacity, and requests submitted with incomplete information.
 
-Overdue work, backlog age, service-level exposure, and monthly evolution.
+The patterns were designed in synthetic data. Proposed actions relate to that scenario; they are not improvements already implemented in an organization.
 
-![SLA and Backlog Analysis](assets/screenshots/sla-backlog-analysis.png)
+## How I built it
 
-### Operational Drivers
+1. **Python generates the scenario.** It creates cases, events, surveys, and capacity data, and calculates business-hour durations and consistency checks.
+2. **Power Query loads the processed CSV files.** It imports tables and sets data types. The published version does not use the raw files as input.
+3. **The model and DAX support the analysis.** They relate service data and calculate indicators under the report's filters.
 
-Scheduled hours, available capacity, capacity-loss causes, and weekly trends.
+## Decisions and learning
 
-![Operational Drivers](assets/screenshots/operational-drivers.png)
+I retained daily backlog snapshots—the cases still open at the end of each day—to study how work accumulates. I also distinguished creation and closure dates and which cases are eligible for each SLA calculation.
 
-### Process & Experience
+When comparing satisfaction, I included the number of survey responses in each group. This helps interpret small samples and present observed relationships without attributing causality.
 
-Waiting time, intake completeness, rework, CSAT, and low-rating risk.
+The project helped me connect data preparation with operational questions and check what each indicator measures before recommending an action.
 
-![Process and Experience](assets/screenshots/process-experience.png)
+## More details
 
-## Method in plain language
-
-1. A Python generator creates reproducible, fully synthetic case, event, survey, backlog, and capacity data.
-2. Power Query validates types and prepares the analytical tables.
-3. A star-oriented model connects shared dimensions—date, service, location, and team—to the fact tables.
-4. DAX measures calculate the KPIs under the filters selected in the report.
-5. Automated tests and direct source-data checks validate row counts, keys, business rules, and published findings.
-
-### HR Services terms
-
-| Term | Plain-language meaning |
-|---|---|
-| SLA | Agreed time target for the first response or final resolution |
-| Backlog | Cases that remain open at a point in time |
-| Overdue backlog | Open cases that already exceeded their resolution target |
-| FCR | Cases resolved during the first contact, without transfer or reopen |
-| Rework | Extra work caused by a transfer or reopening of a case |
-| CSAT | Average satisfaction score from 1 to 5 |
-| Capacity availability | Available service hours divided by scheduled hours |
-
-## Selected findings
-
-- The cutoff contains **679 open cases**; **503 (74.1%)** are overdue.
-- **Offboarding** has the lowest resolution-SLA compliance at **31.2%**.
-- Capacity availability is **86.6%**; absence represents **6.6%** of scheduled hours.
-- Request completeness ranges from **79.1% for Email** to **95.4% for Portal**.
-- Cases with no transfer or reopen average **4.03 CSAT**. Cases with both average **2.67**, but this last segment contains only **21 survey responses** and requires caution.
-
-These are designed patterns in synthetic data, not claims about a real organization.
-
-## Recommended actions
-
-1. Prioritize breached backlog in Offboarding and Onboarding.
-2. Standardize Email intake and guide employees toward the higher-completeness Portal flow.
-3. Monitor transferred and reopened cases as a quality queue and always interpret experience percentages with their sample size.
-
-## Files and documentation
-
-- [Power BI report](power-bi/Project-1-HR-Services-Control-Tower.pbix)
-- [Processed analytical tables](data/processed/)
-- [Raw synthetic exports](data/raw/)
-- [Data dictionary](docs/data-dictionary.es.md)
-- [Synthetic-data design](docs/synthetic-data-design.es.md)
-- [Power BI setup guide](docs/power-bi-fast-track.es.md)
-- [Power BI theme](assets/power-bi/siemens-energy-inspired-theme.json)
-
-To regenerate the data:
-
-```powershell
-.\scripts\run_generator.ps1
-```
-
-## Responsible use
-
-- All people, cases, locations, dates, and survey responses are synthetic.
-- The dashboard evaluates service processes, not individual employee performance.
-- Small samples can produce unstable percentages; survey counts are included in the relevant tooltip.
-- Designed associations demonstrate analysis and do not establish causality.
-
-## Author
+[Methodology and model](docs/technical-overview.en.md) · [Metric dictionary](docs/metric-dictionary.en.md) · [Formula and value checks](evidence/model-verification.json)
 
 Miguel — [GitHub profile](https://github.com/MiguelPR-99)

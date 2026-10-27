@@ -26,9 +26,9 @@ An HR self-service agent for policy questions and follow-up requests. It respond
 
 ### Project 1 — HR Services Control Tower
 
-An end-to-end Power BI case for monitoring HR service demand, SLA, backlog, capacity, process quality, and employee experience using reproducible synthetic data.
+A Power BI dashboard for reviewing pending requests, service times, and HR Services capacity using synthetic data. Includes screenshots and a downloadable PBIX.
 
-[Open the live Power BI report](https://app.powerbi.com/view?r=eyJrIjoiMjU5MDEzODEtMDBkMi00MmUzLTlhNTgtMmQ4N2E1NDkyZDM2IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9) · [Explore the full case study](projects/hr-services-control-tower/README.en.md)
+[View the case and screenshots](projects/hr-services-control-tower/README.en.md) · [Download the PBIX](projects/hr-services-control-tower/power-bi/Project-1-HR-Services-Control-Tower.pbix?raw=true)
 
 ![HR Services Control Tower dashboard](projects/hr-services-control-tower/assets/screenshots/executive-overview.png)
 

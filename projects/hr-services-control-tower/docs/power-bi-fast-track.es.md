@@ -1,58 +1,36 @@
-# Ruta rápida para Power BI
+# Abrir y actualizar el reporte
 
-## Fuente de datos
+[← Caso principal](../README.md) · [English](power-bi-fast-track.en.md)
 
-Usa exclusivamente los CSV de `data/processed/`. Estos archivos ya están limpios, tipificados, relacionados mediante claves y validados. La carpeta `data/raw/` queda como evidencia del origen y para practicar limpieza más adelante.
+Puedes revisar las capturas desde GitHub o descargar el archivo para explorar el reporte en Power BI Desktop. El PBIX publicado incluye los datos importados del escenario sintético.
 
-## Primera carga recomendada
+## Revisar las capturas
 
-Para construir la primera versión del dashboard, importa estas nueve tablas:
+[Vista ejecutiva](../assets/screenshots/executive-overview.png) · [SLA y backlog](../assets/screenshots/sla-backlog-analysis.png) · [Capacidad](../assets/screenshots/operational-drivers.png) · [Proceso y satisfacción](../assets/screenshots/process-experience.png)
 
-1. `dim_date.csv`
-2. `dim_location.csv`
-3. `dim_organization.csv`
-4. `dim_team.csv`
-5. `dim_requester.csv`
-6. `dim_agent.csv`
-7. `dim_service_catalog.csv`
-8. `dim_sla_policy.csv`
-9. `fact_cases.csv`
+## Abrir el PBIX
 
-En Power BI Desktop selecciona **Obtener datos > Texto/CSV**, abre cada archivo y elige **Transformar datos**. Confirma los tipos y después selecciona **Cerrar y aplicar**.
+1. [Descarga el archivo](../power-bi/Project-1-HR-Services-Control-Tower.pbix?raw=true).
+2. Ábrelo en una versión reciente de Power BI Desktop para Windows.
+3. Explora las cuatro páginas y sus filtros con los datos guardados. No hace falta actualizar los datos para revisar esa versión del reporte.
 
-## Tipos de datos
+[Instalar Power BI Desktop](https://learn.microsoft.com/power-bi/fundamentals/desktop-get-the-desktop)
 
-- Columnas terminadas en `Key`: número entero.
-- `Date`: fecha.
-- Columnas terminadas en `At`: fecha/hora.
-- Columnas terminadas en `Flag`: verdadero/falso.
-- Columnas terminadas en `Hours`: número decimal.
-- Identificadores, nombres, estados y categorías: texto.
+El archivo es una copia del reporte completo con su modelo y datos sintéticos, no un enlace que dependa del acceso al reporte de la cuenta universitaria.
 
-## Relaciones del modelo inicial
+## Recargar los datos en otro equipo
 
-Configura relaciones de uno a varios (`1:*`) y filtro en una sola dirección, desde la dimensión hacia `fact_cases`:
+Las consultas del PBIX utilizan rutas locales a trece CSV. Para recargarlos:
 
-| Dimensión | Columna | Hecho | Columna |
-|---|---|---|---|
-| `dim_date` | `DateKey` | `fact_cases` | `CreatedDateKey` |
-| `dim_location` | `LocationKey` | `fact_cases` | `LocationKey` |
-| `dim_organization` | `OrgUnitKey` | `fact_cases` | `OrgUnitKey` |
-| `dim_requester` | `RequesterKey` | `fact_cases` | `RequesterKey` |
-| `dim_service_catalog` | `ServiceKey` | `fact_cases` | `ServiceKey` |
-| `dim_sla_policy` | `SLAPolicyKey` | `fact_cases` | `SLAPolicyKey` |
-| `dim_agent` | `AgentKey` | `fact_cases` | `FinalAgentKey` |
-| `dim_team` | `TeamKey` | `fact_cases` | `FinalTeamKey` |
+1. Descarga el repositorio y conserva la carpeta data/processed del proyecto.
+2. En Power BI Desktop, cambia los orígenes de datos de cada CSV por sus ubicaciones en tu equipo. También puedes revisar las rutas desde Power Query.
+3. Mantén los tipos y la configuración regional de las consultas; los CSV utilizan punto como separador decimal.
+4. Actualiza el modelo y comprueba los valores de referencia del diccionario de métricas.
 
-Mantén activas estas ocho relaciones. No conectes todavía `InitialAgentKey`, `InitialTeamKey`, `FirstResponseDateKey`, `ResolvedDateKey` ni `ClosedDateKey`; se incorporarán después para análisis más avanzados.
+La versión publicada utiliza data/processed, no data/raw. Las rutas están definidas individualmente en las consultas del PBIX.
 
-## Tablas para la segunda etapa
+Si quieres regenerar el escenario, consulta la [guía del generador](generator-guide.es.md). Cambiar la semilla o el número de casos produce otro escenario y los valores de referencia pueden dejar de coincidir.
 
-Cuando el dashboard principal funcione, agrega:
+## Consultar la implementación
 
-- `fact_surveys.csv`: satisfacción y facilidad.
-- `fact_backlog_daily.csv`: evolución diaria del backlog.
-- `fact_queue_capacity_weekly.csv`: capacidad semanal.
-- `fact_case_events.csv`: flujo detallado y process mining.
-
-El manifiesto `data/manifest.json` documenta los volúmenes, hashes y validaciones. El diccionario completo está en `docs/data-dictionary.es.md`.
+[Metodología y modelo](technical-overview.md) · [Métricas y filtros](metric-dictionary.md) · [Medidas DAX](../power-bi/measures-reference.dax)

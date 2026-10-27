@@ -1,0 +1,62 @@
+{
+  "project": "HR Services Control Tower",
+  "verifiedOn": "2026-10-26",
+  "syntheticData": true,
+  "source": {
+    "path": "power-bi/Project-1-HR-Services-Control-Tower.pbix",
+    "gitBlobSha": "1b032dacf6f93e2a885b80b5c764c1e1444620d5",
+    "sha256": "ed66693d4ff951802371ab1db6a5b156378bb2021ea960bc35065665b9b6c0de"
+  },
+  "verificationMethod": "Read-only metadata inspection and DAX queries in Power BI Desktop.",
+  "modelModified": false,
+  "dataRefreshed": false,
+  "importedProcessedCsvFiles": 13,
+  "measureCountInModel": 67,
+  "measuresInspected": 28,
+  "sourceSnapshotDate": "2026-06-30",
+  "metricsAtFullPeriod": {
+    "Casos": 9000,
+    "BacklogActual": 679,
+    "BacklogAlCorte": 679,
+    "BacklogVencido": 503,
+    "PorcentajeVencido": 0.7407952871870398,
+    "SLARespuesta": 0.8092777715376839,
+    "SLAResolucion": 0.7338699841444078,
+    "ElegiblesResolucion": 8199,
+    "FCR": 0.4549335284790828,
+    "ResolucionNetaHoras": 26.370735162824722,
+    "Disponibilidad": 0.8658904711673698,
+    "Encuestas": 2543,
+    "CSAT": 3.9103421156114826
+  },
+  "dateFilterCheck": {
+    "periodStart": "2025-01-01",
+    "periodEnd": "2025-01-31",
+    "backlogActual": 679,
+    "backlogAlCorte": 116,
+    "interpretation": "Backlog actual removes date filters. Backlog al corte uses the maximum selected date."
+  },
+  "surveyGroups": [
+    {
+      "group": "Sin retrabajo",
+      "responses": 2061,
+      "csat": 4.026200873362446
+    },
+    {
+      "group": "Solo reapertura",
+      "responses": 175,
+      "csat": 3.1314285714285712
+    },
+    {
+      "group": "Solo transferencia",
+      "responses": 286,
+      "csat": 3.6433566433566433
+    },
+    {
+      "group": "Transferencia y reapertura",
+      "responses": 21,
+      "csat": 2.6666666666666665
+    }
+  ],
+  "scope": "This records source, formula, and value checks. It is not a full model, security, or performance audit."
+}

@@ -1,0 +1,245 @@
+// Extracto de 28 medidas del PBIX publicado. Nombres y expresiones originales.
+// Referencia para leer las métricas; no reemplaza el modelo completo ni sus dependencias.
+// Para ejecutarlo, debe existir el modelo del PBIX y su tabla _Measures.
+
+DEFINE
+    MEASURE '_Measures'[Casos recibidos] =
+        DISTINCTCOUNT(fact_cases[CaseKey])
+
+    MEASURE '_Measures'[Casos cerrados por fecha] =
+        CALCULATE(
+            [Casos recibidos],
+            USERELATIONSHIP(
+                dim_date[DateKey],
+                fact_cases[ClosedDateKey]
+            ),
+            KEEPFILTERS(
+                fact_cases[CurrentStatusAtCutoff] = "Closed"
+            )
+        )
+
+    MEASURE '_Measures'[Backlog actual] =
+        CALCULATE(
+            [Casos recibidos],
+            fact_cases[CurrentStatusAtCutoff] <> "Closed",
+            fact_cases[CurrentStatusAtCutoff] <> "Cancelled",
+            REMOVEFILTERS(dim_date)
+        )
+
+    MEASURE '_Measures'[Backlog al corte] =
+        VAR FechaCorte =
+            MAX(dim_date[DateKey])
+        RETURN
+            CALCULATE(
+                DISTINCTCOUNT(fact_backlog_daily[CaseKey]),
+                REMOVEFILTERS(dim_date),
+                fact_backlog_daily[SnapshotDateKey] = FechaCorte
+            )
+
+    MEASURE '_Measures'[Backlog vencido al corte] =
+        VAR FechaCorte =
+            MAX(dim_date[DateKey])
+        RETURN
+            CALCULATE(
+                DISTINCTCOUNT(fact_backlog_daily[CaseKey]),
+                REMOVEFILTERS(dim_date),
+                fact_backlog_daily[SnapshotDateKey] = FechaCorte,
+                fact_backlog_daily[ResolutionSLABreachedAtSnapshotFlag] = TRUE()
+            )
+
+    MEASURE '_Measures'[Backlog vencido %] =
+        DIVIDE(
+            [Backlog vencido al corte],
+            [Backlog al corte]
+        )
+
+    MEASURE '_Measures'[Casos elegibles SLA primera respuesta] =
+        CALCULATE(
+            [Casos recibidos],
+            NOT ISBLANK(fact_cases[FirstResponseWithinSLAFlag])
+        )
+
+    MEASURE '_Measures'[Casos dentro SLA primera respuesta] =
+        CALCULATE(
+            [Casos recibidos],
+            fact_cases[FirstResponseWithinSLAFlag] = TRUE()
+        )
+
+    MEASURE '_Measures'[Cumplimiento SLA primera respuesta %] =
+        DIVIDE(
+            [Casos dentro SLA primera respuesta],
+            [Casos elegibles SLA primera respuesta]
+        )
+
+    MEASURE '_Measures'[Casos elegibles SLA resolución] =
+        CALCULATE(
+            [Casos recibidos],
+            NOT ISBLANK(fact_cases[ResolutionWithinSLAFlag])
+        )
+
+    MEASURE '_Measures'[Casos dentro SLA resolución] =
+        CALCULATE(
+            [Casos recibidos],
+            fact_cases[ResolutionWithinSLAFlag] = TRUE()
+        )
+
+    MEASURE '_Measures'[Cumplimiento SLA resolución %] =
+        DIVIDE(
+            [Casos dentro SLA resolución],
+            [Casos elegibles SLA resolución]
+        )
+
+    MEASURE '_Measures'[Casos elegibles FCR] =
+        CALCULATE(
+            [Casos recibidos],
+            NOT ISBLANK(fact_cases[FirstContactResolvedFlag])
+        )
+
+    MEASURE '_Measures'[Casos resueltos primer contacto] =
+        CALCULATE(
+            [Casos recibidos],
+            fact_cases[FirstContactResolvedFlag] = TRUE()
+        )
+
+    MEASURE '_Measures'[Resolución primer contacto %] =
+        DIVIDE(
+            [Casos resueltos primer contacto],
+            [Casos elegibles FCR]
+        )
+
+    MEASURE '_Measures'[Tiempo promedio resolución neta (h)] =
+        AVERAGE(fact_cases[NetResolutionBusinessHours])
+
+    MEASURE '_Measures'[Horas programadas] =
+        SUM(fact_queue_capacity_weekly[ScheduledHours])
+
+    MEASURE '_Measures'[Horas disponibles] =
+        SUM(fact_queue_capacity_weekly[AvailableHours])
+
+    MEASURE '_Measures'[Disponibilidad de capacidad %] =
+        DIVIDE(
+            [Horas disponibles],
+            [Horas programadas]
+        )
+
+    MEASURE '_Measures'[Ausencia sobre capacidad %] =
+        DIVIDE(
+            SUM(fact_queue_capacity_weekly[AbsenceHours]),
+            [Horas programadas]
+        )
+
+    MEASURE '_Measures'[Encuestas respondidas] =
+        COUNTROWS(fact_surveys)
+
+    MEASURE '_Measures'[CSAT promedio] =
+        AVERAGE(fact_surveys[OverallSatisfactionScore])
+
+    MEASURE '_Measures'[CSAT por condición] =
+        VAR CondicionSeleccionada =
+            SELECTEDVALUE('Condición de retrabajo'[Condición])
+        RETURN
+            SWITCH(
+                CondicionSeleccionada,
+                "Sin retrabajo",
+                    CALCULATE(
+                        [CSAT promedio],
+                        fact_cases[TransferCount] = 0,
+                        fact_cases[ReopenCount] = 0
+                    ),
+                "Solo transferencia",
+                    CALCULATE(
+                        [CSAT promedio],
+                        fact_cases[TransferCount] > 0,
+                        fact_cases[ReopenCount] = 0
+                    ),
+                "Solo reapertura",
+                    CALCULATE(
+                        [CSAT promedio],
+                        fact_cases[TransferCount] = 0,
+                        fact_cases[ReopenCount] > 0
+                    ),
+                "Transferencia y reapertura",
+                    CALCULATE(
+                        [CSAT promedio],
+                        fact_cases[TransferCount] > 0,
+                        fact_cases[ReopenCount] > 0
+                    )
+            )
+
+    MEASURE '_Measures'[Encuestas por condición] =
+        VAR CondicionSeleccionada =
+            SELECTEDVALUE('Condición de retrabajo'[Condición])
+        RETURN
+            SWITCH(
+                CondicionSeleccionada,
+                "Sin retrabajo",
+                    CALCULATE(
+                        [Encuestas respondidas],
+                        fact_cases[TransferCount] = 0,
+                        fact_cases[ReopenCount] = 0
+                    ),
+                "Solo transferencia",
+                    CALCULATE(
+                        [Encuestas respondidas],
+                        fact_cases[TransferCount] > 0,
+                        fact_cases[ReopenCount] = 0
+                    ),
+                "Solo reapertura",
+                    CALCULATE(
+                        [Encuestas respondidas],
+                        fact_cases[TransferCount] = 0,
+                        fact_cases[ReopenCount] > 0
+                    ),
+                "Transferencia y reapertura",
+                    CALCULATE(
+                        [Encuestas respondidas],
+                        fact_cases[TransferCount] > 0,
+                        fact_cases[ReopenCount] > 0
+                    )
+            )
+
+    MEASURE '_Measures'[Calificaciones bajas %] =
+        DIVIDE(
+            CALCULATE(
+                [Encuestas respondidas],
+                fact_surveys[LowRatingFlag] = TRUE()
+            ),
+            [Encuestas respondidas]
+        )
+
+    MEASURE '_Measures'[Solicitudes completas al primer envío %] =
+        DIVIDE(
+            CALCULATE(
+                [Casos recibidos],
+                fact_cases[InformationCompleteAtSubmissionFlag] = TRUE()
+            ),
+            [Casos recibidos]
+        )
+
+    MEASURE '_Measures'[Casos resueltos elegibles] =
+        CALCULATE(
+            [Casos recibidos],
+            fact_cases[ResolvedAt] <> BLANK(),
+            fact_cases[CancelledFlag] = FALSE()
+        )
+
+    MEASURE '_Measures'[Casos reabiertos %] =
+        DIVIDE(
+            CALCULATE(
+                [Casos recibidos],
+                fact_cases[ReopenCount] > 0,
+                fact_cases[ResolvedAt] <> BLANK(),
+                fact_cases[CancelledFlag] = FALSE()
+            ),
+            [Casos resueltos elegibles]
+        )
+
+EVALUATE
+ROW(
+    "Casos", [Casos recibidos],
+    "BacklogActual", [Backlog actual],
+    "BacklogAlCorte", [Backlog al corte],
+    "BacklogVencido", [Backlog vencido al corte],
+    "SLAResolucion", [Cumplimiento SLA resolución %],
+    "CSAT", [CSAT promedio]
+)

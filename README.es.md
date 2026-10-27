@@ -26,9 +26,9 @@ Agente de autoservicio de RH para consultar políticas y crear solicitudes de se
 
 ### Proyecto 1 — HR Services Control Tower
 
-Caso end-to-end en Power BI para monitorear demanda, SLA, backlog, capacidad, calidad de proceso y experiencia del empleado mediante datos sintéticos reproducibles.
+Dashboard de Power BI para revisar solicitudes pendientes, tiempos de atención y capacidad en HR Services, con datos sintéticos. Incluye capturas y el PBIX para descargar.
 
-[Abrir el reporte interactivo](https://app.powerbi.com/view?r=eyJrIjoiMjU5MDEzODEtMDBkMi00MmUzLTlhNTgtMmQ4N2E1NDkyZDM2IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9) · [Explorar el caso completo](projects/hr-services-control-tower/README.md)
+[Ver el caso y las capturas](projects/hr-services-control-tower/README.md) · [Descargar el PBIX](projects/hr-services-control-tower/power-bi/Project-1-HR-Services-Control-Tower.pbix?raw=true)
 
 ![Dashboard HR Services Control Tower](projects/hr-services-control-tower/assets/screenshots/executive-overview.png)
 

@@ -1,6 +1,8 @@
-# Diccionario de datos — diseño previo a generación
+# Diccionario de campos de los datos sintéticos
 
-Este documento define la estructura objetivo de la capa procesada. Los nombres están en inglés para que coincidan con los archivos, Power Query y el modelo de Power BI; las explicaciones se mantienen en español.
+Este documento conserva la especificación de campos de los CSV procesados. Los nombres están en inglés para que coincidan con los archivos y el modelo; las explicaciones se mantienen en español.
+
+El PBIX publicado importa estos CSV desde data/processed. Python genera los datos, las duraciones y las banderas; Power Query ajusta los tipos. Las tablas auxiliares del reporte y las medidas tienen su explicación en la [metodología](technical-overview.md) y el [diccionario de métricas](metric-dictionary.md).
 
 Convenciones:
 

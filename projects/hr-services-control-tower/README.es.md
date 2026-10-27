@@ -1,116 +1,56 @@
 # Proyecto 1: HR Services Control Tower
 
-Caso de portafolio en Power BI para monitorear demanda, niveles de servicio, backlog, capacidad, calidad del proceso y experiencia del empleado en una operación simulada de HR Services.
+Un dashboard de Power BI para revisar las solicitudes de RH y decidir dónde concentrar la atención del equipo.
 
 [← Volver al portafolio](../../README.md) · [English](README.en.md)
 
-[![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?logo=powerbi&logoColor=black)](https://app.powerbi.com/view?r=eyJrIjoiMjU5MDEzODEtMDBkMi00MmUzLTlhNTgtMmQ4N2E1NDkyZDM2IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9)
+![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?logo=powerbi&logoColor=black)
 ![Power Query](https://img.shields.io/badge/Power%20Query-217346?logo=powerquery&logoColor=white)
 ![DAX](https://img.shields.io/badge/DAX-F2C811?logo=powerbi&logoColor=black)
 ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
 
-> Proyecto independiente. El lenguaje visual se inspira en elementos públicos de la marca Siemens Energy, pero no existe afiliación ni respaldo de Siemens Energy.
+> Datos y resultados sintéticos. Proyecto independiente, sin afiliación ni respaldo de Siemens Energy.
 
-## Demo interactiva
+## El problema
 
-**[Abrir el reporte interactivo de Power BI](https://app.powerbi.com/view?r=eyJrIjoiMjU5MDEzODEtMDBkMi00MmUzLTlhNTgtMmQ4N2E1NDkyZDM2IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9)**
+Un equipo de HR Services recibe solicitudes de nómina, beneficios, documentos y movimientos de personal. Para organizar el trabajo necesita saber si está resolviendo los casos al ritmo en que llegan y dónde se acumulan los pendientes.
 
-El reporte público contiene únicamente datos sintéticos.
+Desarrollé este caso con 9,000 solicitudes sintéticas para explorar esas preguntas y relacionarlas con los tiempos de atención, la capacidad y la satisfacción.
 
-## Qué resuelve
+## Ver el proyecto
 
-El reporte convierte 9,000 casos sintéticos de HR Services en cuatro vistas orientadas a decisiones. Permite responder:
+[Descargar el PBIX](power-bi/Project-1-HR-Services-Control-Tower.pbix?raw=true) · [Cómo abrirlo en Power BI Desktop](docs/power-bi-fast-track.md)
 
-- ¿La operación absorbe la demanda o crece el backlog?
-- ¿Qué servicios explican los incumplimientos de SLA?
-- ¿Dónde se originan las pérdidas de capacidad y las esperas?
-- ¿Cómo se relacionan las solicitudes incompletas y el retrabajo con la experiencia?
+Puedes revisar las capturas desde GitHub. El PBIX incluye el reporte y los datos importados de la demostración; permite explorar los filtros en Power BI Desktop. Para volver a cargar los CSV hay que ajustar las rutas de origen, como explica la guía.
 
-## Páginas del reporte
+La vista ejecutiva muestra la demanda, los casos pendientes y el cumplimiento de los plazos de atención acordados (SLA).
 
-### Executive Overview
+![Vista ejecutiva de HR Services Control Tower](assets/screenshots/executive-overview.png)
 
-Demanda, backlog, SLA, tiempo de resolución y resolución en primer contacto.
+El recorrido continúa con [SLA y backlog](assets/screenshots/sla-backlog-analysis.png), [capacidad de atención](assets/screenshots/operational-drivers.png) y [proceso y satisfacción](assets/screenshots/process-experience.png).
 
-![Executive Overview](assets/screenshots/executive-overview.png)
+## Un resultado que permite explorar
 
-### SLA & Backlog Analysis
+Al corte del escenario, 503 de los 679 casos pendientes habían superado su plazo de resolución. El dashboard permite revisar cómo se distribuyen por servicio y explorar las esperas, la capacidad disponible y las solicitudes que llegaron incompletas.
 
-Trabajo vencido, antigüedad del backlog, riesgo por servicio y evolución mensual.
+Los patrones se diseñaron en datos sintéticos. Las acciones que se plantean son propuestas para ese escenario, no mejoras ya implementadas en una organización.
 
-![SLA y Backlog](assets/screenshots/sla-backlog-analysis.png)
+## Cómo lo construí
 
-### Operational Drivers
+1. **Python genera el escenario.** Crea los casos, sus eventos, las encuestas y la capacidad, además de calcular tiempos hábiles y comprobaciones de consistencia.
+2. **Power Query carga los CSV procesados.** Importa las tablas y ajusta los tipos de dato. La versión publicada no utiliza los archivos raw como entrada.
+3. **El modelo y DAX permiten analizar los resultados.** Relacionan los datos de servicio y calculan indicadores según los filtros del reporte.
 
-Horas programadas, capacidad disponible, causas de pérdida y tendencia semanal.
+## Decisiones y aprendizaje
 
-![Operational Drivers](assets/screenshots/operational-drivers.png)
+Conservé snapshots diarios del backlog —los casos que seguían abiertos al final de cada día— para estudiar cómo se acumula el trabajo. También distinguí las fechas de creación y cierre y los casos que pueden entrar en cada cálculo de SLA.
 
-### Process & Experience
+Al comparar satisfacción, incluí el número de encuestas de cada grupo. Esto ayuda a interpretar los resultados cuando hay pocas respuestas y a presentar las relaciones observadas sin atribuirles causalidad.
 
-Tiempos de espera, completitud, retrabajo, CSAT y riesgo de calificaciones bajas.
+El proyecto me ayudó a conectar la preparación de datos con preguntas operativas y a revisar qué mide cada indicador antes de recomendar una acción.
 
-![Process and Experience](assets/screenshots/process-experience.png)
+## Más detalles
 
-## Metodología en lenguaje sencillo
-
-1. Un generador en Python crea datos reproducibles y 100% sintéticos de casos, eventos, encuestas, backlog y capacidad.
-2. Power Query valida tipos de dato y prepara las tablas analíticas.
-3. Un modelo tipo estrella conecta las dimensiones compartidas —fecha, servicio, ubicación y equipo— con las tablas de hechos.
-4. Las medidas DAX calculan los indicadores según los filtros seleccionados.
-5. Pruebas automáticas y validaciones contra los CSV comprueban conteos, llaves, reglas de negocio y hallazgos.
-
-### Términos de HR Services
-
-| Término | Significado sencillo |
-|---|---|
-| SLA | Tiempo acordado para responder o resolver una solicitud |
-| Backlog | Casos que continúan abiertos en una fecha determinada |
-| Backlog vencido | Casos abiertos que ya superaron su tiempo objetivo de resolución |
-| FCR | Casos resueltos en el primer contacto, sin transferencia ni reapertura |
-| Retrabajo | Trabajo adicional causado por transferir o reabrir un caso |
-| CSAT | Promedio de satisfacción en una escala de 1 a 5 |
-| Disponibilidad de capacidad | Horas disponibles entre horas programadas |
-
-## Hallazgos principales
-
-- Al corte existen **679 casos abiertos**; **503 (74.1%)** están vencidos.
-- **Offboarding** tiene el menor cumplimiento de SLA de resolución: **31.2%**.
-- La disponibilidad de capacidad es **86.6%**; las ausencias representan **6.6%** de las horas programadas.
-- La completitud va de **79.1% en Email** a **95.4% en Portal**.
-- Los casos sin transferencia ni reapertura promedian **4.03 de CSAT**. Los casos con ambas condiciones promedian **2.67**, pero este último segmento contiene solo **21 encuestas** y debe interpretarse con cautela.
-
-Son patrones diseñados en datos sintéticos, no afirmaciones sobre una organización real.
-
-## Acciones recomendadas
-
-1. Priorizar el backlog vencido de Offboarding y Onboarding.
-2. Estandarizar la entrada por Email y orientar a los empleados hacia Portal.
-3. Monitorear casos transferidos y reabiertos como una cola de calidad e interpretar la experiencia junto con su tamaño de muestra.
-
-## Archivos y documentación
-
-- [Reporte de Power BI](power-bi/Project-1-HR-Services-Control-Tower.pbix)
-- [Tablas analíticas procesadas](data/processed/)
-- [Exportaciones sintéticas raw](data/raw/)
-- [Diccionario de datos](docs/data-dictionary.es.md)
-- [Diseño de datos sintéticos](docs/synthetic-data-design.es.md)
-- [Guía de Power BI](docs/power-bi-fast-track.es.md)
-- [Tema de Power BI](assets/power-bi/siemens-energy-inspired-theme.json)
-
-Para regenerar los datos:
-
-```powershell
-.\scripts\run_generator.ps1
-```
-
-## Uso responsable
-
-- Todas las personas, casos, ubicaciones, fechas y encuestas son sintéticas.
-- El dashboard evalúa procesos de servicio, no el desempeño individual de empleados o agentes.
-- Las muestras pequeñas pueden producir porcentajes inestables; el tooltip correspondiente muestra el número de encuestas.
-- Las asociaciones diseñadas demuestran un análisis, pero no prueban causalidad.
-
-## Autor
+[Metodología y modelo](docs/technical-overview.md) · [Diccionario de métricas](docs/metric-dictionary.md) · [Comprobación de medidas y valores](evidence/model-verification.json)
 
 Miguel — [Perfil de GitHub](https://github.com/MiguelPR-99)

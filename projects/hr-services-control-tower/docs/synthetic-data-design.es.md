@@ -1,5 +1,9 @@
 # Diseño de datos sintéticos
 
+Este documento conserva el diseño inicial del escenario y sus patrones. El PBIX publicado carga los CSV de data/processed: Python genera los datos y las métricas base; Power Query importa y tipifica las tablas. La limpieza de los raw en Power Query quedó como ejercicio posterior.
+
+[Consultar la metodología implementada](technical-overview.md) · [Métricas del PBIX](metric-dictionary.md)
+
 ## 1. Objetivo del dataset
 
 Crear un conjunto de datos reproducible y suficientemente realista para construir un **HR Services / Service Delivery Control Tower** en Power BI. El dataset debe permitir analizar demanda, capacidad, flujo de trabajo, SLA, backlog, retrabajo y experiencia del empleado sin contener información personal real.
@@ -34,19 +38,12 @@ Las fechas, nombres y volúmenes son parte de una empresa ficticia. No se utiliz
 ## 3. Capas de datos
 
 ```text
-data/raw/          Exportaciones sintéticas con problemas controlados
-        │
-        ▼
-Power Query        Tipos, homologación, deduplicación, joins y cuarentena
-        │
-        ▼
-data/processed/    Tablas limpias de referencia para validar Power BI
-        │
-        ▼
-Modelo semántico   Dimensiones conformadas + hechos + medidas DAX
+Generador Python
+├─ data/processed/ → Power Query → modelo y medidas DAX
+└─ data/raw/       → exportaciones con problemas para practicar limpieza
 ```
 
-Los archivos `raw` serán la entrada principal de Power BI. La capa `processed` permitirá comprobar que las transformaciones producen los resultados esperados; no sustituirá el trabajo de Power Query.
+El generador produce ambos conjuntos a partir del escenario sintético. La versión publicada utiliza los CSV de `data/processed/`; Power Query configura encabezados, tipos de dato y configuración regional. Los raw no se limpian ni se cargan en ese PBIX.
 
 ## 4. Tablas y volumen esperado
 
@@ -226,7 +223,9 @@ Los patrones se implantarán mediante reglas explícitas y después se probarán
 
 No se introducirán fechas imposibles o montos sensibles. La dificultad debe demostrar limpieza y control, no obligar a inventar correcciones sin evidencia.
 
-## 11. Modelo analítico
+## 11. Modelo analítico propuesto inicialmente
+
+El esquema siguiente pertenece al diseño inicial. La [metodología implementada](technical-overview.md) describe las relaciones y el uso de fechas del PBIX publicado.
 
 ```mermaid
 flowchart LR
