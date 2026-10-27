@@ -18,7 +18,7 @@ Herramienta para detectar problemas en los datos de personal, gestionar su revis
 
 ### Proyecto 2 — HR Policy & Services Agent
 
-Agente de autoservicio de RH para consultar políticas y crear solicitudes de seguimiento. Responde en español o inglés y pide confirmación antes de registrar un ticket.
+Agente de autoservicio de RH desarrollado en Copilot Studio para consultar políticas y crear solicitudes de seguimiento. Responde en español o inglés y pide confirmación antes de registrar un ticket.
 
 [Explorar el caso completo](projects/hr-policy-services-agent/README.md) · [Ver demostración end-to-end](projects/hr-policy-services-agent/README.md#demostración-end-to-end)
 
@@ -26,9 +26,9 @@ Agente de autoservicio de RH para consultar políticas y crear solicitudes de se
 
 ### Proyecto 1 — HR Services Control Tower
 
-Dashboard de Power BI para revisar solicitudes pendientes, tiempos de atención y capacidad en HR Services, con datos sintéticos. Incluye capturas y el PBIX para descargar.
+Dashboard de Power BI para revisar solicitudes pendientes, tiempos de atención y capacidad en HR Services, con datos sintéticos.
 
-[Explorar el caso completo](projects/hr-services-control-tower/README.md)
+[Explorar el caso completo](projects/hr-services-control-tower/README.md) · [Abrir el reporte interactivo](https://app.powerbi.com/view?r=eyJrIjoiYTA5YTAyNWYtMDQxMC00NzY3LWI0MjEtN2EzMjNlMzQ3MzM3IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9)
 
 ![Dashboard HR Services Control Tower](projects/hr-services-control-tower/assets/screenshots/executive-overview.png)
 
@@ -36,7 +36,7 @@ Dashboard de Power BI para revisar solicitudes pendientes, tiempos de atención 
 
 Caso en Power BI para comprender la distribución de talento, los movimientos entre periodos, la consistencia de las evaluaciones y el riesgo departamental mediante datos sintéticos.
 
-[Abrir el reporte interactivo](https://app.powerbi.com/view?r=eyJrIjoiMjM2NGFkZjYtOWNiNy00MWZhLWJjOGEtYzY5ZGZhZTk2N2E3IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9) · [Explorar el caso completo](projects/talent-review-calibration/README.md)
+[Explorar el caso completo](projects/talent-review-calibration/README.md) · [Abrir el reporte interactivo](https://app.powerbi.com/view?r=eyJrIjoiODIzM2EyZGEtY2ExYi00ODA4LTliNTctMTM2M2NhZDNmNmQ2IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9)
 
 ![Dashboard Talent Review & Calibration](projects/talent-review-calibration/assets/talent-overview.png)
 

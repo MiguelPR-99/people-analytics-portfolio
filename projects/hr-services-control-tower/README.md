@@ -19,7 +19,7 @@ Desarrollé este caso con 9,000 solicitudes sintéticas para explorar esas pregu
 
 ## Ver el proyecto
 
-Puedes revisar las capturas en GitHub o [descargar y abrir el reporte en Power BI Desktop](docs/power-bi-fast-track.md).
+Puedes revisar las capturas en GitHub o [visualizar o descargar el reporte](docs/power-bi-fast-track.md).
 
 La vista ejecutiva muestra la demanda, los casos pendientes y el cumplimiento de los plazos de atención acordados (SLA).
 

@@ -19,7 +19,7 @@ I developed this case using 9,000 synthetic requests to explore those questions 
 
 ## View the project
 
-You can review the screenshots on GitHub or [download and open the report in Power BI Desktop](docs/power-bi-fast-track.en.md).
+You can review the screenshots on GitHub or [view or download the report](docs/power-bi-fast-track.en.md).
 
 The executive view shows demand, pending cases, and compliance with service-level agreement (SLA) targets.
 

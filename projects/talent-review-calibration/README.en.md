@@ -4,7 +4,7 @@ Power BI dashboard for reviewing performance and potential ratings and preparing
 
 [← Back to portfolio](../../README.en.md) · [Español](README.md)
 
-[![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?logo=powerbi&logoColor=black)](https://app.powerbi.com/view?r=eyJrIjoiMjM2NGFkZjYtOWNiNy00MWZhLWJjOGEtYzY5ZGZhZTk2N2E3IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9)
+![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?logo=powerbi&logoColor=black)
 ![Power Query](https://img.shields.io/badge/Power%20Query-217346?logo=powerquery&logoColor=white)
 ![DAX](https://img.shields.io/badge/DAX-F2C811?logo=powerbi&logoColor=black)
 ![Excel](https://img.shields.io/badge/Excel-217346?logo=microsoftexcel&logoColor=white)
@@ -19,15 +19,13 @@ I developed this dashboard to organize that information and support reviews by e
 
 ## View the project
 
-You can review the screenshots on GitHub or [download and open the report in Power BI Desktop](docs/power-bi-fast-track.en.md).
+You can review the screenshots on GitHub or [view or download the report](docs/power-bi-fast-track.en.md).
 
 ![Talent Overview: rating distribution across the 9-box matrix and context for the selected employee](assets/talent-overview.png)
 
 The main view uses a **9-box matrix**, which combines three performance levels with three potential levels into nine categories.
 
 The walkthrough continues with [movement between reviews](assets/talent-movement.png), [calibration across managers](assets/calibration-managers.png), and [department comparison](assets/department-analysis.png).
-
-[Power BI demo](https://app.powerbi.com/view?r=eyJrIjoiMjM2NGFkZjYtOWNiNy00MWZhLWJjOGEtYzY5ZGZhZTk2N2E3IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9).
 
 ## One result to explore
 

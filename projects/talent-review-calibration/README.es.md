@@ -4,7 +4,7 @@ Dashboard de Power BI para revisar evaluaciones de desempeño y potencial y prep
 
 [← Volver al portafolio](../../README.md) · [English](README.en.md)
 
-[![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?logo=powerbi&logoColor=black)](https://app.powerbi.com/view?r=eyJrIjoiMjM2NGFkZjYtOWNiNy00MWZhLWJjOGEtYzY5ZGZhZTk2N2E3IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9)
+![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?logo=powerbi&logoColor=black)
 ![Power Query](https://img.shields.io/badge/Power%20Query-217346?logo=powerquery&logoColor=white)
 ![DAX](https://img.shields.io/badge/DAX-F2C811?logo=powerbi&logoColor=black)
 ![Excel](https://img.shields.io/badge/Excel-217346?logo=microsoftexcel&logoColor=white)
@@ -19,15 +19,13 @@ Desarrollé este dashboard para organizar esa información y facilitar la revisi
 
 ## Ver el proyecto
 
-Puedes revisar las capturas en GitHub o [descargar y abrir el reporte en Power BI Desktop](docs/power-bi-fast-track.md).
+Puedes revisar las capturas en GitHub o [visualizar o descargar el reporte](docs/power-bi-fast-track.md).
 
 ![Talent Overview: distribución de las evaluaciones en la matriz 9-box y contexto del empleado seleccionado](assets/talent-overview.png)
 
 La vista principal utiliza una matriz **9-box**, que combina tres niveles de desempeño con tres de potencial en nueve categorías.
 
 El recorrido continúa con [movimientos entre evaluaciones](assets/talent-movement.png), [calibración entre managers](assets/calibration-managers.png) y [comparación por departamento](assets/department-analysis.png).
-
-[Demo de Power BI](https://app.powerbi.com/view?r=eyJrIjoiMjM2NGFkZjYtOWNiNy00MWZhLWJjOGEtYzY5ZGZhZTk2N2E3IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9).
 
 ## Un resultado que permite explorar
 

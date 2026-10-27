@@ -18,7 +18,7 @@ A Digital HR case connecting workforce-data inconsistency detection with investi
 
 ### Project 2 — HR Policy & Services Agent
 
-An HR self-service agent for policy questions and follow-up requests. It responds in English or Spanish and asks for confirmation before creating a ticket.
+An HR self-service agent built with Copilot Studio for policy questions and follow-up requests. It responds in English or Spanish and asks for confirmation before creating a ticket.
 
 [Explore the full case study](projects/hr-policy-services-agent/README.en.md) · [Watch the end-to-end demonstration](projects/hr-policy-services-agent/README.en.md#end-to-end-demonstration)
 
@@ -26,9 +26,9 @@ An HR self-service agent for policy questions and follow-up requests. It respond
 
 ### Project 1 — HR Services Control Tower
 
-A Power BI dashboard for reviewing pending requests, service times, and HR Services capacity using synthetic data. Includes screenshots and a downloadable PBIX.
+A Power BI dashboard for reviewing pending requests, service times, and HR Services capacity using synthetic data.
 
-[Explore the full case study](projects/hr-services-control-tower/README.en.md)
+[Explore the full case study](projects/hr-services-control-tower/README.en.md) · [Open the interactive report](https://app.powerbi.com/view?r=eyJrIjoiYTA5YTAyNWYtMDQxMC00NzY3LWI0MjEtN2EzMjNlMzQ3MzM3IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9)
 
 ![HR Services Control Tower dashboard](projects/hr-services-control-tower/assets/screenshots/executive-overview.png)
 
@@ -36,7 +36,7 @@ A Power BI dashboard for reviewing pending requests, service times, and HR Servi
 
 A Power BI case for understanding talent distribution, year-over-year movement, rating consistency, and department-level talent risk using synthetic data.
 
-[Open the live Power BI report](https://app.powerbi.com/view?r=eyJrIjoiMjM2NGFkZjYtOWNiNy00MWZhLWJjOGEtYzY5ZGZhZTk2N2E3IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9) · [Explore the full case study](projects/talent-review-calibration/README.en.md)
+[Explore the full case study](projects/talent-review-calibration/README.en.md) · [Open the interactive report](https://app.powerbi.com/view?r=eyJrIjoiODIzM2EyZGEtY2ExYi00ODA4LTliNTctMTM2M2NhZDNmNmQ2IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9)
 
 ![Talent Review & Calibration dashboard](projects/talent-review-calibration/assets/talent-overview.png)
 
