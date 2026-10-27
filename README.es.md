@@ -4,15 +4,15 @@ Construyo productos de apoyo a decisiones que conectan procesos de Recursos Huma
 
 Estoy construyendo este portafolio en torno a People Analytics, HR Data, HR Services, mejora de procesos e inteligencia artificial responsable.
 
-[English](README.md)
+[English](README.en.md)
 
 ## Trabajo terminado
 
 ### Proyecto 3 — HR Data Quality & Lifecycle Workbench
 
-Workbench end-to-end de Digital HR que detecta conflictos en datos laborales, dirige excepciones seleccionadas a remediación humana y muestra si la calidad mejora más allá del cierre administrativo de casos.
+Caso de Digital HR que conecta la detección de inconsistencias en datos laborales con su investigación y seguimiento mediante Fabric, Power Apps, Dataverse, Power Automate y Power BI.
 
-[Explorar el caso completo](projects/hr-data-quality-lifecycle-workbench/README.es.md) · [Revisar la ruta técnica](projects/hr-data-quality-lifecycle-workbench/docs/technical-overview.es.md)
+[Explorar el caso completo](projects/hr-data-quality-lifecycle-workbench/README.md) · [Revisar la ruta técnica](projects/hr-data-quality-lifecycle-workbench/docs/technical-overview.md)
 
 ![HR Data Quality & Lifecycle Workbench](projects/hr-data-quality-lifecycle-workbench/evidence/phase-9/checkpoint-02-power-bi-public-scorecard.png)
 
@@ -20,7 +20,7 @@ Workbench end-to-end de Digital HR que detecta conflictos en datos laborales, di
 
 Agente bilingüe de autoservicio de RH que responde con evidencia, cita políticas, detecta vacíos de información y crea solicitudes sintéticas con confirmación y escalación humana segura.
 
-[Explorar el caso completo](projects/hr-policy-services-agent/README.es.md) · [Ver demostración end-to-end](projects/hr-policy-services-agent/README.es.md#demostración-end-to-end)
+[Explorar el caso completo](projects/hr-policy-services-agent/README.md) · [Ver demostración end-to-end](projects/hr-policy-services-agent/README.md#demostración-end-to-end)
 
 ![HR Policy & Services Agent](projects/hr-policy-services-agent/assets/screenshots/grounded-policy-answer.png)
 
@@ -28,7 +28,7 @@ Agente bilingüe de autoservicio de RH que responde con evidencia, cita polític
 
 Caso end-to-end en Power BI para monitorear demanda, SLA, backlog, capacidad, calidad de proceso y experiencia del empleado mediante datos sintéticos reproducibles.
 
-[Abrir el reporte interactivo](https://app.powerbi.com/view?r=eyJrIjoiMjU5MDEzODEtMDBkMi00MmUzLTlhNTgtMmQ4N2E1NDkyZDM2IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9) · [Explorar el caso completo](projects/hr-services-control-tower/README.es.md)
+[Abrir el reporte interactivo](https://app.powerbi.com/view?r=eyJrIjoiMjU5MDEzODEtMDBkMi00MmUzLTlhNTgtMmQ4N2E1NDkyZDM2IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9) · [Explorar el caso completo](projects/hr-services-control-tower/README.md)
 
 ![Dashboard HR Services Control Tower](projects/hr-services-control-tower/assets/screenshots/executive-overview.png)
 
@@ -36,7 +36,7 @@ Caso end-to-end en Power BI para monitorear demanda, SLA, backlog, capacidad, ca
 
 Caso en Power BI para comprender la distribución de talento, los movimientos entre periodos, la consistencia de las evaluaciones y el riesgo departamental mediante datos sintéticos.
 
-[Abrir el reporte interactivo](https://app.powerbi.com/view?r=eyJrIjoiMjM2NGFkZjYtOWNiNy00MWZhLWJjOGEtYzY5ZGZhZTk2N2E3IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9) · [Explorar el caso completo](projects/talent-review-calibration/README.es.md)
+[Abrir el reporte interactivo](https://app.powerbi.com/view?r=eyJrIjoiMjM2NGFkZjYtOWNiNy00MWZhLWJjOGEtYzY5ZGZhZTk2N2E3IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9) · [Explorar el caso completo](projects/talent-review-calibration/README.md)
 
 ![Dashboard Talent Review & Calibration](projects/talent-review-calibration/assets/talent-overview.png)
 

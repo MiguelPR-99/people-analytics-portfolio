@@ -1,8 +1,8 @@
 # Proyecto 3: HR Data Quality & Lifecycle Workbench
 
-Caso end-to-end de Digital HR que convierte registros laborales dispersos en excepciones de calidad trazables, trabajo humano de remediación y evidencia preparada para decisiones.
+Una solución de Digital HR para detectar inconsistencias en datos laborales y dar seguimiento a su revisión.
 
-[← Volver al portafolio](../../README.es.md) · [English](README.md)
+[← Volver al portafolio](../../README.md) · [English](README.en.md)
 
 ![Microsoft Fabric](https://img.shields.io/badge/Microsoft%20Fabric-5B5FC7?logo=microsoft&logoColor=white)
 ![Dataverse](https://img.shields.io/badge/Dataverse-088142?logo=microsoftdataverse&logoColor=white)
@@ -12,87 +12,45 @@ Caso end-to-end de Digital HR que convierte registros laborales dispersos en exc
 ![Python / PySpark](https://img.shields.io/badge/Python%20%2F%20PySpark-3776AB?logo=python&logoColor=white)
 ![SQL](https://img.shields.io/badge/SQL-CC2927?logo=microsoftsqlserver&logoColor=white)
 
-> Proyecto independiente de portafolio. No es un sistema oficial ni está afiliado o respaldado por Siemens Energy. Los registros laborales, resultados y escenarios son sintéticos. El autor puede aparecer únicamente como propietario de registros creados en el entorno de demostración.
+> Datos y escenarios sintéticos. Proyecto independiente, sin afiliación ni respaldo de Siemens Energy.
 
-## Resumen ejecutivo
+## El problema
 
-Los datos de RH pueden ser válidos en archivos separados y volverse poco confiables al combinar empleados, movimientos y estructura organizacional. Este proyecto detecta esos conflictos, envía las excepciones relevantes a una cola controlada y conserva la evidencia de cada resolución.
+Un cambio de puesto puede aparecer como completado en los movimientos laborales y seguir sin reflejarse en el registro del empleado. Esa diferencia dificulta saber qué información utilizar y quién debe revisarla.
 
-La solución conecta Microsoft Fabric, Power Apps, Dataverse, Power Automate y Power BI. Mantiene separadas la analítica y la operación: Fabric calcula y conserva las excepciones; las personas investigan y aprueban la remediación en Power Apps; Power BI muestra si la calidad mejora o si los casos solamente se cierran de forma administrativa.
+Desarrollé este caso para conectar la detección de inconsistencias con su investigación: identificar qué no coincide, abrir un caso cuando sea necesario y conservar la evidencia de lo que se hizo.
 
-## La experiencia
+## La solución en uso
 
-El workbench operativo ayuda al data steward a priorizar excepciones y revisar responsable, corrección del origen, evidencia y preparación para aprobación en un solo lugar.
+En Power Apps, la persona responsable de revisar los datos puede filtrar excepciones, consultar su contexto y crear o abrir un caso para documentar la investigación.
 
-![DQ Command Center con cola sintética y preparación del caso](power-apps/tests/e2e/tests/dq-command-center.spec.ts-snapshots/dq-command-center-power-apps-edge-win32.png)
+![Command Center de Power Apps con cola de excepciones y contexto del caso](power-apps/tests/e2e/tests/dq-command-center.spec.ts-snapshots/dq-command-center-power-apps-edge-win32.png)
 
-El scorecard ejecutivo resume calidad actual, riesgo recurrente, casos publicados y eficacia de remediación sin asumir que cerrar un caso equivale a corregir el origen.
+En Power BI, el equipo puede consultar la calidad de los datos y el avance de los casos. El reporte distingue un cierre administrativo de una corrección confirmada en el sistema de origen.
 
-![Scorecard de calidad y remediación en Power BI](evidence/phase-9/checkpoint-02-power-bi-public-scorecard.png)
+![Reporte de Power BI con indicadores de calidad y seguimiento de casos](evidence/phase-9/checkpoint-02-power-bi-public-scorecard.png)
 
-## De la incidencia a la evidencia
+## Cómo funciona
 
-```mermaid
-flowchart LR
-    S[Fuentes sintéticas de RH] --> F[Fabric Bronze / Silver / Gold]
-    F --> Q[Reglas y reconciliación]
-    Q --> A[Cola operativa en Power Apps]
-    A --> D[Casos y evidencia en Dataverse]
-    D --> P[Avisos y aprobaciones en Power Automate]
-    F --> B[Scorecard en Power BI]
-    D --> B
-```
+1. **Fabric prepara y contrasta los datos.** Tres fuentes sintéticas representan empleados, movimientos laborales y estructura organizacional. Ocho reglas detectan inconsistencias y conservan su historial.
+2. **Dataverse registra una muestra para revisión.** La demostración publica excepciones seleccionadas y mantiene separados el problema detectado, el caso y sus actividades.
+3. **Power Apps y Power Automate coordinan el trabajo.** La aplicación reúne el contexto y la evidencia; los flujos gestionan avisos, validaciones y aprobaciones.
+4. **Power BI reúne el seguimiento.** Combina el análisis de Fabric con los casos de Dataverse, sin presentar la muestra operativa como si fuera toda la población.
 
-1. Tres fuentes sintéticas representan el snapshot de empleados, eventos de ciclo de vida y referencias organizacionales.
-2. Ocho reglas detectan problemas de completitud, validez, unicidad, consistencia, integridad referencial, temporalidad y oportunidad.
-3. Solo un subconjunto controlado de excepciones se publica en Dataverse para remediación humana.
-4. Power Automate coordina asignación, aprobación, timeout y manejo de errores.
-5. Power BI reconcilia el riesgo analítico con el estado operativo de los casos publicados.
+## Decisiones importantes
 
-[Consultar arquitectura y decisiones técnicas](docs/technical-overview.es.md)
+Conservé el análisis completo en Fabric y una muestra operativa en Dataverse. Detectar un problema y asignarlo a una persona son pasos distintos; publicar todos los resultados como casos habría convertido la revisión en una cola difícil de gestionar.
 
-## Hallazgos seleccionados
+También separé el resultado del caso de la confirmación de corrección del origen. Una aprobación o un cierre no bastan para demostrar que el problema dejó de aparecer. La aplicación apoya la revisión humana y no modifica automáticamente un sistema de RH.
 
-- El Data Quality Score sintético actual llega a **98.9%**, **0.7 puntos porcentuales** por encima del corte anterior.
-- Los seis cortes contienen **923 instancias de excepción** en ocho reglas; la consistencia entre sistemas concentra el mayor volumen.
-- Se publicaron deliberadamente **cinco casos** de la población analítica y **tres continúan abiertos**.
-- El reporte distingue resolución de corrección confirmada en el origen y hace visibles los cierres que aún no tienen esa confirmación.
+## Construcción y aprendizaje
 
-Estos resultados son patrones diseñados para demostración, no hallazgos de una organización real.
+La interfaz utiliza una Generative Page de Power Apps con React y TypeScript. Me apoyé en IA durante el desarrollo e incorporé pruebas de componentes y comprobaciones con Playwright sobre la aplicación publicada.
 
-## Validación
+Una iteración corrigió la creación de casos: el formulario inicial tenía campos obligatorios bloqueados. La solución crea el registro con los datos necesarios antes de abrirlo. Este trabajo me ayudó a entender cómo distribuir responsabilidades entre la interfaz, los datos y la automatización.
 
-| Control | Resultado |
-|---|---:|
-| Generador sintético | 7/7 pruebas aprobadas |
-| Generative Page | Typecheck + 5/5 pruebas de componente |
-| Controles Power Platform | Asignación, aprobación, rechazo, waiver, timeout, Catch e idempotencia validados |
-| Proyecto Power BI | 0 errores · 0 advertencias |
-| Higiene del repositorio | Credenciales, sesión, caché y configuración local excluidas |
+## Explorar el caso
 
-[Revisar el manifiesto reducido de evidencia](evidence/phase-9/evidence-manifest.es.md) · [Consultar el gate de pruebas y publicación](docs/phase-9-test-and-publication-plan.es.md)
-
-## Explorar la implementación
-
-La implementación sigue una separación deliberada entre análisis y operación:
-
-1. Las fuentes sintéticas crean un problema repetible sin utilizar información laboral real.
-2. Fabric conserva la población completa y convierte conflictos entre sistemas en excepciones explicables.
-3. Solo las excepciones priorizadas pasan a Dataverse para evitar convertir el análisis completo en una cola operativa.
-4. Power Apps reúne la investigación humana; Power Automate coordina los pasos asíncronos y las aprobaciones.
-5. Power BI reconcilia la tendencia analítica con el avance de los casos sin confundir cierre administrativo con corrección del origen.
-
-[Seguir la narrativa técnica y sus decisiones](docs/technical-overview.es.md). Desde ese recorrido se puede acceder a modelos, reglas, automatizaciones, pruebas y demás artefactos reproducibles cuando sea necesario.
-
-Los parámetros públicos de Power BI utilizan valores de ejemplo seguros. Antes de actualizar, deben sustituirse en Power BI Desktop por el endpoint SQL de Fabric, la base del Lakehouse y el entorno de Dataverse propios.
-
-## Uso responsable
-
-- No se incluyen datos reales de empleados, salario, información médica, desempeño ni otros atributos sensibles.
-- El workbench apoya la investigación humana; no modifica automáticamente un HRIS.
-- Los cambios relevantes conservan evidencia y aprobación sin ocultar la excepción original.
-- El reporte diferencia población analítica, casos publicados, resolución administrativa y corrección confirmada del origen.
-
-## Autor
+[Recorrido técnico y decisiones de diseño](docs/technical-overview.md) · [Evidencias y pruebas](evidence/phase-9/evidence-manifest.md) · [Código y artefactos](./)
 
 Miguel — [Perfil de GitHub](https://github.com/MiguelPR-99)

@@ -2,7 +2,7 @@
 
 Caso de portafolio en Power BI para comprender la distribución de talento, los movimientos entre periodos, la consistencia de las evaluaciones y el riesgo por departamento.
 
-[← Volver al portafolio](../../README.es.md) · [English](README.md)
+[← Volver al portafolio](../../README.md) · [English](README.en.md)
 
 [![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?logo=powerbi&logoColor=black)](https://app.powerbi.com/view?r=eyJrIjoiMjM2NGFkZjYtOWNiNy00MWZhLWJjOGEtYzY5ZGZhZTk2N2E3IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9)
 ![Power Query](https://img.shields.io/badge/Power%20Query-217346?logo=powerquery&logoColor=white)

@@ -1,147 +1,97 @@
-# From a data conflict to a traceable decision
+# Recorrido técnico del proyecto 3
 
-[← Case study](../README.md) · [Español](technical-overview.es.md)
+[← Caso principal](../README.md) · [English](technical-overview.en.md)
 
-This is the technical journey behind Project 3. It explains how each component receives a specific problem, solves only the part it owns, and hands a verifiable result to the next stage. Implementation details remain linked as reference so they do not interrupt the main story.
-
-## The decision that shapes the architecture
-
-The project separates two related but distinct needs:
-
-- **Understand quality across the full population:** this requires history, volume, repeatable rules, and recurrence analysis.
-- **Remediate selected cases:** this requires owners, states, evidence, approvals, and auditability.
-
-Fabric addresses the first need. Dataverse and Power Platform address the second. This separation prevents a transactional application from becoming an analytical store or every detected issue from automatically becoming human work.
+El recorrido sigue una inconsistencia desde los archivos de origen hasta su investigación y seguimiento. Fabric conserva el análisis completo; Dataverse registra el trabajo sobre una muestra de excepciones. Power Apps, Power Automate y Power BI utilizan esas dos perspectivas con responsabilidades distintas.
 
 ```mermaid
 flowchart LR
-    S[Synthetic sources] --> F[Fabric: population and rules]
-    F -->|prioritized subset| D[Dataverse: cases and evidence]
-    D --> A[Power Apps: investigation]
-    A --> P[Power Automate: coordination]
-    F --> B[Power BI: analytical context]
+    S["Fuentes sintéticas"] --> F["Fabric: preparación y reglas"]
+    F -->|"Muestra controlada"| D["Dataverse: referencias y casos"]
+    A["Power Apps: investigación"] <-->|"Consulta y registro"| D
+    D -->|"Cambios en el caso"| P["Power Automate: avisos y aprobación"]
+    P -->|"Resultado y actividad"| D
+    F --> B["Power BI: calidad y seguimiento"]
     D --> B
 ```
 
-## 1. Create a problem that can be repeated
+## 1. Construir un escenario repetible
 
-The starting point was not a dashboard but three synthetic sources representing worker snapshots, lifecycle events, and organizational references. Each can appear valid in isolation; reconciling them reveals duplicates, impossible sequences, missing references, and cross-system differences.
+Tres fuentes representan el registro de empleados, los eventos de ciclo de vida y las referencias organizacionales. El generador utiliza una semilla fija e introduce anomalías conocidas, de modo que el escenario se puede regenerar y contrastar con las reglas.
 
-A fixed seed and versioned contracts make it possible to regenerate the same scenario, test every rule, and publish the project without exposing real information. The files do not attempt to reproduce the full complexity of a production HRIS; they provide a controlled laboratory for demonstrating the process.
+Por ejemplo, la regla DQ-007 compara el estado del empleado con los eventos completados que ya deberían estar reflejados en él. Permite dos días hábiles de sincronización antes de señalar una discrepancia. Así distingue una demora aceptada de un conflicto que necesita revisión.
 
-**Key decision:** known anomalies make it possible to verify that a rule detects the intended problem, not merely that it returns results.
+[Diseño de datos](data-design.es.md) · [Reglas y tolerancias](quality-rules.es.md) · [Validación del generador](synthetic-data-validation.es.md)
 
-[Data design and grain](data-design.es.md) · [Synthetic scenario validation](synthetic-data-validation.es.md)
+## 2. Preparar y evaluar los datos en Fabric
 
-## 2. Retain the analytical population in Fabric
+Bronze conserva los archivos originales. Silver normaliza tipos y estructura, y marca ambigüedades como claves duplicadas. Gold evalúa las ocho reglas y prepara las excepciones, la recurrencia y las vistas que consume Power BI.
 
-Fabric receives the files and preserves their journey through layers. Bronze retains the source material; Silver normalizes types and structure without hiding issues; Gold evaluates rules, measures recurrence, and prepares consumption views.
+Mantener el historial permite revisar si un problema reaparece entre cortes, incluso cuando nunca se creó un caso para investigarlo. Los notebooks utilizan PySpark; las vistas SQL definen las salidas de consumo y la muestra de exportación.
 
-Fabric also retains exceptions that never become cases. This supports questions such as: Is quality improving? Which rule keeps returning? How much risk remains outside the operational queue? Dataverse does not own this responsibility because it is designed for governed transactions, not for retaining and recomputing the complete analytical history.
+[Implementación de Fabric](fabric-implementation.es.md) · [Notebooks](../notebooks/) · [Vistas SQL](../sql/)
 
-**Boundary:** the project demonstrates contracts, transformations, and reconciliation at synthetic scale. Production would require reviews of partitioning, incremental ingestion, performance, observability, and data agreements with each source.
+## 3. Seleccionar excepciones y registrar casos en Dataverse
 
-[Fabric implementation](fabric-implementation.es.md) · [Quality rules](quality-rules.es.md) · [`notebooks/`](../notebooks/) · [`sql/`](../sql/)
+Una excepción es el resultado de una regla fallida. Una referencia publicada conserva sus datos en Dataverse. Un caso es el registro operativo que se abre para investigarla. Esas tres entidades no representan el mismo volumen.
 
-## 3. Turn detections into deliberate work
+La carga de demostración selecciona ocho referencias, una por regla, mediante una consulta SQL y una importación. La muestra permite recorrer distintos tipos de problema; no representa un motor automático de priorización ni una integración continua con Fabric.
 
-An analytical exception means a rule failed; it does not automatically mean someone should open a case. Publishing all 923 synthetic instances would duplicate the population, create noise, and push Dataverse toward a storage role already fulfilled by Fabric.
+Dataverse conserva casos, responsables, actividades, evidencia y estados. Las claves alternativas evitan duplicar un caso para la misma instancia de excepción; las relaciones y la auditoría mantienen el vínculo con lo detectado. La referencia original permanece separada del registro editable de investigación.
 
-The project therefore publishes only a prioritized subset. Each case retains a key back to its analytical exception while Fabric keeps the complete view. Selection could later evolve through severity, recurrence, materiality, or operational-capacity criteria without changing the architectural separation.
+[Consulta de exportación](../sql/03_export_dataverse_demo_exceptions.sql) · [Modelo de Dataverse](dataverse-design.es.md) · [Verificación de datos y controles](phase-5-gate-review.es.md)
 
-**Interview answer — why not publish every exception?** Detection and remediation have different costs and operating rhythms. Controlled publication protects team capacity while keeping unconverted risk visible.
+## 4. Investigar desde Power Apps
 
-[Controlled export view](../sql/03_export_dataverse_demo_exceptions.sql) · [Dataverse design](dataverse-design.es.md)
+El Command Center es una Generative Page con React y TypeScript. Consulta Dataverse mediante las API soportadas y permite filtrar excepciones, revisar contexto y crear o abrir el caso. La edición completa continúa en la aplicación basada en modelo.
 
-## 4. Use Dataverse as the operational record
+Durante las pruebas, el botón inicial abría un formulario vacío cuyos campos técnicos obligatorios estaban bloqueados. La corrección mantuvo esas restricciones: ahora crea el caso con su referencia, estado inicial, responsable y marcas temporales antes de abrirlo por GUID. Una prueba de creación contra la aplicación publicada comprobó ese recorrido.
 
-Dataverse organizes cases, activities, evidence, owners, and states in a transactional model with identity and auditing. It fits this part of the problem because Power Apps and Power Automate can work over the same entities and security model without creating a separate operational database.
+[Arquitectura de la interfaz](generative-page-architecture.es.md) · [Iteración y pruebas de Power Apps](phase-6-gate-review.es.md) · [Código de la aplicación](../power-apps/)
 
-Its purpose is not to recalculate quality or replace the Lakehouse. It receives only what is needed to manage an intervention and preserves its history. This boundary distinguishes the original exception, the published case, and the actions taken to resolve it.
+## 5. Coordinar avisos y aprobaciones con Power Automate
 
-**Interview answer — why Dataverse?** The operational problem needs ownership, states, relationships, evidence, and transactional controls; the analytical problem needs full history and scalable processing. They are different responsibilities.
+Power Automate se ocupa de tareas que deben continuar aunque la pantalla se cierre: avisar de una asignación, validar una solicitud de aprobación, esperar la respuesta y registrar el resultado.
 
-**Production review:** team roles, field security, retention, capacity, DLP policies, managed solutions, and environment-to-environment deployment.
+Los flujos comprueban evidencia y condiciones antes de solicitar aprobación. Conservan identificadores para evitar ejecuciones duplicadas y registran errores o vencimientos de espera. Las decisiones quedan asociadas al caso en Dataverse.
 
-[Dataverse model and decisions](dataverse-design.es.md) · [`dataverse/`](../dataverse/)
+La verificación documenta aprobación, rechazo, exención y timeout. La reasignación entre dos usuarios no se probó porque el entorno tenía una sola identidad; los recordatorios periódicos de SLA quedan pendientes.
 
-## 5. Give investigation context in Power Apps
+[Diseño de los flujos](phase-7-automation-design.es.md) · [Resultados y límites de la verificación](phase-7-gate-review.es.md)
 
-The Command Center helps users prioritize and understand exceptions; the model-driven app protects the capture of activities, evidence, and case transitions. The interface brings fragmented context together while leaving analytical rules in Fabric and asynchronous coordination in Power Automate.
+## 6. Reunir calidad y seguimiento en Power BI
 
-This keeps the experience focused on human judgment: investigate, document, and determine whether a case is ready for approval. The application neither updates an HRIS nor declares by itself that the source was corrected.
+El modelo combina las vistas Gold de Fabric con las tablas operativas de Dataverse mediante Import. Esta elección permite actualizar y reconciliar ambas fuentes para el volumen de la demostración. El modelo y el reporte se conservan como archivos PBIP, TMDL y PBIR.
 
-**Boundary:** tests cover components, navigation, and a development tenant. Production would require accessibility, device, performance, security-profile, and user-acceptance testing.
+El reporte distingue el estado del caso de la confirmación de corrección del origen. Resolverlo o conceder una exención no demuestra que el próximo corte dejará de producir la excepción. La aplicación no escribe en un sistema real de RH.
 
-[Power Apps architecture](generative-page-architecture.es.md) · [`power-apps/`](../power-apps/)
+En la captura publicada se observan seis cortes con 923 instancias de excepción, cinco casos creados y tres abiertos. Las instancias pueden incluir problemas que reaparecen entre cortes; no equivalen a 923 empleados ni a 923 casos distintos.
 
-## 6. Coordinate the process with Power Automate
+El score final de 98.9% es la proporción ponderada de comprobaciones elegibles que aprobaron, con mayor peso para las de mayor severidad. No es el porcentaje de empleados sin errores. La variación de +0.7 puntos porcentuales pertenece al escenario sintético y no demuestra un efecto de las automatizaciones.
 
-Power Automate owns what should not depend on an open screen: assignment, notifications, approval waits, timeouts, idempotency, and error logging. Power Apps starts or displays the process; flows preserve continuity and execution evidence.
+[Diseño y denominadores de Power BI](phase-8-bi-design.es.md) · [Reconciliación de resultados](phase-8-gate-review.es.md) · [Modelo y reporte](../power-bi/)
 
-Automation does not replace human judgment. It checks conditions, moves information, and follows approved routes, while assessment of the evidence remains part of the governed process.
+## Desarrollo asistido por IA y pruebas
 
-**Interview answer — what does it add beyond Power Apps?** Power Apps manages interaction; Power Automate orchestrates events and asynchronous work. Separating them avoids embedding a long-running process in the interface.
+Utilicé IA para apoyar la construcción, junto con MCP para operar el modelo semántico y herramientas de línea de comandos para generar y validar artefactos. El proyecto incorpora comprobación de tipos, pruebas de componentes, pruebas con Playwright y revisión visual. La IA forma parte del proceso de desarrollo; las reglas de calidad de esta solución son explícitas y deterministas.
 
-**Production review:** service accounts, alternate owners, monitoring, alerts, retry policies, connector limits, and support strategy.
+La evidencia distingue lo ejecutado en cada momento. Las fases 6 y 7 documentan pruebas contra la aplicación publicada y una creación controlada. La regresión local del 18 de octubre de 2026 no repitió las pruebas de navegador, la comparación visual ni la creación de registros.
 
-[Automation design](phase-7-automation-design.es.md) · [Gate validation](phase-7-gate-review.es.md)
+[Evidencias y alcance de las pruebas](../evidence/phase-9/evidence-manifest.md)
 
-## 7. Do not confuse closure with correction
+## Alcance y siguientes pasos
 
-A case can close because it was rejected, waived, or administratively resolved. None of those states proves that the next source-system extract will stop producing the exception.
+La demostración utiliza datos sintéticos y un entorno de desarrollo. Antes de aplicarla a una operación real habría que definir criterios de selección con el equipo, integrar la corrección con los responsables de origen y revisar accesos, retención, carga incremental, rendimiento, costos y despliegue entre entornos. Las pruebas con distintos perfiles y usuarios reales también quedan pendientes.
 
-The project stores case outcome separately from source-correction confirmation. The strongest proof appears when a later snapshot no longer reproduces the issue; until then, Power BI keeps the difference visible.
+## Referencias para reproducir o ampliar
 
-**Interview answer — why does this matter?** Measuring closed cases alone can reward administrative speed without demonstrating genuine data improvement.
+[Diccionario de datos](data-dictionary.es.md) · [Operación de Power Platform](power-platform-maintenance.es.md) · [Plan de pruebas y publicación](phase-9-test-and-publication-plan.es.md)
 
-## 8. Reconcile analytics and operations in Power BI
-
-The scorecard combines two perspectives. Fabric supplies the full population, trends, and rules; Dataverse supplies published cases, their owners, and operational outcomes. Power BI relates them without assuming they represent the same universe.
-
-Using only Dataverse would omit unpublished exceptions. Using only Fabric would not explain investigation and approval progress. Reconciliation makes detected risk, operational coverage, and correction evidence visible together.
-
-**Boundary:** the public model uses safe example parameters and a small sample. Production would require reviews of row-level security, refresh, gateway or identity, DAX performance, accessibility, distribution, and semantic-model monitoring.
-
-[Power BI design](phase-8-bi-design.es.md) · [`power-bi/`](../power-bi/)
-
-### AI-assisted authoring workflow
-
-The build used an agentic workflow to accelerate repeatable work: MCP for semantic-model operations, CLI and PBIP/TMDL/PBIR artifacts for report generation and validation, and Playwright for reproducible checks of the web experience. Version control, automated gates, and visual review reduced the risk of accepting generated output without verification.
-
-## What production would still require
-
-Before applying this pattern to real workforce data, the following would need review:
-
-- data classification, minimization, retention, and access;
-- managed identities, secrets, connections, and segregation of duties;
-- solutions, environment variables, and deployment pipelines;
-- scalability, incremental refresh, performance, and cost;
-- joint monitoring across Fabric, Power Platform, and Power BI;
-- formal criteria for publishing, prioritizing, and closing cases;
-- governed integration with source-system owners.
-
-The published solution demonstrates the architecture and its controls. It is not a production multi-environment deployment and does not write to a real HRIS.
-
-## Reproducible reference
-
-The following resources preserve the detail needed to audit or extend the solution:
-
-- [Data dictionary](data-dictionary.es.md)
-- [Fabric gate](phase-4-gate-review.es.md)
-- [Dataverse gate](phase-5-gate-review.es.md)
-- [Power Apps gate](phase-6-gate-review.es.md)
-- [Power Automate gate](phase-7-gate-review.es.md)
-- [Power BI gate](phase-8-gate-review.es.md)
-- [Publication gate](phase-9-test-and-publication-plan.es.md)
-- [Reduced evidence manifest](../evidence/phase-9/evidence-manifest.md)
-- [Optional video recording guide](video-recording-guide.md)
-
-From the project folder, the public regression can be run with:
+Desde la carpeta del proyecto:
 
 ```powershell
 python -m unittest discover -s scripts/tests -v
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify_phase9.ps1
 ```
 
-Credentials, sessions, cache, and local settings are excluded from the repository. Public connection parameters use safe example values and must be replaced before refreshing the model.
+Antes de actualizar Power BI, sustituye los parámetros de ejemplo por tu endpoint SQL de Fabric, base del Lakehouse y entorno de Dataverse. Las credenciales y la configuración local no se incluyen en el repositorio.

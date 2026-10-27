@@ -2,7 +2,7 @@
 
 Caso de portafolio en Power BI para monitorear demanda, niveles de servicio, backlog, capacidad, calidad del proceso y experiencia del empleado en una operación simulada de HR Services.
 
-[← Volver al portafolio](../../README.es.md) · [English](README.md)
+[← Volver al portafolio](../../README.md) · [English](README.en.md)
 
 [![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?logo=powerbi&logoColor=black)](https://app.powerbi.com/view?r=eyJrIjoiMjU5MDEzODEtMDBkMi00MmUzLTlhNTgtMmQ4N2E1NDkyZDM2IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9)
 ![Power Query](https://img.shields.io/badge/Power%20Query-217346?logo=powerquery&logoColor=white)

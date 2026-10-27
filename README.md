@@ -1,47 +1,47 @@
-# People Analytics & Digital HR Portfolio
+# Portafolio de People Analytics y Digital HR
 
-I build decision-support products that connect HR processes, workforce data, and business operations.
+Construyo productos de apoyo a decisiones que conectan procesos de Recursos Humanos, datos de la fuerza laboral y operación del negocio.
 
-I’m building this portfolio around People Analytics, HR Data, HR Services, process improvement, and responsible AI.
+Estoy construyendo este portafolio en torno a People Analytics, HR Data, HR Services, mejora de procesos e inteligencia artificial responsable.
 
-[Español](README.es.md)
+[English](README.en.md)
 
-## Completed work
+## Trabajo terminado
 
-### Project 3 — HR Data Quality & Lifecycle Workbench
+### Proyecto 3 — HR Data Quality & Lifecycle Workbench
 
-An end-to-end Digital HR workbench that detects workforce-data conflicts, routes selected exceptions through human remediation, and shows whether quality improves beyond administrative case closure.
+Caso de Digital HR que conecta la detección de inconsistencias en datos laborales con su investigación y seguimiento mediante Fabric, Power Apps, Dataverse, Power Automate y Power BI.
 
-[Explore the full case study](projects/hr-data-quality-lifecycle-workbench/README.md) · [Review the technical route](projects/hr-data-quality-lifecycle-workbench/docs/technical-overview.md)
+[Explorar el caso completo](projects/hr-data-quality-lifecycle-workbench/README.md) · [Revisar la ruta técnica](projects/hr-data-quality-lifecycle-workbench/docs/technical-overview.md)
 
 ![HR Data Quality & Lifecycle Workbench](projects/hr-data-quality-lifecycle-workbench/evidence/phase-9/checkpoint-02-power-bi-public-scorecard.png)
 
-### Project 2 — HR Policy & Services Agent
+### Proyecto 2 — HR Policy & Services Agent
 
-A bilingual HR self-service agent that answers with evidence, cites policy sources, detects knowledge gaps, and creates synthetic service requests with confirmation and safe human escalation.
+Agente bilingüe de autoservicio de RH que responde con evidencia, cita políticas, detecta vacíos de información y crea solicitudes sintéticas con confirmación y escalación humana segura.
 
-[Explore the full case study](projects/hr-policy-services-agent/README.md) · [Watch the end-to-end demonstration](projects/hr-policy-services-agent/README.md#end-to-end-demonstration)
+[Explorar el caso completo](projects/hr-policy-services-agent/README.md) · [Ver demostración end-to-end](projects/hr-policy-services-agent/README.md#demostración-end-to-end)
 
 ![HR Policy & Services Agent](projects/hr-policy-services-agent/assets/screenshots/grounded-policy-answer.png)
 
-### Project 1 — HR Services Control Tower
+### Proyecto 1 — HR Services Control Tower
 
-An end-to-end Power BI case for monitoring HR service demand, SLA, backlog, capacity, process quality, and employee experience using reproducible synthetic data.
+Caso end-to-end en Power BI para monitorear demanda, SLA, backlog, capacidad, calidad de proceso y experiencia del empleado mediante datos sintéticos reproducibles.
 
-[Open the live Power BI report](https://app.powerbi.com/view?r=eyJrIjoiMjU5MDEzODEtMDBkMi00MmUzLTlhNTgtMmQ4N2E1NDkyZDM2IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9) · [Explore the full case study](projects/hr-services-control-tower/README.md)
+[Abrir el reporte interactivo](https://app.powerbi.com/view?r=eyJrIjoiMjU5MDEzODEtMDBkMi00MmUzLTlhNTgtMmQ4N2E1NDkyZDM2IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9) · [Explorar el caso completo](projects/hr-services-control-tower/README.md)
 
-![HR Services Control Tower dashboard](projects/hr-services-control-tower/assets/screenshots/executive-overview.png)
+![Dashboard HR Services Control Tower](projects/hr-services-control-tower/assets/screenshots/executive-overview.png)
 
-### Project 0 — Talent Review & Calibration
+### Proyecto 0 — Talent Review & Calibration
 
-A Power BI case for understanding talent distribution, year-over-year movement, rating consistency, and department-level talent risk using synthetic data.
+Caso en Power BI para comprender la distribución de talento, los movimientos entre periodos, la consistencia de las evaluaciones y el riesgo departamental mediante datos sintéticos.
 
-[Open the live Power BI report](https://app.powerbi.com/view?r=eyJrIjoiMjM2NGFkZjYtOWNiNy00MWZhLWJjOGEtYzY5ZGZhZTk2N2E3IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9) · [Explore the full case study](projects/talent-review-calibration/README.md)
+[Abrir el reporte interactivo](https://app.powerbi.com/view?r=eyJrIjoiMjM2NGFkZjYtOWNiNy00MWZhLWJjOGEtYzY5ZGZhZTk2N2E3IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9) · [Explorar el caso completo](projects/talent-review-calibration/README.md)
 
-![Talent Review & Calibration dashboard](projects/talent-review-calibration/assets/talent-overview.png)
+![Dashboard Talent Review & Calibration](projects/talent-review-calibration/assets/talent-overview.png)
 
-## Positioning
+## Posicionamiento
 
-My goal is to grow as an **HR Analytics & Digital HR professional**: someone who understands people processes and turns them into reliable indicators, better services, and decision-ready systems.
+Mi objetivo es desarrollarme como profesional de **HR Analytics & Digital HR**: una persona que entiende los procesos de RH y los convierte en indicadores confiables, mejores servicios y sistemas preparados para la toma de decisiones.
 
-> All portfolio datasets are synthetic or privacy-safe. Projects are learning and demonstration artifacts, not production HR decision systems.
+> Todos los datasets del portafolio son sintéticos o seguros para demostración. Los proyectos son artefactos de aprendizaje y portafolio, no sistemas productivos para tomar decisiones de RH.

@@ -1,110 +1,110 @@
-# Project 0: Talent Review & Calibration
+# Proyecto 0: Talent Review & Calibration
 
-Power BI portfolio case for understanding talent distribution, year-over-year movement, rating consistency, and department-level talent risk.
+Caso de portafolio en Power BI para comprender la distribución de talento, los movimientos entre periodos, la consistencia de las evaluaciones y el riesgo por departamento.
 
-[← Back to portfolio](../../README.md) · [Español](README.es.md)
+[← Volver al portafolio](../../README.md) · [English](README.en.md)
 
 [![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?logo=powerbi&logoColor=black)](https://app.powerbi.com/view?r=eyJrIjoiMjM2NGFkZjYtOWNiNy00MWZhLWJjOGEtYzY5ZGZhZTk2N2E3IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9)
 ![Power Query](https://img.shields.io/badge/Power%20Query-217346?logo=powerquery&logoColor=white)
 ![DAX](https://img.shields.io/badge/DAX-F2C811?logo=powerbi&logoColor=black)
 ![Excel](https://img.shields.io/badge/Excel-217346?logo=microsoftexcel&logoColor=white)
 
-> Portfolio demonstration with synthetic employees and reviews. The report supports structured discussion; it does not automate employment decisions.
+> Demostración de portafolio con empleados y evaluaciones sintéticas. El reporte apoya conversaciones estructuradas; no automatiza decisiones laborales.
 
-## Live demo
+## Demo interactiva
 
-**[Open the interactive Power BI report](https://app.powerbi.com/view?r=eyJrIjoiMjM2NGFkZjYtOWNiNy00MWZhLWJjOGEtYzY5ZGZhZTk2N2E3IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9)**
+**[Abrir el reporte interactivo de Power BI](https://app.powerbi.com/view?r=eyJrIjoiMjM2NGFkZjYtOWNiNy00MWZhLWJjOGEtYzY5ZGZhZTk2N2E3IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9)**
 
-The public report contains only synthetic data.
+El reporte público contiene únicamente datos sintéticos.
 
-## What the project solves
+## Qué resuelve
 
-The report turns annual reviews for 100 synthetic employees into four decision-oriented views. It helps answer:
+El reporte convierte las evaluaciones anuales de 100 empleados sintéticos en cuatro vistas orientadas a decisiones. Permite responder:
 
-- How is talent distributed across performance and potential levels?
-- Is the overall talent position improving, stable, or declining?
-- Which manager rating patterns require a calibration discussion?
-- Which departments show a stronger leadership pipeline or greater talent risk?
+- ¿Cómo se distribuye el talento entre niveles de desempeño y potencial?
+- ¿La posición general del talento mejora, permanece estable o retrocede?
+- ¿Qué patrones de evaluación requieren una conversación de calibración?
+- ¿Qué departamentos muestran un pipeline de liderazgo más fuerte o mayor riesgo de talento?
 
-## Report pages
+## Páginas del reporte
 
 ### Talent Overview
 
-Interactive 9-box matrix with the selected review period and concise employee context.
+Matriz 9-box interactiva con el periodo seleccionado y contexto breve del empleado.
 
 ![Talent Overview](assets/talent-overview.png)
 
 ### Talent Movement
 
-Movement between the selected review period and the immediately preceding review.
+Movimiento entre el periodo seleccionado y la evaluación inmediatamente anterior.
 
 ![Talent Movement](assets/talent-movement.png)
 
 ### Calibration & Managers
 
-Comparison of manager rating patterns against the selected population. Bubble size represents employees reviewed.
+Comparación de patrones de evaluación contra la población seleccionada. El tamaño de la burbuja representa empleados evaluados.
 
 ![Calibration and Managers](assets/calibration-managers.png)
 
 ### Department Analysis
 
-Comparison of leadership-pipeline strength and talent-risk concentration by department.
+Comparación de la fortaleza del pipeline de liderazgo y la concentración de riesgo por departamento.
 
 ![Department Analysis](assets/department-analysis.png)
 
-## Method in plain language
+## Metodología en lenguaje sencillo
 
-1. A synthetic workbook provides employee information, annual reviews, and the 9-box mapping.
-2. Power Query prepares the tables and validates the data types.
-3. A star-oriented model connects employees and talent-position definitions to annual reviews.
-4. DAX measures calculate distribution, movement, calibration, and department indicators under the selected filters.
-5. The measures and published results are checked directly against the synthetic source data.
+1. Un archivo sintético reúne información de empleados, evaluaciones anuales y la clasificación 9-box.
+2. Power Query prepara las tablas y valida los tipos de dato.
+3. Un modelo tipo estrella conecta empleados y posiciones de talento con las evaluaciones anuales.
+4. Las medidas DAX calculan distribución, movimiento, calibración e indicadores departamentales según los filtros seleccionados.
+5. Las medidas y los resultados publicados se validan directamente contra los datos sintéticos de origen.
 
-### Talent Review terms
+### Términos de Talent Review
 
-| Term | Plain-language meaning |
+| Término | Significado sencillo |
 |---|---|
-| 9-box matrix | Framework that combines three performance levels with three potential levels |
-| Performance | Assessment of results and behaviors during the review period |
-| Potential | Organizational assessment of readiness for broader or more complex responsibilities |
-| Future Leader | 9-box position with high performance and high potential |
-| Under Performer | 9-box position with low performance and low potential |
-| Movement | Change in an employee's 9-box position from the prior review |
-| Calibration | Structured discussion to apply rating criteria more consistently across teams |
-| Calibration signal | Rating pattern that should be reviewed; it is not proof of bias or manager quality |
-| Talent Balance | Future Leader percentage minus Under Performer percentage |
+| Matriz 9-box | Marco que combina tres niveles de desempeño con tres niveles de potencial |
+| Desempeño | Evaluación de resultados y comportamientos durante el periodo |
+| Potencial | Valoración organizacional sobre la preparación para asumir responsabilidades más amplias o complejas |
+| Future Leader | Posición 9-box con desempeño alto y potencial alto |
+| Under Performer | Posición 9-box con desempeño bajo y potencial bajo |
+| Movimiento | Cambio de posición 9-box respecto a la evaluación anterior |
+| Calibración | Conversación estructurada para aplicar criterios de evaluación con mayor consistencia entre equipos |
+| Señal de calibración | Patrón que debe revisarse; no demuestra sesgo ni calidad del manager |
+| Talent Balance | Porcentaje de Future Leaders menos porcentaje de Under Performers |
 
-## Selected findings
+## Hallazgos principales
 
-- In 2025, **12%** of employees are Future Leaders and **24%** are Under Performers.
-- From 2025 to 2026, **66%** remained stable, **18%** improved, **14%** declined, and **2%** showed mixed movement.
-- In the 2024 example, **3 of 8 managers** meet the rule for a calibration review.
-- In 2026, Human Resources has the strongest Talent Balance (**+30 percentage points**), while Customer Success has the lowest (**−50 percentage points**).
+- En 2025, **12%** de los empleados son Future Leaders y **24%** son Under Performers.
+- De 2025 a 2026, **66%** permaneció estable, **18%** mejoró, **14%** retrocedió y **2%** tuvo movimiento mixto.
+- En el ejemplo de 2024, **3 de 8 managers** cumplen la regla para una revisión de calibración.
+- En 2026, Human Resources tiene el Talent Balance más fuerte (**+30 puntos porcentuales**) y Customer Success el más bajo (**−50 puntos porcentuales**).
 
-These are designed patterns in synthetic data, not claims about a real organization.
+Son patrones diseñados en datos sintéticos, no afirmaciones sobre una organización real.
 
-## Recommended actions
+## Acciones recomendadas
 
-1. Prioritize structured talent reviews in Customer Success and Operations.
-2. Discuss flagged rating patterns during calibration before drawing conclusions about bias or manager quality.
-3. Build development and mobility plans for leadership-pipeline employees while monitoring department size and context.
+1. Priorizar revisiones estructuradas en Customer Success y Operations.
+2. Analizar los patrones señalados durante la calibración antes de concluir que existe sesgo o un problema de calidad del manager.
+3. Crear planes de desarrollo y movilidad para el pipeline de liderazgo, considerando el tamaño y contexto de cada departamento.
 
-## Files and documentation
+## Archivos y documentación
 
-- [Power BI report](power-bi/Project-0-Talent-Review-Calibration.pbix)
-- [Synthetic dataset](data/9box_powerbi_dataset_demo.xlsx)
-- [Metric dictionary](docs/metric-dictionary.md)
-- [Data model and implementation notes](docs/data-model.md)
-- [Responsible-use statement](docs/responsible-use.md)
+- [Reporte de Power BI](power-bi/Project-0-Talent-Review-Calibration.pbix)
+- [Dataset sintético](data/9box_powerbi_dataset_demo.xlsx)
+- [Diccionario de métricas](docs/metric-dictionary.md)
+- [Modelo de datos y notas de implementación](docs/data-model.md)
+- [Declaración de uso responsable](docs/responsible-use.md)
 
-## Responsible use
+## Uso responsable
 
-- All employees, names, assignments, and reviews are synthetic.
-- A 9-box matrix simplifies complex performance and potential discussions.
-- Calibration signals identify review priorities, not confirmed bias.
-- Small groups can produce unstable percentages and require organizational context.
-- The dashboard supports human review; it should not determine promotion, compensation, succession, or termination decisions.
+- Todos los empleados, nombres, asignaciones y evaluaciones son sintéticos.
+- La matriz 9-box simplifica conversaciones complejas sobre desempeño y potencial.
+- Las señales de calibración identifican prioridades de revisión, no sesgo confirmado.
+- Los grupos pequeños pueden producir porcentajes inestables y requieren contexto organizacional.
+- El dashboard apoya la revisión humana; no debe decidir promociones, compensación, sucesión o terminaciones laborales.
 
-## Author
+## Autor
 
-Miguel — [GitHub profile](https://github.com/MiguelPR-99)
+Miguel — [Perfil de GitHub](https://github.com/MiguelPR-99)

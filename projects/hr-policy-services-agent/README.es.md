@@ -2,7 +2,7 @@
 
 Caso de Digital HR desarrollado con Microsoft Copilot Studio y Power Automate para responder consultas de políticas con evidencia y convertir solicitudes que requieren seguimiento en tickets sintéticos de HR Services.
 
-[← Volver al portafolio](../../README.es.md) · [English](README.md)
+[← Volver al portafolio](../../README.md) · [English](README.en.md)
 
 ![Copilot Studio](https://img.shields.io/badge/Copilot%20Studio-5C2D91?logo=microsoftcopilot&logoColor=white)
 ![Power Automate](https://img.shields.io/badge/Power%20Automate-0066FF?logo=powerautomate&logoColor=white)
