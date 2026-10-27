@@ -1,6 +1,6 @@
 # Project 0: Talent Review & Calibration
 
-Power BI portfolio case for understanding talent distribution, year-over-year movement, rating consistency, and department-level talent risk.
+Power BI dashboard for reviewing performance and potential ratings, comparing review periods, and preparing HR calibration discussions.
 
 [← Back to portfolio](../../README.en.md) · [Español](README.md)
 
@@ -9,102 +9,56 @@ Power BI portfolio case for understanding talent distribution, year-over-year mo
 ![DAX](https://img.shields.io/badge/DAX-F2C811?logo=powerbi&logoColor=black)
 ![Excel](https://img.shields.io/badge/Excel-217346?logo=microsoftexcel&logoColor=white)
 
-> Portfolio demonstration with synthetic employees and reviews. The report supports structured discussion; it does not automate employment decisions.
+Learning project with reviews for **100 fictional employees**. All data is synthetic, and the report supports human review.
 
-## Live demo
+## The problem
 
-**[Open the interactive Power BI report](https://app.powerbi.com/view?r=eyJrIjoiMjM2NGFkZjYtOWNiNy00MWZhLWJjOGEtYzY5ZGZhZTk2N2E3IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9)**
+During a Talent Review, HR needs to bring together assessments from different teams, review the criteria used, and understand changes since the previous review.
 
-The public report contains only synthetic data.
+I built four views to explore these questions using existing assessments. **Calibration** is the discussion used to review the criteria and evidence behind them.
 
-## What the project solves
+## Explore the report
 
-The report turns annual reviews for 100 synthetic employees into four decision-oriented views. It helps answer:
+**[Open the Power BI demo](https://app.powerbi.com/view?r=eyJrIjoiMjM2NGFkZjYtOWNiNy00MWZhLWJjOGEtYzY5ZGZhZTk2N2E3IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9)** · [Download the PBIX](power-bi/Project-0-Talent-Review-Calibration.pbix)
 
-- How is talent distributed across performance and potential levels?
-- Is the overall talent position improving, stable, or declining?
-- Which manager rating patterns require a calibration discussion?
-- Which departments show a stronger leadership pipeline or greater talent risk?
+![Talent Overview: rating distribution across the 9-box matrix and context for the selected employee](assets/talent-overview.png)
 
-## Report pages
+The **9-box matrix** combines three performance levels with three potential levels into nine categories.
 
-### Talent Overview
-
-Interactive 9-box matrix with the selected review period and concise employee context.
-
-![Talent Overview](assets/talent-overview.png)
-
-### Talent Movement
-
-Movement between the selected review period and the immediately preceding review.
-
-![Talent Movement](assets/talent-movement.png)
-
-### Calibration & Managers
-
-Comparison of manager rating patterns against the selected population. Bubble size represents employees reviewed.
-
-![Calibration and Managers](assets/calibration-managers.png)
-
-### Department Analysis
-
-Comparison of leadership-pipeline strength and talent-risk concentration by department.
-
-![Department Analysis](assets/department-analysis.png)
-
-## Method in plain language
-
-1. A synthetic workbook provides employee information, annual reviews, and the 9-box mapping.
-2. Power Query prepares the tables and validates the data types.
-3. A star-oriented model connects employees and talent-position definitions to annual reviews.
-4. DAX measures calculate distribution, movement, calibration, and department indicators under the selected filters.
-5. The measures and published results are checked directly against the synthetic source data.
-
-### Talent Review terms
-
-| Term | Plain-language meaning |
+| View | What it helps review |
 |---|---|
-| 9-box matrix | Framework that combines three performance levels with three potential levels |
-| Performance | Assessment of results and behaviors during the review period |
-| Potential | Organizational assessment of readiness for broader or more complex responsibilities |
-| Future Leader | 9-box position with high performance and high potential |
-| Under Performer | 9-box position with low performance and low potential |
-| Movement | Change in an employee's 9-box position from the prior review |
-| Calibration | Structured discussion to apply rating criteria more consistently across teams |
-| Calibration signal | Rating pattern that should be reviewed; it is not proof of bias or manager quality |
-| Talent Balance | Future Leader percentage minus Under Performer percentage |
+| Talent Overview | The distribution across the matrix and an employee's context |
+| [Talent Movement](assets/talent-movement.png) | Changes from the previous review |
+| [Calibration & Managers](assets/calibration-managers.png) | Differences between each manager's average ratings and the selected population |
+| [Department Analysis](assets/department-analysis.png) | Rating distributions by department, with group size in view |
 
-## Selected findings
+## How I built it
 
-- In 2025, **12%** of employees are Future Leaders and **24%** are Under Performers.
-- From 2025 to 2026, **66%** remained stable, **18%** improved, **14%** declined, and **2%** showed mixed movement.
-- In the 2024 example, **3 of 8 managers** meet the rule for a calibration review.
-- In 2026, Human Resources has the strongest Talent Balance (**+30 percentage points**), while Customer Success has the lowest (**−50 percentage points**).
+I started with an Excel workbook containing employees, annual reviews, and the mapping to 9-box categories. I used **Power Query** to prepare the tables, a **star-oriented model** to connect them, and **DAX measures** to calculate indicators under the report filters.
 
-These are designed patterns in synthetic data, not claims about a real organization.
+I checked measures against the source workbook under different period and department filters.
 
-## Recommended actions
+## A reading example
 
-1. Prioritize structured talent reviews in Customer Success and Operations.
-2. Discuss flagged rating patterns during calibration before drawing conclusions about bias or manager quality.
-3. Build development and mobility plans for leadership-pipeline employees while monitoring department size and context.
+Between **2025 and 2026**, **66%** stayed in the same matrix position, **18%** had a positive change in their ratings, **14%** had a negative change, and **2%** showed mixed movement.
 
-## Files and documentation
+Mixed movement identifies cases where performance rises and potential falls, or vice versa. These changes describe recorded assessments; they do not explain their causes or independently establish that a person has improved or declined.
 
-- [Power BI report](power-bi/Project-0-Talent-Review-Calibration.pbix)
-- [Synthetic dataset](data/9box_powerbi_dataset_demo.xlsx)
-- [Metric dictionary](docs/metric-dictionary.md)
-- [Data model and implementation notes](docs/data-model.md)
-- [Responsible-use statement](docs/responsible-use.md)
+## Interpreting the metrics
 
-## Responsible use
+- **Calibration signal:** an absolute difference of at least **0.25 points** in average performance or potential, with at least **five reviewed employees** per manager. The benchmark is the population selected by the active filters. This is an exercise rule for prioritizing discussions, not a statistical test.
+- **Talent Balance:** the percentage in *Future Leader* minus the percentage in *Under Performer*, the high-performance/high-potential and low-performance/low-potential cells, respectively. It is a difference in **percentage points** that summarizes only those two categories.
+- **Group size:** in the 2026 example, Customer Success has six employees; three are in *Under Performer* and none in *Future Leader*. Its Talent Balance is **−50 percentage points**. That result needs context about the ratings and roles before suggesting actions.
 
-- All employees, names, assignments, and reviews are synthetic.
-- A 9-box matrix simplifies complex performance and potential discussions.
-- Calibration signals identify review priorities, not confirmed bias.
-- Small groups can produce unstable percentages and require organizational context.
-- The dashboard supports human review; it should not determine promotion, compensation, succession, or termination decisions.
+The screenshots retain the **%** format for Talent Balance and wording such as *talent risk* or *pipeline strength*. Here, these refer to differences in rating distributions, subject to the limits above. The indicator does not estimate risk probabilities or independently measure leadership readiness.
 
-## Author
+## Documentation and files
+
+- [Synthetic Excel dataset](data/9box_powerbi_dataset_demo.xlsx).
+- [Metrics and calculation rules](docs/metric-dictionary.en.md).
+- [Data model and implementation notes](docs/data-model.en.md).
+- [Responsible use and AI assistance](docs/responsible-use.en.md).
+
+Differences between managers do not prove bias or management quality. Development, promotion, or compensation decisions require additional evidence and human accountability.
 
 Miguel — [GitHub profile](https://github.com/MiguelPR-99)

@@ -1,54 +1,50 @@
-# Data model and implementation notes
+# Modelo de datos y notas de implementación
 
-## Model structure
+[← Volver al caso](../README.md) · [English](data-model.en.md)
 
-The model separates employee attributes, annual review records, 9-box mappings, and calculations.
+## Estructura
+
+La unidad de análisis es una evaluación por empleado y periodo. El modelo separa los atributos del empleado, las evaluaciones anuales y la correspondencia con las categorías 9-box.
 
 ```mermaid
 flowchart LR
-    E[EmployeesTable\nEmployee attributes] -->|1 : many\nEmployeeID| R[TalentReviewsTable\nAnnual review facts]
-    B[BoxMappingTable\n9-box labels and mapping] -->|1 : many\nBoxKey| R
-    M[_Measures\nCentralized DAX measures]
+    E["EmployeesTable<br/>Datos del empleado"] -->|"1 a muchos · EmployeeID"| R["TalentReviewsTable<br/>Evaluaciones anuales"]
+    B["BoxMappingTable<br/>Categorías 9-box"] -->|"1 a muchos · BoxKey"| R
+    M["_Measures<br/>Medidas DAX"]
 ```
 
-## Main tables
+| Tabla | Contenido |
+|---|---|
+| `EmployeesTable` | Una fila por empleado sintético: nombre, puesto, departamento, unidad de negocio y manager |
+| `TalentReviewsTable` | Una fila por empleado y periodo: desempeño, potencial, clave de posición y campos de movimiento |
+| `BoxMappingTable` | Correspondencia entre las combinaciones de puntajes y sus etiquetas 9-box, orden y atributos visuales |
+| `_Measures` | Medidas DAX explícitas, reunidas para facilitar su consulta |
 
-### EmployeesTable
+## Decisiones de modelado
 
-One row per synthetic employee. Contains organizational context such as name, position, department, business unit, and manager.
+- Las relaciones son de uno a muchos, con una sola dirección de filtrado.
+- Los filtros de empleado y periodo delimitan las evaluaciones que se analizan.
+- La clasificación 9-box se mantiene separada de los registros de evaluación.
+- Las medidas gestionan el contexto de filtro de forma explícita, sin relaciones bidireccionales.
+- Los conteos de empleados usan `EmployeeID` distinto cuando puede haber más de un registro por persona.
+- Las columnas técnicas que no necesita quien construye el reporte permanecen ocultas.
 
-### TalentReviewsTable
+Reunir las medidas en `_Measures` facilita encontrarlas; esa tabla no representa una entidad del negocio ni añade una relación al modelo.
 
-One row per employee and review period. Contains performance, potential, talent-position key, and movement-related fields.
+## Decisiones de análisis
 
-### BoxMappingTable
+El movimiento considera los dos ejes de la evaluación. Cuando uno sube y el otro baja, se conserva la clasificación Mixed. En calibración, la referencia depende de la población seleccionada, por lo que debe revisarse junto con los filtros activos y el número de empleados.
 
-Maps score combinations to 9-box names, labels, sort logic, and presentation attributes.
+Talent Balance resume dos celdas de la matriz. Para interpretar un departamento, también hay que revisar las otras categorías y el tamaño del grupo. Las definiciones y los ejemplos están en el [diccionario de métricas](metric-dictionary.md).
 
-### _Measures
+Las cuatro páginas separan distribución, movimiento, calibración y comparación departamental. Los titulares dinámicos y las notas ayudan a leer cada selección, con las [precauciones de interpretación](responsible-use.md) del caso.
 
-Dedicated home table for explicit DAX measures. Moving measures to this table improves discoverability without changing the analytical model.
+## Comprobaciones realizadas durante el desarrollo
 
-## Modeling decisions
+- Contraste de medidas con el archivo de Excel bajo distintos filtros de periodo y departamento.
+- Revisión del primer periodo, que no tiene una evaluación anterior para clasificar movimientos.
+- Consulta de metadatos para comprobar la validez de las medidas explícitas y su ubicación en `_Measures`.
 
-- Relationships are one-to-many and single-direction.
-- Employee and review-period filters flow into annual review facts.
-- Mapping logic is separated from employee review records.
-- Measures use explicit filter-context handling instead of bidirectional relationships.
-- Technical columns not intended for report authors are hidden.
-- All employee counts use distinct EmployeeID where duplication could occur.
+Estas comprobaciones corresponden al ejercicio con datos sintéticos. No constituyen una validación de los criterios de evaluación, del umbral de calibración ni de su utilidad en una organización real.
 
-## Report design decisions
-
-- Dynamic headlines communicate the main conclusion before supporting visuals.
-- Each page focuses on one decision layer: distribution, movement, calibration, or department comparison.
-- The 9-box is used for exploration, while employee context remains compact.
-- Conditional color is reserved for meaningful analytical differences.
-- Footnotes disclose comparison logic, thresholds, and interpretation limitations.
-
-## Validation
-
-- Measures were checked against the source workbook under multiple review-period and department filters.
-- Movement pages exclude unsupported comparisons when no prior review exists.
-- A model metadata query was used to verify that all explicit measures were valid and centralized in `_Measures`.
-- The published report was tested without authentication using its public Power BI URL.
+El caso incluye una demo publicada, capturas y el [PBIX descargable](../power-bi/Project-0-Talent-Review-Calibration.pbix). Para abrir el archivo se necesita Power BI Desktop; la disponibilidad de la demo depende de su publicación en Power BI.

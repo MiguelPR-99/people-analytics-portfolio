@@ -1,34 +1,31 @@
-# Responsible use
+# Uso responsable y apoyo de IA
 
-## Intended purpose
+[← Volver al caso](../README.md) · [English](responsible-use.en.md)
 
-This dashboard is a portfolio demonstration of how People Analytics can structure talent-review information. It is intended to support discussion and quality checks, not to determine promotions, compensation, termination, succession, or other employment outcomes.
+## Propósito y datos
 
-## Data
+Este caso muestra cómo People Analytics puede organizar evaluaciones para preparar conversaciones de Talent Review y calibración. Todos los empleados, nombres, asignaciones y evaluaciones son sintéticos. No incluye información confidencial de una organización real ni demuestra resultados de negocio.
 
-- All people, names, organizational assignments, and reviews are synthetic.
-- No confidential employer or employee information is included.
-- The public report and downloadable files are safe for demonstration.
+## Límites de interpretación
 
-## Interpretation safeguards
+- Desempeño y potencial son valoraciones organizacionales sujetas a criterio humano. El dashboard recibe esas evaluaciones.
+- La matriz 9-box reúne información compleja en categorías amplias. Sus etiquetas no definen de forma permanente a las personas.
+- El movimiento describe cambios de evaluación entre periodos. No establece causas ni demuestra mejoras o deterioros objetivos.
+- Las señales de calibración comparan promedios con la población seleccionada. No acreditan sesgo, discriminación ni calidad de la gestión.
+- El umbral de 0.25 puntos y el mínimo de cinco empleados son reglas del ejercicio, sin validez estadística establecida.
+- Talent Balance compara únicamente Future Leader y Under Performer. No mide la calidad global del talento, el riesgo de salida ni la preparación para el liderazgo.
+- Los grupos pequeños pueden cambiar mucho en términos porcentuales con una sola evaluación distinta. Sus resultados requieren contexto.
 
-- Performance and potential ratings are subjective organizational assessments.
-- A 9-box matrix compresses complex evidence into broad categories.
-- Department percentages can change substantially when teams are small.
-- Calibration gaps compare rating patterns with the selected population; they do not establish discrimination or bias.
-- Movement is descriptive and should not be interpreted as causal.
-- The dashboard does not calculate an employee-level risk or recommendation score.
+Las capturas conservan expresiones como *talent risk* y *pipeline strength*. Deben leerse con los límites anteriores y las [reglas de cálculo](metric-dictionary.md).
 
-## Human review
+## Revisión humana
 
-Any real implementation should include:
+El reporte no calcula una recomendación individual de promoción, compensación, sucesión o terminación laboral. Cualquier decisión requiere evidencia adicional, criterios documentados y una persona responsable.
 
-1. Documented rating criteria and calibration governance.
-2. Role-based access and minimum necessary data.
-3. A process for employees and managers to correct inaccurate information.
-4. Review of adverse impact and organizational context.
-5. Human accountability for every employment decision.
+Una aplicación real también necesitaría acceso por roles, uso de los datos necesarios para cada función, mecanismos para corregir información y revisión de posibles efectos desiguales entre grupos. Estos elementos son requisitos a resolver antes de usar el ejercicio en un proceso real; no se presentan como controles implementados en esta demo.
 
-## AI assistance
+## Apoyo de IA
 
-AI tools supported design exploration and debugging during development. Final business rules, calculations, interactions, and outputs were reviewed manually against the synthetic source data.
+Usé herramientas de IA para explorar opciones de diseño y resolver problemas durante el desarrollo. Revisé manualmente las reglas de negocio, los cálculos, las interacciones y los resultados contra los datos sintéticos de origen.
+
+El proyecto es un ejercicio de aprendizaje. El apoyo de IA forma parte de su desarrollo; las reglas y sus límites deben poder explicarse a partir de la documentación y los datos.

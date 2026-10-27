@@ -1,6 +1,6 @@
 # Proyecto 0: Talent Review & Calibration
 
-Caso de portafolio en Power BI para comprender la distribución de talento, los movimientos entre periodos, la consistencia de las evaluaciones y el riesgo por departamento.
+Dashboard de Power BI para revisar evaluaciones de desempeño y potencial, comparar periodos y preparar conversaciones de calibración en RH.
 
 [← Volver al portafolio](../../README.md) · [English](README.en.md)
 
@@ -9,102 +9,56 @@ Caso de portafolio en Power BI para comprender la distribución de talento, los 
 ![DAX](https://img.shields.io/badge/DAX-F2C811?logo=powerbi&logoColor=black)
 ![Excel](https://img.shields.io/badge/Excel-217346?logo=microsoftexcel&logoColor=white)
 
-> Demostración de portafolio con empleados y evaluaciones sintéticas. El reporte apoya conversaciones estructuradas; no automatiza decisiones laborales.
+Caso de aprendizaje con evaluaciones de **100 empleados ficticios**. Todos los datos son sintéticos y el reporte apoya la revisión humana.
 
-## Demo interactiva
+## El problema
 
-**[Abrir el reporte interactivo de Power BI](https://app.powerbi.com/view?r=eyJrIjoiMjM2NGFkZjYtOWNiNy00MWZhLWJjOGEtYzY5ZGZhZTk2N2E3IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9)**
+En un proceso de Talent Review, RH necesita reunir evaluaciones de distintos equipos, revisar los criterios utilizados y entender qué cambió respecto al periodo anterior.
 
-El reporte público contiene únicamente datos sintéticos.
+Construí cuatro vistas para explorar esas preguntas a partir de las evaluaciones existentes. La **calibración** es la conversación en la que se revisan los criterios y la evidencia que las sustentan.
 
-## Qué resuelve
+## Explorar el reporte
 
-El reporte convierte las evaluaciones anuales de 100 empleados sintéticos en cuatro vistas orientadas a decisiones. Permite responder:
+**[Abrir la demo de Power BI](https://app.powerbi.com/view?r=eyJrIjoiMjM2NGFkZjYtOWNiNy00MWZhLWJjOGEtYzY5ZGZhZTk2N2E3IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9)** · [Descargar el PBIX](power-bi/Project-0-Talent-Review-Calibration.pbix)
 
-- ¿Cómo se distribuye el talento entre niveles de desempeño y potencial?
-- ¿La posición general del talento mejora, permanece estable o retrocede?
-- ¿Qué patrones de evaluación requieren una conversación de calibración?
-- ¿Qué departamentos muestran un pipeline de liderazgo más fuerte o mayor riesgo de talento?
+![Talent Overview: distribución de las evaluaciones en la matriz 9-box y contexto del empleado seleccionado](assets/talent-overview.png)
 
-## Páginas del reporte
+La matriz **9-box** combina tres niveles de desempeño con tres de potencial en nueve categorías.
 
-### Talent Overview
-
-Matriz 9-box interactiva con el periodo seleccionado y contexto breve del empleado.
-
-![Talent Overview](assets/talent-overview.png)
-
-### Talent Movement
-
-Movimiento entre el periodo seleccionado y la evaluación inmediatamente anterior.
-
-![Talent Movement](assets/talent-movement.png)
-
-### Calibration & Managers
-
-Comparación de patrones de evaluación contra la población seleccionada. El tamaño de la burbuja representa empleados evaluados.
-
-![Calibration and Managers](assets/calibration-managers.png)
-
-### Department Analysis
-
-Comparación de la fortaleza del pipeline de liderazgo y la concentración de riesgo por departamento.
-
-![Department Analysis](assets/department-analysis.png)
-
-## Metodología en lenguaje sencillo
-
-1. Un archivo sintético reúne información de empleados, evaluaciones anuales y la clasificación 9-box.
-2. Power Query prepara las tablas y valida los tipos de dato.
-3. Un modelo tipo estrella conecta empleados y posiciones de talento con las evaluaciones anuales.
-4. Las medidas DAX calculan distribución, movimiento, calibración e indicadores departamentales según los filtros seleccionados.
-5. Las medidas y los resultados publicados se validan directamente contra los datos sintéticos de origen.
-
-### Términos de Talent Review
-
-| Término | Significado sencillo |
+| Vista | Qué permite revisar |
 |---|---|
-| Matriz 9-box | Marco que combina tres niveles de desempeño con tres niveles de potencial |
-| Desempeño | Evaluación de resultados y comportamientos durante el periodo |
-| Potencial | Valoración organizacional sobre la preparación para asumir responsabilidades más amplias o complejas |
-| Future Leader | Posición 9-box con desempeño alto y potencial alto |
-| Under Performer | Posición 9-box con desempeño bajo y potencial bajo |
-| Movimiento | Cambio de posición 9-box respecto a la evaluación anterior |
-| Calibración | Conversación estructurada para aplicar criterios de evaluación con mayor consistencia entre equipos |
-| Señal de calibración | Patrón que debe revisarse; no demuestra sesgo ni calidad del manager |
-| Talent Balance | Porcentaje de Future Leaders menos porcentaje de Under Performers |
+| Talent Overview | La distribución en la matriz y el contexto de un empleado |
+| [Talent Movement](assets/talent-movement.png) | Los cambios respecto a la evaluación anterior |
+| [Calibration & Managers](assets/calibration-managers.png) | Las diferencias entre las evaluaciones promedio de cada manager y la población seleccionada |
+| [Department Analysis](assets/department-analysis.png) | La distribución de evaluaciones por departamento, considerando su tamaño |
 
-## Hallazgos principales
+## Cómo lo construí
 
-- En 2025, **12%** de los empleados son Future Leaders y **24%** son Under Performers.
-- De 2025 a 2026, **66%** permaneció estable, **18%** mejoró, **14%** retrocedió y **2%** tuvo movimiento mixto.
-- En el ejemplo de 2024, **3 de 8 managers** cumplen la regla para una revisión de calibración.
-- En 2026, Human Resources tiene el Talent Balance más fuerte (**+30 puntos porcentuales**) y Customer Success el más bajo (**−50 puntos porcentuales**).
+Partí de un archivo de Excel con empleados, evaluaciones anuales y la correspondencia con las categorías 9-box. Usé **Power Query** para preparar las tablas, un **modelo tipo estrella** para relacionarlas y **medidas DAX** para calcular los indicadores según los filtros del reporte.
 
-Son patrones diseñados en datos sintéticos, no afirmaciones sobre una organización real.
+Contrasté las medidas con el archivo de origen bajo distintos filtros de periodo y departamento.
 
-## Acciones recomendadas
+## Un ejemplo de lectura
 
-1. Priorizar revisiones estructuradas en Customer Success y Operations.
-2. Analizar los patrones señalados durante la calibración antes de concluir que existe sesgo o un problema de calidad del manager.
-3. Crear planes de desarrollo y movilidad para el pipeline de liderazgo, considerando el tamaño y contexto de cada departamento.
+Entre **2025 y 2026**, el **66%** mantuvo su posición en la matriz, el **18%** tuvo un cambio positivo en las evaluaciones, el **14%** un cambio negativo y el **2%** un movimiento mixto.
 
-## Archivos y documentación
+El movimiento mixto distingue cuando una evaluación sube en desempeño y baja en potencial, o al revés. Estos cambios describen las evaluaciones registradas; no explican sus causas ni demuestran por sí solos una mejora o un deterioro de la persona.
 
-- [Reporte de Power BI](power-bi/Project-0-Talent-Review-Calibration.pbix)
-- [Dataset sintético](data/9box_powerbi_dataset_demo.xlsx)
-- [Diccionario de métricas](docs/metric-dictionary.md)
-- [Modelo de datos y notas de implementación](docs/data-model.md)
-- [Declaración de uso responsable](docs/responsible-use.md)
+## Cómo interpretar las métricas
 
-## Uso responsable
+- **Señal de calibración:** diferencia absoluta de al menos **0.25 puntos** en el promedio de desempeño o potencial, con un mínimo de **cinco empleados evaluados** por manager. La referencia es la población seleccionada con los filtros activos. Es una regla del ejercicio para priorizar conversaciones; no es una prueba estadística.
+- **Talent Balance:** porcentaje en *Future Leader* menos porcentaje en *Under Performer*, las celdas de desempeño y potencial altos y bajos, respectivamente. Se expresa en **puntos porcentuales** y solo resume esas dos categorías.
+- **Tamaño del grupo:** en el ejemplo de 2026, Customer Success tiene seis empleados; tres están en *Under Performer* y ninguno en *Future Leader*. Su Talent Balance es **−50 puntos porcentuales**. Ese resultado necesita contexto sobre las evaluaciones y los puestos antes de proponer acciones.
 
-- Todos los empleados, nombres, asignaciones y evaluaciones son sintéticos.
-- La matriz 9-box simplifica conversaciones complejas sobre desempeño y potencial.
-- Las señales de calibración identifican prioridades de revisión, no sesgo confirmado.
-- Los grupos pequeños pueden producir porcentajes inestables y requieren contexto organizacional.
-- El dashboard apoya la revisión humana; no debe decidir promociones, compensación, sucesión o terminaciones laborales.
+Las capturas conservan el formato **%** para Talent Balance y expresiones como *talent risk* o *pipeline strength*. Aquí se interpretan como diferencias en la distribución de evaluaciones, con los límites anteriores. El indicador no estima probabilidades de riesgo ni mide por sí solo la preparación para el liderazgo.
 
-## Autor
+## Documentación y archivos
+
+- [Dataset sintético en Excel](data/9box_powerbi_dataset_demo.xlsx).
+- [Métricas y reglas de cálculo](docs/metric-dictionary.md).
+- [Modelo de datos y notas de implementación](docs/data-model.md).
+- [Uso responsable y apoyo de IA](docs/responsible-use.md).
+
+Las diferencias entre managers no prueban sesgos ni la calidad de su gestión. Las decisiones sobre desarrollo, promoción o compensación requieren evidencia adicional y responsabilidad humana.
 
 Miguel — [Perfil de GitHub](https://github.com/MiguelPR-99)
