@@ -19,9 +19,7 @@ Desarrollé este caso con 9,000 solicitudes sintéticas para explorar esas pregu
 
 ## Ver el proyecto
 
-[Descargar el PBIX](power-bi/Project-1-HR-Services-Control-Tower.pbix?raw=true) · [Cómo abrirlo en Power BI Desktop](docs/power-bi-fast-track.md)
-
-Puedes revisar las capturas desde GitHub. El PBIX incluye el reporte y los datos importados de la demostración; permite explorar los filtros en Power BI Desktop. Para volver a cargar los CSV hay que ajustar las rutas de origen, como explica la guía.
+Puedes revisar las capturas en GitHub o [descargar y abrir el reporte en Power BI Desktop](docs/power-bi-fast-track.md).
 
 La vista ejecutiva muestra la demanda, los casos pendientes y el cumplimiento de los plazos de atención acordados (SLA).
 
@@ -51,6 +49,6 @@ El proyecto me ayudó a conectar la preparación de datos con preguntas operativ
 
 ## Más detalles
 
-[Metodología y modelo](docs/technical-overview.md) · [Diccionario de métricas](docs/metric-dictionary.md) · [Comprobación de medidas y valores](evidence/model-verification.json)
+[Metodología y modelo](docs/technical-overview.md) · [Diccionario de métricas](docs/metric-dictionary.md) · [Comprobación de medidas y valores](evidence/model-verification.json) · [Actualizar los datos](docs/power-bi-refresh.md)
 
 Miguel — [Perfil de GitHub](https://github.com/MiguelPR-99)

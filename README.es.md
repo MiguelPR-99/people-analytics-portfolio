@@ -28,7 +28,7 @@ Agente de autoservicio de RH para consultar políticas y crear solicitudes de se
 
 Dashboard de Power BI para revisar solicitudes pendientes, tiempos de atención y capacidad en HR Services, con datos sintéticos. Incluye capturas y el PBIX para descargar.
 
-[Ver el caso y las capturas](projects/hr-services-control-tower/README.md) · [Descargar el PBIX](projects/hr-services-control-tower/power-bi/Project-1-HR-Services-Control-Tower.pbix?raw=true)
+[Explorar el caso completo](projects/hr-services-control-tower/README.md)
 
 ![Dashboard HR Services Control Tower](projects/hr-services-control-tower/assets/screenshots/executive-overview.png)
 

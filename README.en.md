@@ -28,7 +28,7 @@ An HR self-service agent for policy questions and follow-up requests. It respond
 
 A Power BI dashboard for reviewing pending requests, service times, and HR Services capacity using synthetic data. Includes screenshots and a downloadable PBIX.
 
-[View the case and screenshots](projects/hr-services-control-tower/README.en.md) · [Download the PBIX](projects/hr-services-control-tower/power-bi/Project-1-HR-Services-Control-Tower.pbix?raw=true)
+[Explore the full case study](projects/hr-services-control-tower/README.en.md)
 
 ![HR Services Control Tower dashboard](projects/hr-services-control-tower/assets/screenshots/executive-overview.png)
 
