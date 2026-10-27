@@ -34,7 +34,7 @@ Dashboard de Power BI para revisar solicitudes pendientes, tiempos de atención 
 
 ### Proyecto 0 — Talent Review & Calibration
 
-Caso en Power BI para comprender la distribución de talento, los movimientos entre periodos, la consistencia de las evaluaciones y el riesgo departamental mediante datos sintéticos.
+Caso en Power BI para comprender la distribución de talento, los movimientos entre periodos, la consistencia de las evaluaciones y la comparación de evaluaciones por departamento mediante datos sintéticos.
 
 [Explorar el caso completo](projects/talent-review-calibration/README.md) · [Abrir el reporte interactivo](https://app.powerbi.com/view?r=eyJrIjoiODIzM2EyZGEtY2ExYi00ODA4LTliNTctMTM2M2NhZDNmNmQ2IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9)
 

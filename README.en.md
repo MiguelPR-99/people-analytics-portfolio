@@ -34,7 +34,7 @@ A Power BI dashboard for reviewing pending requests, service times, and HR Servi
 
 ### Project 0 — Talent Review & Calibration
 
-A Power BI case for understanding talent distribution, year-over-year movement, rating consistency, and department-level talent risk using synthetic data.
+A Power BI case for understanding talent distribution, year-over-year movement, rating consistency, and department-level rating comparisons using synthetic data.
 
 [Explore the full case study](projects/talent-review-calibration/README.en.md) · [Open the interactive report](https://app.powerbi.com/view?r=eyJrIjoiODIzM2EyZGEtY2ExYi00ODA4LTliNTctMTM2M2NhZDNmNmQ2IiwidCI6ImY4NGNiMmZiLTQ0MDgtNDcxMC05NWY5LTQwYjBmMThlZDQ3ZiIsImMiOjR9)
 

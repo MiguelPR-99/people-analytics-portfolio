@@ -68,6 +68,6 @@ For this review, sources and 28 measures were inspected in the same PBIX availab
 
 ## Files and scope
 
-The [PBIX](../power-bi/Project-1-HR-Services-Control-Tower.pbix?raw=true) supports report exploration and model inspection in Desktop. Screenshots show the result without requiring installation. The [opening guide](power-bi-fast-track.en.md) explains how to update paths when reloading CSV files.
+The [viewing and download guide](power-bi-fast-track.en.md) explains how to view the report on the web or open the PBIX and inspect the model in Desktop. Screenshots show the result without requiring installation. The [refresh guide](power-bi-refresh.en.md) explains how to update source paths when reloading CSV files.
 
 The project studies service processes using synthetic data. It does not measure individual productivity or establish real savings or improvements.

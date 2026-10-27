@@ -68,6 +68,6 @@ Para esta revisión se consultaron las fuentes y 28 medidas del mismo PBIX dispo
 
 ## Archivos y alcance
 
-El [PBIX](../power-bi/Project-1-HR-Services-Control-Tower.pbix?raw=true) permite explorar el reporte y consultar el modelo en Desktop. Las capturas permiten revisar el resultado sin instalarlo. La [guía de apertura](power-bi-fast-track.md) explica cómo cambiar las rutas si se quiere recargar los CSV.
+La [guía de visualización y descarga](power-bi-fast-track.md) reúne las opciones para consultar el reporte en la web o abrir el PBIX y revisar el modelo en Desktop. Las capturas permiten revisar el resultado sin instalarlo. La [guía de actualización](power-bi-refresh.md) explica cómo cambiar las rutas si se quiere recargar los CSV.
 
 El proyecto estudia procesos de servicio con datos sintéticos. No mide productividad individual ni acredita ahorros o mejoras reales.
